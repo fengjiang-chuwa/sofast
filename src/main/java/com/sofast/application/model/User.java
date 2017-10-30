@@ -1,9 +1,7 @@
 package com.sofast.application.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class User {
@@ -13,6 +11,8 @@ public class User {
     private String email;
     private String password;
     private String role;
+    private String authCode;
+    private Date authCodeExpire;
 
     @Id
     @Column(name = "id")
@@ -74,6 +74,31 @@ public class User {
         this.role = role;
     }
 
+    @Basic
+    @Column(name = "AUTH_CODE")
+    public String getAuthCode() {
+        return authCode;
+    }
+
+    public void setAuthCode(String authCode) {
+        this.authCode = authCode;
+    }
+
+    @Basic
+    @Column(name = "AUTH_CODE_EXPIRE")
+    public Date getAuthCodeExpire() {
+        return authCodeExpire;
+    }
+
+    public void setAuthCodeExpire(Date authCodeExpire) {
+        this.authCodeExpire = authCodeExpire;
+    }
+
+    @Transient
+    public String getUserName() {
+        return this.getFirstName() + " " + this.getLastName();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,6 +112,9 @@ public class User {
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (role != null ? !role.equals(user.role) : user.role != null) return false;
+        if (authCode != null ? !authCode.equals(user.authCode) : user.authCode != null) return false;
+        if (authCodeExpire != null ? !authCodeExpire.equals(user.authCodeExpire) : user.authCodeExpire != null)
+            return false;
 
         return true;
     }
@@ -99,6 +127,8 @@ public class User {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (authCode != null ? authCode.hashCode() : 0);
+        result = 31 * result + (authCodeExpire != null ? authCodeExpire.hashCode() : 0);
         return result;
     }
 }

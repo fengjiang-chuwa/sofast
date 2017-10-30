@@ -4,9 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class StudentHasQuestionnaireSurveyPK implements Serializable {
+public class StudentHasRecommenderInfoPK implements Serializable {
     private String studentId;
-    private String questionnaireSurveyId;
+    private String recommenderInfoId;
 
     @Column(name = "student_id")
     @Id
@@ -18,14 +18,14 @@ public class StudentHasQuestionnaireSurveyPK implements Serializable {
         this.studentId = studentId;
     }
 
-    @Column(name = "questionnaire_survey_id")
+    @Column(name = "recommender_info_id")
     @Id
-    public String getQuestionnaireSurveyId() {
-        return questionnaireSurveyId;
+    public String getRecommenderInfoId() {
+        return recommenderInfoId;
     }
 
-    public void setQuestionnaireSurveyId(String questionnaireSurveyId) {
-        this.questionnaireSurveyId = questionnaireSurveyId;
+    public void setRecommenderInfoId(String recommenderInfoId) {
+        this.recommenderInfoId = recommenderInfoId;
     }
 
     @Override
@@ -33,10 +33,10 @@ public class StudentHasQuestionnaireSurveyPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StudentHasQuestionnaireSurveyPK that = (StudentHasQuestionnaireSurveyPK) o;
+        StudentHasRecommenderInfoPK that = (StudentHasRecommenderInfoPK) o;
 
         if (studentId != null ? !studentId.equals(that.studentId) : that.studentId != null) return false;
-        if (questionnaireSurveyId != null ? !questionnaireSurveyId.equals(that.questionnaireSurveyId) : that.questionnaireSurveyId != null)
+        if (recommenderInfoId != null ? !recommenderInfoId.equals(that.recommenderInfoId) : that.recommenderInfoId != null)
             return false;
 
         return true;
@@ -45,7 +45,7 @@ public class StudentHasQuestionnaireSurveyPK implements Serializable {
     @Override
     public int hashCode() {
         int result = studentId != null ? studentId.hashCode() : 0;
-        result = 31 * result + (questionnaireSurveyId != null ? questionnaireSurveyId.hashCode() : 0);
+        result = 31 * result + (recommenderInfoId != null ? recommenderInfoId.hashCode() : 0);
         return result;
     }
 }

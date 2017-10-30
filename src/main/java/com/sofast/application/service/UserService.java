@@ -2,7 +2,7 @@ package com.sofast.application.service;
 
 import com.sofast.application.model.User;
 
-public interface AuthService {
+public interface UserService extends BaseService<User, String> {
 
     int getCookieExpire();
 
