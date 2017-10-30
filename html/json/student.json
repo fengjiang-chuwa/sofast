@@ -1,0 +1,92 @@
+[
+{
+  "student_status": "replied",
+  "email": "maryellen.kent@undefined.me",
+  "name": "Maryellen.Kent",
+  "random_name": "Vaughn Rose",
+  "_name":
+  {
+    "last": "Kent",
+    "first": "Maryellen"
+  },
+  "index": 0,
+  "id": "59f694dd63a66d94614ec978"
+},
+{
+  "student_status": "replied",
+  "email": "kristina.alston@undefined.co.uk",
+  "name": "Kristina.Alston",
+  "random_name": "Kelli Curtis",
+  "_name":
+  {
+    "last": "Alston",
+    "first": "Kristina"
+  },
+  "index": 1,
+  "id": "59f694dd801d7bdc52da473e"
+},
+{
+  "student_status": "replied",
+  "email": "amanda.mcpherson@undefined.name",
+  "name": "Amanda.Mcpherson",
+  "random_name": "Rosalind Sloan",
+  "_name":
+  {
+    "last": "Mcpherson",
+    "first": "Amanda"
+  },
+  "index": 2,
+  "id": "59f694ddc34e46e6b1f9cd96"
+},
+{
+  "student_status": "sent",
+  "email": "cooper.reyes@undefined.net",
+  "name": "Cooper.Reyes",
+  "random_name": "Caldwell Caldwell",
+  "_name":
+  {
+    "last": "Reyes",
+    "first": "Cooper"
+  },
+  "index": 3,
+  "id": "59f694dd45ef1ef5848e963c"
+},
+{
+  "student_status": "sent",
+  "email": "john.bernard@undefined.org",
+  "name": "John.Bernard",
+  "random_name": "Sharon Mcintyre",
+  "_name":
+  {
+    "last": "Bernard",
+    "first": "John"
+  },
+  "index": 4,
+  "id": "59f694dd8f1001b109ab8139"
+},
+{
+  "student_status": "sent",
+  "email": "debra.mcmillan@undefined.ca",
+  "name": "Debra.Mcmillan",
+  "random_name": "Neal Bryant",
+  "_name":
+  {
+    "last": "Mcmillan",
+    "first": "Debra"
+  },
+  "index": 5,
+  "id": "59f694dd2f0074dcd692fe4b"
+},
+{
+  "student_status": "New",
+  "email": "brady.durham@undefined.io",
+  "name": "Brady.Durham",
+  "random_name": "Yesenia Williamson",
+  "_name":
+  {
+    "last": "Durham",
+    "first": "Brady"
+  },
+  "index": 6,
+  "id": "59f694ddd4a8973a2b54bd05"
+}]
