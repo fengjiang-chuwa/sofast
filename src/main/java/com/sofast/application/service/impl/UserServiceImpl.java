@@ -3,7 +3,6 @@ package com.sofast.application.service.impl;
 import com.sofast.application.dao.UserDao;
 import com.sofast.application.model.User;
 import com.sofast.application.service.UserService;
-import com.sofast.application.util.SecurityHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +53,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
     @Override
     public User getUserByEmailPassword(String email, String password) {
-        String encryptPassword = SecurityHelper.stringMD5(password);
-        return userDao.findByEmailAndPassword(email, encryptPassword);
+        return userDao.findByEmailAndPassword(email, password);
     }
 }
