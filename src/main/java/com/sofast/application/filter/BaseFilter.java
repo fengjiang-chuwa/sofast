@@ -17,8 +17,7 @@ import java.util.List;
  * @date 9/2/16
  */
 public abstract class BaseFilter {
-    private static final String LOGIN_PAGE_URL = "/mvc/user/login";
-    private static final String TRAINING_LOGIN_PAGE_URL = "/mvc/training/login";
+    private static final String LOGIN_PAGE_URL = "/user/login";
     /**
      * The Exclude path list.
      */
@@ -75,9 +74,8 @@ public abstract class BaseFilter {
                 return true;
             }
         }
-        String requestUrl = getRequestURL(request);
         for (String exPath : excludePathList) {
-            if (requestUrl.equals(exPath)) {
+            if (resourceUrl.equals(exPath)) {
                 return true;
             }
         }
@@ -102,23 +100,6 @@ public abstract class BaseFilter {
         if (Strings.isNullOrEmpty(accept) || !accept.contains("application/json")) {
             response.setStatus(302);
             response.sendRedirect(request.getContextPath() + LOGIN_PAGE_URL);
-        } else {
-            response.setStatus(401);
-        }
-    }
-
-    /**
-     * 跳转到登陆页面
-     *
-     * @param request  request
-     * @param response response
-     * @throws IOException the io exception
-     */
-    protected void redirectTrainingLoginPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String accept = request.getHeader("Accept");
-        if (Strings.isNullOrEmpty(accept) || !accept.contains("application/json")) {
-            response.setStatus(302);
-            response.sendRedirect(request.getContextPath() + TRAINING_LOGIN_PAGE_URL);
         } else {
             response.setStatus(401);
         }
