@@ -1,4 +1,4 @@
-package com.sofast.application.controller;
+package com.sofast.application.controller.mvc;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ public class WelcomeController {
 	@Value("${welcome.message:test}")
 	private String message = "Hello World";
 
-	@RequestMapping("/")
+	@RequestMapping("/welcome")
 	public String welcome(Map<String, Object> model) {
 		model.put("message", this.message);
 		return "welcome";
