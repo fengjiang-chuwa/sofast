@@ -17,6 +17,7 @@
     email: function(tags)
     {
       return (this._name.first + '.' + this._name.last + '@' + this.company + tags.domainZone()).toLowerCase();
-    }
+    },
+    student_status: "{{random('New','sent','replied')}}"
   }
 }]
