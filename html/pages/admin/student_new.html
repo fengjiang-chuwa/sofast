@@ -13,22 +13,30 @@
   <div class="container">
     <div class="well">
       <div class="page_title">New Student </div>
-      <form class="form-horizontal clearfix form_container">
+      <form class="form-horizontal clearfix form_container" ng-controller="validateCtrl" name="studentNewForm" novalidate>
         <div class="subtitle">Basic Information</div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">First Name</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control"> </div>
-          <label for="inputPassword3" class="col-sm-2 control-label">Family Name</label>
+            <input type="text" class="form-control" required name="firstName" ng-model="firstName">
+            <p ng-show="studentNewForm.firstName.$error.required" class="help-block" style="">Email is empty or Email format is wrong.</p>
+          </div>
+          <label for="inputPassword3" class="col-sm-2 control-label">Last Name</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control"> </div>
+            <input type="text" class="form-control" required name="lastName" ng-model="lastName">
+            <p ng-show="studentNewForm.lastName.$error.required" class="help-block" style="">Email is empty or Email format is wrong.</p>
+          </div>
         </div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control"> </div>
+            <input type="text" class="form-control" required name="email" ng-model="email">
+            <p ng-show="studentNewForm.email.$error.required" class="help-block" style="">Email is empty or Email format is wrong.</p>
+          </div>
+          <label for="inputPassword3 " class="col-sm-2 control-label">Phone Number</label>
+          <div class="col-sm-4 " ng-include="'/sofast/html/tmpl/phone.html'"> </div>
         </div>
-        <div class="form-group button-room ">
+        <div class="button-room ">
           <div class="text-center">
             <button type="button " class="btn btn-primary" onclick="window.location.href='student_list.html'"> <span class="glyphicon glyphicon-ok "></span> Submit </button>
             <button type="button " class="btn btn-default" onclick="window.location.href='student_list.html'"> <span class="glyphicon glyphicon-ok "></span> Cancel </button>

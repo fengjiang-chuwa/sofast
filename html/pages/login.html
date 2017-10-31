@@ -14,13 +14,13 @@
     </div>
     <div class="container">
       <div class="login-main">
-        <div class="well">
-          <form class="form-horizontal ">
+        <form class="well" ng-controller="validateCtrl" name="loginForm" novalidate>
+          <div class="form-horizontal ">
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-4 control-label"> <span class="glyphicon glyphicon-user"></span> Login Name </label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" placeholder="Name">
-                <p ng-show="frmLogin.email.$invalid &amp;&amp; !frmLogin.email.$pristine" class="help-block" style="">Email is empty or Email format is wrong.</p>
+                <input type="text" class="form-control" placeholder="name" required name="name" ng-model="name">
+                <p ng-show="loginForm.name.$invalid &amp;&amp; !loginForm.name.$pristine" class="help-block" style="">Email is empty or Email format is wrong.</p>
               </div>
             </div>
             <div class="form-group">
@@ -28,27 +28,13 @@
               <div class="col-sm-8">
                 <input type="text" class="form-control" placeholder="Password"> </div>
             </div>
-            <!--             <div class="form-group verification">
-              <label for="inputPassword3" class="col-sm-4 control-label">请输入手机验证码</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control col-sm-8" placeholder="">
-                <button type="button" class="btn btn-default pull-right col-sm-4"> 发送验证码 </button>
-              </div>
-            </div> -->
-            <!--             <div class="row verification-notice">
-              <div class="col-sm-8 col-sm-offset-4"> <span><span class="text-muted">验证码已发送，请耐心等待</span> （60S） &nbsp;</span>
-              </div>
-            </div> -->
-          </form>
+          </div>
           <br/>
           <div class="">
-            <button type="button" class="btn btn-primary btn-lg btn-block" onClick="javascript:location.href='admin/student_list.html ' "> <span class="glyphicon glyphicon-ok"></span> Login </button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" onClick="javascript:location.href='admin/student_list.html ' "> <span class="glyphicon glyphicon-ok" ng-disabled="loginForm.name.$pristine"></span> Login </button>
             <br/>
-            <!--             <div class="row">
-              <div class="col-sm-6"> <a href="recovery_psw_01.html">忘记密码？</a> </div>
-              <div class="col-sm-6 text-right"> <a href="regist.html">还没有帐号？立即注册</a> </div>
-            </div> --></div>
-        </div>
+          </div>
+        </form>
         <br> </div>
     </div>
     <div class="footer" ng-include="'/sofast/html/tmpl/layout/page_footer.html'"></div>
