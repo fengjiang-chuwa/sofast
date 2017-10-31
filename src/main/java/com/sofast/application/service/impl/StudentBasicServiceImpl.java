@@ -82,8 +82,9 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
 
     @Override
     public List<Country> findAllCountryList(){
-        Sort sort = new Sort(Sort.Direction.ASC, QCountry.country.name.toString());
-        Iterable<Country> countryList = countryDao.findAll(sort);
+        QCountry country = QCountry.country;
+        Sort sort = new Sort(Sort.Direction.ASC, "name");
+        Iterable<Country> countryList = countryDao.findAll(country.telCode.isNotNull(), sort);
         return Lists.newArrayList(countryList);
     }
 

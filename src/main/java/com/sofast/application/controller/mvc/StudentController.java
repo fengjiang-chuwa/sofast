@@ -1,10 +1,7 @@
 package com.sofast.application.controller.mvc;
 
 import com.google.common.collect.Lists;
-import com.sofast.application.model.Address;
-import com.sofast.application.model.StudentBasic;
-import com.sofast.application.model.StudentHasAddress;
-import com.sofast.application.model.StudentInfo;
+import com.sofast.application.model.*;
 import com.sofast.application.service.StudentBasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +18,7 @@ public class StudentController {
 
 	@GetMapping("/student/{linkId}")
 	public String welcome(Map<String, Object> model, @PathVariable("linkId") String linkId) {
+	    List<Country> countryList = studentBasicService.findAllCountryList();
         StudentBasic studentBasic = studentBasicService.findByLinkId(linkId);
         StudentInfo studentInfo = studentBasicService.findStudentInfoByStudentBasicId(studentBasic.getId());
         List<StudentHasAddress> studentHasAddressList = studentBasicService.findStudentHasAddressList(studentBasic.getId());
