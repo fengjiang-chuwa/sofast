@@ -24,12 +24,10 @@ function add_courses($scope, $compile, DTOptionsBuilder, DTColumnBuilder) {
   }
 
   function actionHtml(data, type, row) {
-    var btn;
-    if (row.student_status == "replied") {
-      btn = '<a href = "student_details.html" class = "btn-default btn btn-xs"> <span class = "glyphicon glyphicon-search"> </span> View Details</a>'
-    } else if (row.student_status == "New") {
-      btn = '<a href = "student_details.html" class = "btn-default btn btn-xs"> <span class = "glyphicon glyphicon-envelope"> </span> Send Email</a>'
-    } else btn = '';
+    var btn = '<a href = "student_details.html" class = "btn-default btn btn-xs"> <span class = "glyphicon glyphicon-pencil"> </span> Edit Details</a>';
+    if (row.student_status == "New") {
+      btn += ' <a href = "student_details.html" class = "btn-default btn btn-xs"> <span class = "glyphicon glyphicon-envelope"> </span> Send Email</a>'
+    } else btn += '';
     return btn;
   }
 }
