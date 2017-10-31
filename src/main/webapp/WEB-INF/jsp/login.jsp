@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>CSTU</title>
+    <title>Sofast</title>
     <%@include file="common/header.jsp" %>
 </head>
 <body ng-app="myApp" class="ng-scope login_body">

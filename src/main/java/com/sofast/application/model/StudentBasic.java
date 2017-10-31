@@ -1,5 +1,8 @@
 package com.sofast.application.model;
 
+import com.google.common.base.Strings;
+import com.sofast.application.entity.enums.StudentSendStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -48,6 +51,11 @@ public class StudentBasic {
         this.familyName = familyName;
     }
 
+    @Transient
+    public String getUserName() {
+        return this.getFirstName() + " " + this.getFamilyName();
+    }
+
     @Basic
     @Column(name = "status")
     public String getStatus() {
@@ -56,6 +64,15 @@ public class StudentBasic {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Transient
+    public String getStatusStr() {
+        if(Strings.isNullOrEmpty(status)){
+            return "";
+        } else {
+            return StudentSendStatus.forName(status).getName();
+        }
     }
 
     @Basic
