@@ -9,8 +9,8 @@ import java.util.Map;
 @Controller
 public class StudentController {
 
-	@GetMapping("/student/{email}")
-	public String welcome(Map<String, Object> model, @PathVariable("email") String email) {
+	@GetMapping("/student/{linkId}")
+	public String welcome(Map<String, Object> model, @PathVariable("linkId") String linkId) {
 
 		return "student_input";
 	}
