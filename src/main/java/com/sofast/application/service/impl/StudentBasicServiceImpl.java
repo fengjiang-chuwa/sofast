@@ -89,7 +89,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
 
     @Override
     public List<Address> findAddressList(List<String> ids){
-        return addressDao.findAllById(ids);
+        Iterable<String> iterable = ids;
+        return Lists.newArrayList(addressDao.findAll(iterable));
     }
 
     @Override
