@@ -56,7 +56,7 @@ public class StudentRestController {
     public JsonResponse<String> saveCourse(@RequestBody StudentBasicEntity studentBasicEntity)
             throws MsgException {
         try {
-            StudentBasic checkStudentBasic = studentBasicService.findByEmail(studentBasicEntity.getEmail());
+            StudentBasic checkStudentBasic = studentBasicService.findByEmail(studentBasicEntity.getApplicantEmailAddress());
             if (checkStudentBasic != null) {
                 if (checkStudentBasic.getId().equalsIgnoreCase(studentBasicEntity.getId())) {
                     return new JsonResponse<>("The email has been already used.");

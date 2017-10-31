@@ -35,9 +35,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
 
     @Override
     public StudentBasic findByEmail(String email) {
-        return studentBasicDao.findByEmail(email);
+        return studentBasicDao.findByApplicantEmailAddress(email);
     }
-}
 
     @Override
     public List<Country> findAllCountryList(){
