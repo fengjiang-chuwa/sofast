@@ -162,7 +162,7 @@ public class StudentInfo {
     }
 
     @Basic
-    @Column(name = "existing_I-20")
+    @Column(name = "existing_i20")
     public String getExistingI20() {
         return existingI20;
     }

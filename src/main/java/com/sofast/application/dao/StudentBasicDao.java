@@ -10,5 +10,6 @@ import javax.transaction.Transactional;
 @Repository
 public interface StudentBasicDao extends CrudRepository<StudentBasic, String> {
     StudentBasic findById(String id);
+    StudentBasic findByLinkId(String linkId);
     StudentBasic findByApplicantEmailAddress(String applicantEmailAddress);
 }
