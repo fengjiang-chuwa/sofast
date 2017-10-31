@@ -2,6 +2,8 @@ package com.sofast.application.model;
 
 import com.google.common.base.Strings;
 import com.sofast.application.entity.enums.StudentSendStatus;
+import com.sofast.application.entity.request.StudentBasicEntity;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +22,13 @@ public class StudentBasic {
     private String applicantEmailAddress;
     private String phoneId;
     private String linkId;
+
+    public StudentBasic() {
+
+    }
+    public StudentBasic(StudentBasicEntity studentBasicEntity) {
+        BeanUtils.copyProperties(studentBasicEntity, this);
+    }
 
     @Id
     @Column(name = "id")

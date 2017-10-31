@@ -58,15 +58,16 @@ public class StudentRestController {
         try {
             StudentBasic checkStudentBasic = studentBasicService.findByEmail(studentBasicEntity.getApplicantEmailAddress());
             if (checkStudentBasic != null) {
-                if (checkStudentBasic.getId().equalsIgnoreCase(studentBasicEntity.getId())) {
+                if (!checkStudentBasic.getId().equalsIgnoreCase(studentBasicEntity.getId())) {
                     return new JsonResponse<>("The email has been already used.");
                 }
             }
             if(Strings.isNullOrEmpty(studentBasicEntity.getId())){
                 studentBasicEntity.setId(UUIDHelper.getUUID());
                 studentBasicEntity.setStatus(StudentSendStatus.NEW.getKey());
+                studentBasicEntity.setLinkId(UUIDHelper.getUUID());
             }
-            StudentBasic studentBasic = studentBasicEntity;
+            StudentBasic studentBasic = new StudentBasic(studentBasicEntity);
             // TODO: 10/31/17 set phone number to phone id
             studentBasic.setPhoneId(studentBasicEntity.getPhoneNumber());
             studentBasicService.save(studentBasic);
