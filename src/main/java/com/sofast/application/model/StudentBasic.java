@@ -19,7 +19,6 @@ public class StudentBasic {
     private String nationality;
     private String applicantEmailAddress;
     private String phoneId;
-    private String email;
 
     @Id
     @Column(name = "id")
@@ -135,16 +134,6 @@ public class StudentBasic {
         this.phoneId = phoneId;
     }
 
-    @Basic
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -164,7 +153,6 @@ public class StudentBasic {
         if (applicantEmailAddress != null ? !applicantEmailAddress.equals(that.applicantEmailAddress) : that.applicantEmailAddress != null)
             return false;
         if (phoneId != null ? !phoneId.equals(that.phoneId) : that.phoneId != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
 
         return true;
     }
@@ -181,7 +169,6 @@ public class StudentBasic {
         result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
         result = 31 * result + (applicantEmailAddress != null ? applicantEmailAddress.hashCode() : 0);
         result = 31 * result + (phoneId != null ? phoneId.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 }
