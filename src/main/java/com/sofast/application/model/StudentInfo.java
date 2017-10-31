@@ -28,6 +28,8 @@ public class StudentInfo {
     private Date dateOfBirth;
     private String nationality;
     private String passportNumber;
+    private String nameOfHighestQualification;
+    private Boolean declarationAgree;
 
     @Id
     @Column(name = "id")
@@ -249,6 +251,26 @@ public class StudentInfo {
         this.passportNumber = passportNumber;
     }
 
+    @Basic
+    @Column(name = "name_of_highest_qualification")
+    public String getNameOfHighestQualification() {
+        return nameOfHighestQualification;
+    }
+
+    public void setNameOfHighestQualification(String nameOfHighestQualification) {
+        this.nameOfHighestQualification = nameOfHighestQualification;
+    }
+
+    @Basic
+    @Column(name = "declaration_agree")
+    public Boolean getDeclarationAgree() {
+        return declarationAgree;
+    }
+
+    public void setDeclarationAgree(Boolean declarationAgree) {
+        this.declarationAgree = declarationAgree;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -285,6 +307,10 @@ public class StudentInfo {
         if (nationality != null ? !nationality.equals(that.nationality) : that.nationality != null) return false;
         if (passportNumber != null ? !passportNumber.equals(that.passportNumber) : that.passportNumber != null)
             return false;
+        if (nameOfHighestQualification != null ? !nameOfHighestQualification.equals(that.nameOfHighestQualification) : that.nameOfHighestQualification != null)
+            return false;
+        if (declarationAgree != null ? !declarationAgree.equals(that.declarationAgree) : that.declarationAgree != null)
+            return false;
 
         return true;
     }
@@ -313,6 +339,8 @@ public class StudentInfo {
         result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
         result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
         result = 31 * result + (passportNumber != null ? passportNumber.hashCode() : 0);
+        result = 31 * result + (nameOfHighestQualification != null ? nameOfHighestQualification.hashCode() : 0);
+        result = 31 * result + (declarationAgree != null ? declarationAgree.hashCode() : 0);
         return result;
     }
 }

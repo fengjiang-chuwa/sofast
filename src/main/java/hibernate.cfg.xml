@@ -24,6 +24,7 @@
         <mapping class="com.sofast.application.model.StudentHasRecommenderInfo"/>
         <mapping class="com.sofast.application.model.StudentHasRelationship"/>
         <mapping class="com.sofast.application.model.StudentHasStandardizedTestAccountInfo"/>
+        <mapping class="com.sofast.application.model.Country"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>
