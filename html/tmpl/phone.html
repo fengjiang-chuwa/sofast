@@ -1,13 +1,14 @@
 <div class="row ">
   <div class="col-xs-4 ">
-    <div ng-controller="phoneNumber " class="drop_down ">
-      <select name="repeatSelect " id="repeatSelect " ng-model="data.model " class="form-control ng-pristine ng-untouched ng-valid ng-not-empty ">
+    <div ng-controller="phoneNumber" class="drop_down ng-scope">
+      <label class="ng-binding">+86</label> <span class="arrow"></span>
+      <select name="repeatSelect" id="repeatSelect" ng-model="data.model" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
         <!-- ngRepeat: option in data.availableOptions -->
-        <option ng-repeat="option in data.availableOptions " value="+86 " class="ng-binding ng-scope ">China (+86)</option>
+        <option ng-repeat="option in data.availableOptions" value="+86" class="ng-binding ng-scope">China (+86)</option>
         <!-- end ngRepeat: option in data.availableOptions -->
-        <option ng-repeat="option in data.availableOptions " value="2 " class="ng-binding ng-scope ">China (+86)China (+86)China (+86)China (+86)</option>
+        <option ng-repeat="option in data.availableOptions" value="2" class="ng-binding ng-scope">China (+86)China (+86)China (+86)China (+86)</option>
         <!-- end ngRepeat: option in data.availableOptions -->
-        <option ng-repeat="option in data.availableOptions " value="3 " class="ng-binding ng-scope ">Option C</option>
+        <option ng-repeat="option in data.availableOptions" value="3" class="ng-binding ng-scope">Option C</option>
         <!-- end ngRepeat: option in data.availableOptions -->
       </select>
     </div>

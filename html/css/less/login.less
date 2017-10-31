@@ -1,6 +1,19 @@
-@login_input_bg: #DEDEDE;
 .login_body {
 	background: #fff;
+	.header {
+		text-align: center;
+		.logo_title {
+			font-size: 40px;
+		}
+
+		.sys_room {
+			display: none;
+		}
+		.nav {
+			display: none;
+		}
+	}
+
 	.footer {
 		position: fixed;
 		width: 100%;
@@ -15,7 +28,8 @@
 	.well {
 		padding: 35px;
 		.form-group {
-			margin-bottom: 30px;
+			margin-bottom: 0px;
+			height: 80px;
 			>label.control-label {
 				height: 45px;
 				border-right: 2px solid #fff;
@@ -24,8 +38,11 @@
 				padding-top: 13px;
 			}
 			>label.control-label,
-			>div {
+			>div .form-control {
 				background-color: @login_input_bg;
+			}
+			>div {
+				padding: 0px;
 			}
 			.form-control {
 				border: medium none;
@@ -34,6 +51,8 @@
 				-webkit-box-shadow: none;
 				-moz-box-shadow: none;
 				height: 45px;
+				border-radius: 0;
+				padding: 0 15px;
 			}
 		}
 	}

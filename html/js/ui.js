@@ -4,6 +4,8 @@ function goBack() {
 }
 
 var validationApp = angular.module('soFast', ['ui.bootstrap', 'datatables']);
+// ValidateCtrl
+validationApp.controller('validateCtrl', function($scope) {});
 // Date Picker
 validationApp.controller('DatepickerPopupDemoCtrl', function($scope) {
     $scope.today = function() {
