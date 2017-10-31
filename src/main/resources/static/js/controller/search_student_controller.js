@@ -16,7 +16,6 @@ App.controller('SearchStudentController', ['$rootScope','$scope','$httpParamSeri
                     if(row.status === 'new'){
                         var viewLink = getFullRequestPath('/payment/detail/view/') + data;
                         btnHtml += '<a href='+viewLink+' class = "btn-default btn btn-xs"> <span class = "glyphicon glyphicon-envelope"> </span> Send Email</a>';
-                        return btnHtml;
                     }
                     var editLink = getFullRequestPath('/payment/detail/paid/') + data;
                     btnHtml += '<a href='+editLink+' class = "btn-default btn btn-xs"> <span class = "glyphicon glyphicon-pencil"> </span> Edit Details</a>';

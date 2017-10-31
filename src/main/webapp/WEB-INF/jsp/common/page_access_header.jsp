@@ -3,7 +3,7 @@
     <div class="sys_room">
         <div class="wrapper">
             <span>Welcome, admin .</span>
-            <a href="../login.html" class="pull-right"><span class="glyphicon glyphicon-off "></span> Logout</a></div>
+            <a href="${pageContext.request.contextPath}/user/logout" class="pull-right"><span class="glyphicon glyphicon-off "></span> Logout</a></div>
     </div>
     <%@include file="page_header_logo.jsp" %>
 </div>

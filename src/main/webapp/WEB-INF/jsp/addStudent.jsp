@@ -56,6 +56,7 @@
                 </div>
             </div>
             <div class="button-room ">
+                <div class="alert alert-danger" role="alert" ng-show="showErrorMsg">{{errorMsg}}</div>
                 <div class="text-center">
                     <button type="button" class="btn btn-primary" ng-click="ctrl.saveStudent()">
                         <span class="glyphicon glyphicon-ok "></span> Submit

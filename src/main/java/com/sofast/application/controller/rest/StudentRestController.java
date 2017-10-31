@@ -58,7 +58,7 @@ public class StudentRestController {
         try {
             StudentBasic checkStudentBasic = studentBasicService.findByEmail(studentBasicEntity.getApplicantEmailAddress());
             if (checkStudentBasic != null) {
-                if (checkStudentBasic.getId().equalsIgnoreCase(studentBasicEntity.getId())) {
+                if (!checkStudentBasic.getId().equalsIgnoreCase(studentBasicEntity.getId())) {
                     return new JsonResponse<>("The email has been already used.");
                 }
             }

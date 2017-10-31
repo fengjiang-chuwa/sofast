@@ -4,7 +4,7 @@
         <div class="logo_title">Sofast</div>
         <div class="logo_text">Administration Management System</div>
         <div class="nav">
-            <a href="/Sofast/html/pages/admin/student_list.html"><span class="glyphicon glyphicon-th-list"></span> Student List</a>
+            <a href="${pageContext.request.contextPath}/welcome"><span class="glyphicon glyphicon-th-list"></span> Student List</a>
         </div>
     </div>
 </div>
