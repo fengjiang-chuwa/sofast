@@ -15,6 +15,8 @@ public interface StudentBasicService extends BaseService<StudentBasic, String> {
 
     List<Country> findAllCountryList();
 
+    List<QuestionnaireSurvey> findAllQuestionnaireSurveyList();
+
     List<Address> findAddressList(List<String> ids);
 
     List<EducationInfo> findEducationInfoList(List<String> ids);

@@ -89,6 +89,14 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     }
 
     @Override
+    public List<QuestionnaireSurvey> findAllQuestionnaireSurveyList(){
+        QQuestionnaireSurvey questionnaireSurvey = QQuestionnaireSurvey.questionnaireSurvey;
+        Sort sort = new Sort(Sort.Direction.ASC, "sequence");
+        Iterable<QuestionnaireSurvey> questionnaireSurveyList = questionnaireSurveyDao.findAll(sort);
+        return Lists.newArrayList(questionnaireSurveyList);
+    }
+
+    @Override
     public List<Address> findAddressList(List<String> ids){
         Iterable<String> iterable = ids;
         return Lists.newArrayList(addressDao.findAll(iterable));
@@ -101,7 +109,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
 
     @Override
     public List<EducationInfo> findEducationInfoList(List<String> ids){
-        return educationInfoDao.findAllById(ids);
+        Iterable<String> iterable = ids;
+        return Lists.newArrayList(educationInfoDao.findAll(iterable));
     }
 
     @Override
@@ -111,7 +120,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
 
     @Override
     public List<QuestionnaireSurvey> findQuestionnaireSurveyList(List<String> ids){
-        return questionnaireSurveyDao.findAllById(ids);
+        Iterable<String> iterable = ids;
+        return Lists.newArrayList(questionnaireSurveyDao.findAll(iterable));
     }
 
     @Override
@@ -121,7 +131,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
 
     @Override
     public List<RecommenderInfo> findRecommenderInfoList(List<String> ids){
-        return recommenderInfoDao.findAllById(ids);
+        Iterable<String> iterable = ids;
+        return Lists.newArrayList(recommenderInfoDao.findAll(iterable));
     }
 
     @Override
@@ -131,7 +142,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
 
     @Override
     public List<Relationship> findRelationshipList(List<String> ids){
-        return relationshipDao.findAllById(ids);
+        Iterable<String> iterable = ids;
+        return Lists.newArrayList(relationshipDao.findAll(iterable));
     }
 
     @Override
@@ -141,7 +153,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
 
     @Override
     public List<StandardizedTestAccountInfo> findStandardizedTestAccountInfoList(List<String> ids){
-        return standardizedTestAccountInfoDao.findAllById(ids);
+        Iterable<String> iterable = ids;
+        return Lists.newArrayList(standardizedTestAccountInfoDao.findAll(iterable));
     }
 
     @Override
