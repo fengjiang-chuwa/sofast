@@ -23,4 +23,9 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     public StudentBasic findById(String id) {
         return studentBasicDao.findById(id);
     }
+
+    @Override
+    public StudentBasic findByEmail(String email) {
+        return studentBasicDao.findByEmail(email);
+    }
 }
