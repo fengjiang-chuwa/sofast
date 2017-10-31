@@ -19,18 +19,29 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     private final CountryDao countryDao;
     private final StudentInfoDao studentInfoDao;
     private final AddressDao addressDao;
+    private final StudentHasAddressDao studentHasAddressDao;
     private final EducationInfoDao educationInfoDao;
+    private final StudentHasEducationInfoDao studentHasEducationInfoDao;
     private final QuestionnaireSurveyDao questionnaireSurveyDao;
+    private final StudentHasQuestionnaireSurveyDao studentHasQuestionnaireSurveyDao;
     private final RecommenderInfoDao recommenderInfoDao;
+    private final StudentHasRecommenderInfoDao studentHasRecommenderInfoDao;
     private final RelationshipDao relationshipDao;
+    private final StudentHasRelationshipDao studentHasRelationshipDao;
     private final StandardizedTestAccountInfoDao standardizedTestAccountInfoDao;
+    private final StudentHasStandardizedTestAccountInfoDao studentHasStandardizedTestAccountInfoDao;
 
     @Autowired
     public StudentBasicServiceImpl(StudentBasicDao studentBasicDao, CountryDao countryDao,
                                    AddressDao addressDao, StudentInfoDao studentInfoDao,
                                    EducationInfoDao educationInfoDao, QuestionnaireSurveyDao questionnaireSurveyDao,
                                    RecommenderInfoDao recommenderInfoDao, RelationshipDao relationshipDao,
-                                   StandardizedTestAccountInfoDao standardizedTestAccountInfoDao) {
+                                   StandardizedTestAccountInfoDao standardizedTestAccountInfoDao,
+                                   StudentHasAddressDao studentHasAddressDao, StudentHasEducationInfoDao studentHasEducationInfoDao,
+                                   StudentHasQuestionnaireSurveyDao studentHasQuestionnaireSurveyDao,
+                                   StudentHasRecommenderInfoDao studentHasRecommenderInfoDao,
+                                   StudentHasRelationshipDao studentHasRelationshipDao,
+                                   StudentHasStandardizedTestAccountInfoDao studentHasStandardizedTestAccountInfoDao) {
         this.studentBasicDao = studentBasicDao;
         this.crudRepository = studentBasicDao;
         this.countryDao = countryDao;
@@ -41,11 +52,22 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
         this.recommenderInfoDao = recommenderInfoDao;
         this.relationshipDao = relationshipDao;
         this.standardizedTestAccountInfoDao = standardizedTestAccountInfoDao;
+        this.studentHasAddressDao = studentHasAddressDao;
+        this.studentHasEducationInfoDao = studentHasEducationInfoDao;
+        this.studentHasQuestionnaireSurveyDao = studentHasQuestionnaireSurveyDao;
+        this.studentHasRecommenderInfoDao = studentHasRecommenderInfoDao;
+        this.studentHasRelationshipDao = studentHasRelationshipDao;
+        this.studentHasStandardizedTestAccountInfoDao = studentHasStandardizedTestAccountInfoDao;
     }
 
     @Override
     public StudentBasic findById(String id) {
         return studentBasicDao.findById(id);
+    }
+
+    @Override
+    public StudentBasic findByLinkId(String linkId) {
+        return studentBasicDao.findByLinkId(linkId);
     }
 
     @Override
@@ -71,8 +93,18 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     }
 
     @Override
+    public List<StudentHasAddress> findStudentHasAddressList(String studentId){
+        return studentHasAddressDao.findAllByStudentId(studentId);
+    }
+
+    @Override
     public List<EducationInfo> findEducationInfoList(List<String> ids){
         return educationInfoDao.findAllById(ids);
+    }
+
+    @Override
+    public List<StudentHasEducationInfo> findStudentHasEducationInfoList(String studentId){
+        return studentHasEducationInfoDao.findAllByStudentId(studentId);
     }
 
     @Override
@@ -81,8 +113,18 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     }
 
     @Override
+    public List<StudentHasQuestionnaireSurvey> findStudentHasQuestionnaireSurveyList(String studentId){
+        return studentHasQuestionnaireSurveyDao.findAllByStudentId(studentId);
+    }
+
+    @Override
     public List<RecommenderInfo> findRecommenderInfoList(List<String> ids){
         return recommenderInfoDao.findAllById(ids);
+    }
+
+    @Override
+    public List<StudentHasRecommenderInfo> findStudentHasRecommenderInfoList(String studentId){
+        return studentHasRecommenderInfoDao.findAllByStudentId(studentId);
     }
 
     @Override
@@ -91,7 +133,17 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     }
 
     @Override
+    public List<StudentHasRelationship> findStudentHasRelationshipList(String studentId){
+        return studentHasRelationshipDao.findAllByStudentId(studentId);
+    }
+
+    @Override
     public List<StandardizedTestAccountInfo> findStandardizedTestAccountInfoList(List<String> ids){
         return standardizedTestAccountInfoDao.findAllById(ids);
+    }
+
+    @Override
+    public List<StudentHasStandardizedTestAccountInfo> findStudentHasStandardizedTestAccountInfoList(String studentId){
+        return studentHasStandardizedTestAccountInfoDao.findAllByStudentId(studentId);
     }
 }

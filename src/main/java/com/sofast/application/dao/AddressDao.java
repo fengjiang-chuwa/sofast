@@ -10,5 +10,5 @@ import java.util.List;
 @Transactional
 @Repository
 public interface AddressDao extends CrudRepository<Address, String> {
-    List<Address> findAllById(List<String> ids);
+    List<Address> findAll(List<String> ids);
 }
