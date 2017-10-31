@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface StudentBasicService extends BaseService<StudentBasic, String> {
     StudentBasic findById(String id);
+    StudentBasic findByEmail(String email);
 
     StudentInfo findStudentInfoByStudentBasicId(String studentBasicId);
 

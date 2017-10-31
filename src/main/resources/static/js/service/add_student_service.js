@@ -3,8 +3,8 @@
 App.factory('StudentBasicService', ['$http', '$q', function($http, $q){
 
     return {
-        init: function(termId) {
-            return $http.get(getFullRequestPath("/term/data/"+termId))
+        init: function(studentId) {
+            return $http.get(getFullRequestPath("/studentbasic/data/"+studentId))
                 .then(
                     function(response){
                         return response.data;
@@ -15,8 +15,8 @@ App.factory('StudentBasicService', ['$http', '$q', function($http, $q){
                     }
                 );
         },
-        save: function(yearTerm) {
-            return $http.post(getFullRequestPath("/term/save"), yearTerm)
+        save: function(studentBasicEntity) {
+            return $http.post(getFullRequestPath("/studentbasic/save"), studentBasicEntity)
                 .then(
                     function(response){
                         return response.data;

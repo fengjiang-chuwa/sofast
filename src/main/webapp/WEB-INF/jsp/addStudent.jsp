@@ -11,37 +11,49 @@
 <div class="container" ng-controller="StudentBasicController as ctrl">
     <div class="login-main">
         <div class="well">
-            <form  name="frmLogin" novalidate
-                   autocomplete="off" class="form-horizontal">
-                <span style="color:red;" ng-if="showErrorMsg" ng-bind-html="errorMsg" id="errorMsg"></span>
+            <div class="page_title">New Student </div>
+            <form  name="frmStudent" novalidate autocomplete="off" class="form-horizontal clearfix form_container">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> <span class="glyphicon glyphicon-user"></span> Login Name
-                    </label>
-                    <div class="col-sm-8"
-                         ng-class="{ 'has-error' : frmLogin.email.$invalid && !frmLogin.email.$pristine }">
-                        <input type="email" class="form-control" name="email" ng-model="ctl.loginInfo.email"
+                    <label class="col-sm-2 control-label">First Name</label>
+                    <div class="col-sm-4" ng-class="{ 'has-error' : frmStudent.firstName.$invalid && !frmStudent.firstName.$pristine }">
+                        <input type="text" class="form-control" name="firstName" ng-model="ctrl.studentBasicEntity.firstName"
                                required>
-                        <p ng-show="frmLogin.email.$invalid && !frmLogin.email.$pristine"
-                           class="help-block">Email is empty or Email format is wrong.</p>
+                        <p ng-show="!frmStudent.firstName.$pristine && frmStudent.firstName.$invalid"
+                           class="help-block">First Name is required.</p>
+                    </div>
+                    <label class="col-sm-2 control-label">Last Name</label>
+                    <div class="col-sm-4" ng-class="{ 'has-error' : frmStudent.familyName.$invalid && !frmStudent.familyName.$pristine }">
+                        <input type="text" class="form-control" name="familyName" ng-model="ctrl.studentBasicEntity.familyName"
+                               required>
+                        <p ng-show="frmStudent.familyName.$invalid && !frmStudent.familyName.$pristine"
+                           class="help-block">Last Name is empty or Email format is wrong.</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-4 control-label"> <span
-                            class=" glyphicon glyphicon-lock"></span> Password </label>
-                    <div class="col-sm-8"
-                         ng-class="{ 'has-error' : frmLogin.password.$invalid && !frmLogin.password.$pristine }">
-                        <input type="password" class="form-control" name="password"
-                               ng-model="ctl.loginInfo.password" required>
-                        <p ng-show="frmLogin.password.$invalid && !frmLogin.password.$pristine"
-                           class="help-block">Password is required.</p>
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-4" ng-class="{ 'has-error' : frmStudent.email.$invalid && !frmStudent.email.$pristine }">
+                        <input type="email" class="form-control" name="email" ng-model="ctrl.studentBasicEntity.email"
+                               required>
+                        <p ng-show="!frmStudent.email.$pristine && frmStudent.email.$error.required"
+                           class="help-block">Email is required.</p>
+                        <p ng-show="!frmStudent.email.$pristine && frmStudent.email.$error.email"
+                           class="help-block">Email format is wrong.</p>
+                    </div>
+                    <label class="col-sm-2 control-label">Phone Number</label>
+                    <div class="col-sm-4" ng-class="{ 'has-error' : frmStudent.phoneNumber.$invalid && !frmStudent.phoneNumber.$pristine }">
+                        <input type="email" class="form-control" ng-pattern="/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,2,3,5-9]))\\d{8}$/" name="phoneNumber" ng-model="ctrl.studentBasicEntity.phoneNumber"
+                               required>
+                        <p ng-show="frmStudent.phoneNumber.$invalid && !frmStudent.phoneNumber.$pristine"
+                           class="help-block">Phone number is empty or Phone number  format is wrong.</p>
+                    </div>
+                </div>
+                <div class="button-room ">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='student_list.html'"> <span class="glyphicon glyphicon-ok "></span> Submit </button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href='student_list.html'"> <span class="glyphicon glyphicon-ok "></span> Cancel </button>
                     </div>
                 </div>
             </form>
-            <div class="">
-                <button type="submit" ng-click="ctrl.checkUser()" class="btn btn-primary btn-lg btn-block"><span
-                        class="glyphicon glyphicon-ok"></span> Login
-                </button>
-            </div>
         </div>
     </div>
 </div>
