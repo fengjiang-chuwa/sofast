@@ -8,7 +8,7 @@
 <body ng-app="myApp" class="ng-scope">
 <%@include file="common/page_access_header.jsp" %>
 <div class="container" ng-controller="SearchStudentController as ctrl">
-	<div class="page_title">Student List <a href="student_new.html" class="btn-link btn-xs btn pull-right">
+	<div class="page_title">Student List <a href="${pageContext.request.contextPath}/studentdetail/new" class="btn-link btn-xs btn pull-right">
 		<span class="glyphicon glyphicon-plus"></span> New Student
 	</a></div>
 	<div class="clearfix row-border hover">

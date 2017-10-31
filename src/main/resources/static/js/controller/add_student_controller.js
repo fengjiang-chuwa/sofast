@@ -1,13 +1,13 @@
 
 'use strict';
 
-App.controller('StudentBasicController', ['$sce', '$scope', 'StudentBasicService', function ($sce, $scope, TermService) {
+App.controller('StudentBasicController', ['$sce', '$scope', 'StudentBasicService', function ($sce, $scope, StudentBasicService) {
     var self = this;
 
     self.studentBasicEntity = {
         "firstName": null,
         "familyName": null,
-        "email": null,
+        "applicantEmailAddress": null,
         "phoneNumber": null
     };
 
