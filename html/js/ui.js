@@ -4,6 +4,14 @@ function goBack() {
 }
 
 var validationApp = angular.module('soFast', ['ui.bootstrap', 'datatables']);
+// show Loading 
+validationApp.controller('ShowLoadingCtrl', function($scope) {
+    var self = this;
+    self.loadingImg = false;
+    self.showLoading = function() {
+        self.loadingImg = true;
+    };
+});
 // ValidateCtrl
 validationApp.controller('validateCtrl', function($scope) {});
 // Date Picker
