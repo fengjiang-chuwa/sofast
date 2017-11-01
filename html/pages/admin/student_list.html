@@ -20,5 +20,16 @@
   </div>
   <div class="footer" ng-include="'/sofast/html/tmpl/layout/page_footer.html'"></div>
 </body>
+<!-- for Loading -->
+<div ng-controller="ShowLoadingCtrl as ctrl " style="display: block; position: absolute; top: 5px; right: 5px; ">
+  <input type="button" ng-click="ctrl.showLoading() " value="loading "> {{ctrl.loadingImg}}
+  <div id="mask-loading " class="mask_loading " ng-if="ctrl.loadingImg " style=" ">
+    <div>
+      <img src="/sofast/html/img/gears.svg ">
+      <div>Page is loading.</div>
+    </div>
+  </div>
+</div>
+<!-- end for Loading -->
 
 </html>
