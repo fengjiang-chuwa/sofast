@@ -8,11 +8,15 @@ import com.sofast.application.entity.request.StudentBasicEntity;
 import com.sofast.application.exception.MsgException;
 import com.sofast.application.model.StudentBasic;
 import com.sofast.application.service.StudentBasicService;
+import com.sofast.application.util.MailUtil;
 import com.sofast.application.util.UUIDHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.MessageFormat;
 import java.util.List;
 
 @Slf4j
@@ -21,9 +25,18 @@ public class StudentRestController {
 
     private final StudentBasicService studentBasicService;
 
+    private final MailUtil mailUtil;
+
+    @Value("${mail.enroll.student.template}")
+    private String mailTemplate;
+
+    @Value("${mail.enroll.student.subject}")
+    private String mailSubject;
+
     @Autowired
-    public StudentRestController(StudentBasicService studentBasicService) {
+    public StudentRestController(StudentBasicService studentBasicService, MailUtil mailUtil) {
         this.studentBasicService = studentBasicService;
+        this.mailUtil = mailUtil;
     }
 
     @GetMapping(value = "/studentdetail/search/result/")
@@ -77,4 +90,25 @@ public class StudentRestController {
             return new JsonResponse<>("error");
         }
     }
+
+    @GetMapping(value = "/student/send/mail/{studentBasicId}")
+    public JsonResponse<String> sendEmail(@PathVariable("studentBasicId") String studentBasicId,
+                                          HttpServletRequest request) throws MsgException {
+        try {
+            StudentBasic studentBasic = studentBasicService.findById(studentBasicId);
+            if(studentBasic == null || Strings.isNullOrEmpty(studentBasic.getLinkId())){
+                return new JsonResponse<>("error");
+            }
+            String link = request.getRequestURL().toString();
+            link = link.substring(0, link.indexOf("/student/send/mail/"));
+            link += "/student/" + studentBasic.getLinkId();
+            String content = MessageFormat.format(mailTemplate, studentBasic.getFirstName(), link, link);
+            mailUtil.send(studentBasic.getApplicantEmailAddress(), mailSubject, content);
+            return new JsonResponse<>("success");
+        } catch (Exception e) {
+            log.error("sendEmail", e);
+            return new JsonResponse<>("error");
+        }
+    }
+
 }
