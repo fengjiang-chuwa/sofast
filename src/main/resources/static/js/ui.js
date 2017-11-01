@@ -3,9 +3,9 @@ function goBack() {
     window.history.go(-1)
 }
 
-var validationApp = angular.module('soFast', ['ui.bootstrap', 'datatables']);
+// var validationApp = angular.module('soFast', ['ui.bootstrap', 'datatables']);
 // Date Picker
-validationApp.controller('DatepickerPopupDemoCtrl', function($scope) {
+App.controller('DatepickerPopupDemoCtrl', function($scope) {
     $scope.today = function() {
         $scope.dt = new Date();
     };
@@ -83,7 +83,7 @@ validationApp.controller('DatepickerPopupDemoCtrl', function($scope) {
 });
 
 // Create Phone Number Controller
-validationApp.controller('phoneNumber', ['$scope', function($scope) {
+App.controller('phoneNumber', ['$scope', function($scope) {
     $scope.data = {
         model: '+86',
         availableOptions: [{ id: '+86', name: 'China (+86)' }, { id: '2', name: 'China (+86)China (+86)China (+86)China (+86)' }, { id: '3', name: 'Option C' }]
@@ -91,7 +91,7 @@ validationApp.controller('phoneNumber', ['$scope', function($scope) {
 }]);
 
 // Show Information
-validationApp.controller('showInfo', function($scope, $window) {
+App.controller('showInfo', function($scope, $window) {
     $scope.level = ['Undergraduate', 'Postgraduate', 'Postgraduated Researcher'];
     $scope.files = ['Passport', 'Academic Transcript', 'English Language Report/Certificate', 'Existing I-20', 'Personal Statement/Admission Essay', 'CV', 'Certificate (Optional)']
     $scope.bragSheet = [

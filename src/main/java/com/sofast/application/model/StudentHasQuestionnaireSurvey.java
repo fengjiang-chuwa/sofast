@@ -9,7 +9,6 @@ public class StudentHasQuestionnaireSurvey {
     private String studentId;
     private String questionnaireSurveyId;
     private String answer;
-    private String studentInfoId;
 
     @Id
     @Column(name = "student_id")
@@ -41,16 +40,6 @@ public class StudentHasQuestionnaireSurvey {
         this.answer = answer;
     }
 
-    @Basic
-    @Column(name = "student_info_id")
-    public String getStudentInfoId() {
-        return studentInfoId;
-    }
-
-    public void setStudentInfoId(String studentInfoId) {
-        this.studentInfoId = studentInfoId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,8 +51,6 @@ public class StudentHasQuestionnaireSurvey {
         if (questionnaireSurveyId != null ? !questionnaireSurveyId.equals(that.questionnaireSurveyId) : that.questionnaireSurveyId != null)
             return false;
         if (answer != null ? !answer.equals(that.answer) : that.answer != null) return false;
-        if (studentInfoId != null ? !studentInfoId.equals(that.studentInfoId) : that.studentInfoId != null)
-            return false;
 
         return true;
     }
@@ -73,7 +60,6 @@ public class StudentHasQuestionnaireSurvey {
         int result = studentId != null ? studentId.hashCode() : 0;
         result = 31 * result + (questionnaireSurveyId != null ? questionnaireSurveyId.hashCode() : 0);
         result = 31 * result + (answer != null ? answer.hashCode() : 0);
-        result = 31 * result + (studentInfoId != null ? studentInfoId.hashCode() : 0);
         return result;
     }
 }

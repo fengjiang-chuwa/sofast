@@ -1,5 +1,10 @@
 package com.sofast.application.model;
 
+import com.google.common.base.Strings;
+import com.sofast.application.entity.enums.StudentSendStatus;
+import com.sofast.application.entity.request.StudentBasicEntity;
+import org.springframework.beans.BeanUtils;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,11 +17,19 @@ public class StudentBasic {
     private String status;
     private Date createdAt;
     private Date dateOfBirth;
-    private Date countryOfBirth;
+    private String countryOfBirth;
     private String nationality;
     private String applicantEmailAddress;
     private String phoneId;
-    private String email;
+    private String linkId;
+    private String passportNumber;
+
+    public StudentBasic() {
+
+    }
+    public StudentBasic(StudentBasicEntity studentBasicEntity) {
+        BeanUtils.copyProperties(studentBasicEntity, this);
+    }
 
     @Id
     @Column(name = "id")
@@ -48,6 +61,11 @@ public class StudentBasic {
         this.familyName = familyName;
     }
 
+    @Transient
+    public String getUserName() {
+        return this.getFirstName() + " " + this.getFamilyName();
+    }
+
     @Basic
     @Column(name = "status")
     public String getStatus() {
@@ -56,6 +74,15 @@ public class StudentBasic {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Transient
+    public String getStatusStr() {
+        if(Strings.isNullOrEmpty(status)){
+            return "";
+        } else {
+            return StudentSendStatus.forName(status).getName();
+        }
     }
 
     @Basic
@@ -80,11 +107,11 @@ public class StudentBasic {
 
     @Basic
     @Column(name = "country_of_birth")
-    public Date getCountryOfBirth() {
+    public String getCountryOfBirth() {
         return countryOfBirth;
     }
 
-    public void setCountryOfBirth(Date countryOfBirth) {
+    public void setCountryOfBirth(String countryOfBirth) {
         this.countryOfBirth = countryOfBirth;
     }
 
@@ -119,13 +146,23 @@ public class StudentBasic {
     }
 
     @Basic
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
+    @Column(name = "link_id")
+    public String getLinkId() {
+        return linkId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLinkId(String linkId) {
+        this.linkId = linkId;
+    }
+
+    @Basic
+    @Column(name = "passport_number")
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 
     @Override
@@ -147,7 +184,7 @@ public class StudentBasic {
         if (applicantEmailAddress != null ? !applicantEmailAddress.equals(that.applicantEmailAddress) : that.applicantEmailAddress != null)
             return false;
         if (phoneId != null ? !phoneId.equals(that.phoneId) : that.phoneId != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (linkId != null ? !linkId.equals(that.linkId) : that.linkId != null) return false;
 
         return true;
     }
@@ -164,7 +201,7 @@ public class StudentBasic {
         result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
         result = 31 * result + (applicantEmailAddress != null ? applicantEmailAddress.hashCode() : 0);
         result = 31 * result + (phoneId != null ? phoneId.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (linkId != null ? linkId.hashCode() : 0);
         return result;
     }
 }

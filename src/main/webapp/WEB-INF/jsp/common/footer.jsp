@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="page_footer">
-    &copy; Copyright 2016-2017, California Science And Technology University. All rights reserved (Release Date: 10/20/2017)
+<div class="footer">
+    <span>© Copyright 2017, Sofast Company. All rights reserved</span>
 </div>
 
 <div>
