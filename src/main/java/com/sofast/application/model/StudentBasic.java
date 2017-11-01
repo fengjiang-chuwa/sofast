@@ -17,11 +17,12 @@ public class StudentBasic {
     private String status;
     private Date createdAt;
     private Date dateOfBirth;
-    private Date countryOfBirth;
+    private String countryOfBirth;
     private String nationality;
     private String applicantEmailAddress;
     private String phoneId;
     private String linkId;
+    private String passportNumber;
 
     public StudentBasic() {
 
@@ -106,11 +107,11 @@ public class StudentBasic {
 
     @Basic
     @Column(name = "country_of_birth")
-    public Date getCountryOfBirth() {
+    public String getCountryOfBirth() {
         return countryOfBirth;
     }
 
-    public void setCountryOfBirth(Date countryOfBirth) {
+    public void setCountryOfBirth(String countryOfBirth) {
         this.countryOfBirth = countryOfBirth;
     }
 
@@ -152,6 +153,16 @@ public class StudentBasic {
 
     public void setLinkId(String linkId) {
         this.linkId = linkId;
+    }
+
+    @Basic
+    @Column(name = "passport_number")
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 
     @Override
