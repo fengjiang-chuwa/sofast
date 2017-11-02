@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import com.sofast.application.entity.JsonResponse;
 import com.sofast.application.entity.enums.StudentSendStatus;
 import com.sofast.application.entity.request.StudentBasicEntity;
+import com.sofast.application.entity.response.EducationInfoData;
+import com.sofast.application.entity.response.StudentHasQuestionnaireSurveyData;
 import com.sofast.application.entity.response.StudentInputData;
 import com.sofast.application.exception.MsgException;
 import com.sofast.application.model.*;
@@ -184,17 +186,34 @@ public class StudentRestController {
                 ids.add(studentHasEducationInfo.getEducationInfoId());
             }
             List<EducationInfo> educationInfoList = studentBasicService.findEducationInfoList(ids);
-            studentInputData.setEducationInfoList(educationInfoList);
+            List<EducationInfoData> educationInfoDataList = Lists.newArrayList();
+            for (EducationInfo educationInfo : educationInfoList) {
+                EducationInfoData educationInfoData = new EducationInfoData();
+                educationInfoData.setEducationInfoData(educationInfo);
+                Address address = studentBasicService.findAddressById(educationInfo.getAddressId());
+                educationInfoData.setAddress(address);
+                educationInfoDataList.add(educationInfoData);
+            }
+            studentInputData.setEducationInfoList(educationInfoDataList);
         }
         List<StudentHasQuestionnaireSurvey> studentHasQuestionnaireSurveyList = studentBasicService.findStudentHasQuestionnaireSurveyList(studentBasic.getId());
-        if (!CollectionHelper.isEmptyOrNull(studentHasQuestionnaireSurveyList)) {
-            List<String> ids = Lists.newArrayList();
-            for (StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey : studentHasQuestionnaireSurveyList) {
-                ids.add(studentHasQuestionnaireSurvey.getQuestionnaireSurveyId());
+        List<StudentHasQuestionnaireSurveyData> studentHasQuestionnaireSurveyDataList = Lists.newArrayList();
+        for (QuestionnaireSurvey questionnaireSurvey : allQuestionnaireSurveyList) {
+            StudentHasQuestionnaireSurveyData studentHasQuestionnaireSurveyData = new StudentHasQuestionnaireSurveyData();
+            studentHasQuestionnaireSurveyData.setQuestionnaireSurveyId(questionnaireSurvey.getId());
+            studentHasQuestionnaireSurveyData.setStudentId(studentBasic.getId());
+            studentHasQuestionnaireSurveyData.setQuestion(questionnaireSurvey.getQuestion());
+            if (!CollectionHelper.isEmptyOrNull(studentHasQuestionnaireSurveyList)) {
+                for (StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey : studentHasQuestionnaireSurveyList) {
+                    if (questionnaireSurvey.getId().equalsIgnoreCase(studentHasQuestionnaireSurvey.getQuestionnaireSurveyId())) {
+                        studentHasQuestionnaireSurveyData.setAnswer(studentHasQuestionnaireSurvey.getAnswer());
+                        break;
+                    }
+                }
             }
-            List<QuestionnaireSurvey> questionnaireSurveyList = studentBasicService.findQuestionnaireSurveyList(ids);
-            studentInputData.setQuestionnaireSurveyList(questionnaireSurveyList);
+            studentHasQuestionnaireSurveyDataList.add(studentHasQuestionnaireSurveyData);
         }
+        studentInputData.setQuestionnaireSurveyList(studentHasQuestionnaireSurveyDataList);
         List<StudentHasStandardizedTestAccountInfo> studentHasStandardizedTestAccountInfoList = studentBasicService.findStudentHasStandardizedTestAccountInfoList(studentBasic.getId());
         if (!CollectionHelper.isEmptyOrNull(studentHasStandardizedTestAccountInfoList)) {
             List<String> ids = Lists.newArrayList();

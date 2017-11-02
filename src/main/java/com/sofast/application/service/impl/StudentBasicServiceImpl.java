@@ -66,6 +66,11 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     }
 
     @Override
+    public Address findAddressById(String addressId) {
+        return addressDao.findById(addressId);
+    }
+
+    @Override
     public StudentBasic findByLinkId(String linkId) {
         return studentBasicDao.findByLinkId(linkId);
     }
