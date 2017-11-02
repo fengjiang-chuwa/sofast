@@ -4,12 +4,12 @@
     <span>© Copyright 2017, Sofast Company. All rights reserved</span>
 </div>
 
-<div>
-    <div id="mask-loading" class="mask-loading" ng-if="loading" style="background-color: rgba(0, 0, 0, 0.5);">
-        <div><img src='<c:url value="/image/gears.svg"/>'/>
-            <div>Page is loading.</div></div>
+    <div id="mask-loading" class="mask_loading" ng-if="loading" >
+        <div>
+            <img src='<c:url value="/image/gears.svg"/>'/>
+            <div>Page is loading.</div>
+        </div>
     </div>
-</div>
 
 <script type="application/javascript">
     function getFullRequestPath(context){
@@ -42,3 +42,5 @@
 <script type="text/javascript" src="<c:url value='/js/ui-bootstrap-tpls-1.3.3.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/ui.js'/>"></script>
 <script src="<c:url value='/js/angular-datatables.min.js' />"></script>
+<script src="<c:url value='/js/service/account_info_service.js' />"></script>
+<script src="<c:url value='/js/controller/account_info_controller.js' />"></script>
