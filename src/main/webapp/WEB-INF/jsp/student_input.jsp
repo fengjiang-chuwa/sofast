@@ -265,7 +265,8 @@
                 </div>
 			</div>
             <span ng-repeat="education in ctrl.studentInputData.educationInfoList">
-                <div class="add_more" ng-if="(ctrl.studentInputData.studentInfo.educationInfoId === education.id)">
+                <div class="unit_title">School {{$index + 1}}</div>
+                <div class="add_more">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">School Name</label>
                         <div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.schoolName{{$index}}.$invalid && !studentInputForm.schoolName{{$index}}.$pristine }">
@@ -375,123 +376,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="subtitle"> <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.removeEducation($index)"><span class="glyphicon glyphicon-plus"></span> Remove</a> </div>
                 </div>
             </span>
-            <span ng-repeat="education in ctrl.studentInputData.educationInfoList">
-                <div class="unit_title" ng-if="(ctrl.studentInputData.studentInfo.educationInfoId !== education.id)">Other School</div>
-                <div class="add_more" ng-if="(ctrl.studentInputData.studentInfo.educationInfoId !== education.id)">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">School Name</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.schoolName{{$index}}.$invalid && !studentInputForm.schoolName{{$index}}.$pristine }">
-                            <input type="text" class="form-control" name="schoolName{{$index}}" ng-model="education.schoolName" required maxlength="45">
-                            <p ng-show="studentInputForm.schoolName{{$index}}.$invalid && !studentInputForm.schoolName{{$index}}.$pristine" class="help-block">School Name is required.</p>
-                        </div>
-                        <label class="col-sm-2 control-label">School Type</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.schoolType{{$index}}.$invalid && !studentInputForm.schoolType{{$index}}.$pristine }">
-                            <select class="form-control" name="schoolType{{$index}}" ng-model="education.schoolType" required>
-                                <option value="">Please Select</option>
-                                <option value="Public">Public</option>
-                                <option value="Private">Private</option>
-                            </select>
-                            <p ng-show="studentInputForm.schoolType{{$index}}.$invalid && !studentInputForm.schoolType{{$index}}.$pristine" class="help-block">School Type is required.</p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Level of study</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.levelOfStudy{{$index}}.$invalid && !studentInputForm.levelOfStudy{{$index}}.$pristine }">
-                            <select class="form-control" name="levelOfStudy{{$index}}" ng-model="education.levelOfStudy" required>
-                                <option value="">Please Select</option>
-                                <option value="High school">High school</option>
-                                <option value="Vocational school">Vocational school</option>
-                                <option value="Undergraduate">Undergraduate</option>
-                                <option value="Zhuanke">Zhuanke</option>
-                            </select>
-                            <p ng-show="studentInputForm.levelOfStudy{{$index}}.$invalid && !studentInputForm.levelOfStudy{{$index}}.$pristine" class="help-block">Level of study is required.</p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Study Start Date</label>
-                        <div class="col-sm-4">
-                            <div ng-controller="DatepickerPopupDemoCtrl" class="ng-scope" ng-class="{ 'has-error' : studentInputForm.startDate{{$index}}.$invalid && !studentInputForm.startDate{{$index}}.$pristine }">
-                                <div class="input-group">
-                                    <input type="text" name="startDate{{$index}}" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="education.startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
-                                    <div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-not-empty ng-valid">
-                                        <!-- ngIf: isOpen -->
-                                    </div>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="open1()"> <i class="glyphicon glyphicon-calendar"></i></button>
-                                    </span>
-                                </div>
-                                <p ng-show="studentInputForm.startDate{{$index}}.$invalid && !studentInputForm.startDate{{$index}}.$pristine" class="help-block">Start Date is required.</p>
-                            </div>
-                        </div>
-                        <label class="col-sm-2 control-label">Study End Date</label>
-                        <div class="col-sm-4">
-                            <div ng-controller="DatepickerPopupDemoCtrl" class="ng-scope" ng-class="{ 'has-error' : studentInputForm.endDate{{$index}}.$invalid && !studentInputForm.endDate{{$index}}.$pristine }">
-                                <div class="input-group">
-                                    <input type="text" name="endDate{{$index}}" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="education.endDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
-                                    <div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-not-empty ng-valid">
-                                        <!-- ngIf: isOpen -->
-                                    </div>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="open1()"> <i class="glyphicon glyphicon-calendar"></i></button>
-                                    </span>
-                                </div>
-                                <p ng-show="studentInputForm.endDate{{$index}}.$invalid && !studentInputForm.endDate{{$index}}.$pristine" class="help-block">End Date is required.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="unit_title">School Address and Contact</div>
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">Address Line 1</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.line1{{$index}}.$invalid && !studentInputForm.line1{{$index}}.$pristine }">
-                            <input type="text" name="line1{{$index}}" placeholder="" class="form-control" ng-model="education.address.line1" required maxlength="45">
-                            <p ng-show="studentInputForm.line1{{$index}}.$invalid && !studentInputForm.line1{{$index}}.$pristine" class="help-block">Address Line 1 is required.</p>
-                        </div>
-                        <label class="col-xs-2 control-label">Address Line 2</label>
-                        <div class="col-xs-4">
-                            <input type="text" placeholder="" class="form-control" ng-model="address.line2">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">Country</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.country{{$index}}.$invalid && !studentInputForm.country{{$index}}.$pristine }">
-                            <select class="form-control" ng-model="education.address.country" name="country{{$index}}" convert-to-string required>
-                                <option value="">Please Select</option>
-                                <option ng-repeat="country in ctrl.studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
-                            </select>
-                            <p ng-show="studentInputForm.country{{$index}}.$invalid && !studentInputForm.country{{$index}}.$pristine" class="help-block">Country is required.</p>
-                        </div>
-                        <label class="col-xs-2 control-label">State / Province</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.state{{$index}}.$invalid && !studentInputForm.state{{$index}}.$pristine }">
-                            <input type="text" class="form-control" name="state{{$index}}" ng-model="education.address.state" required maxlength="45">
-                            <p ng-show="studentInputForm.state{{$index}}.$invalid && !studentInputForm.state{{$index}}.$pristine" class="help-block">State is required.</p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">City</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.city{{$index}}.$invalid && !studentInputForm.city{{$index}}.$pristine }">
-                            <input type="text" class="form-control" name="city{{$index}}" ng-model="education.address.city" required maxlength="45">
-                            <p ng-show="studentInputForm.city{{$index}}.$invalid && !studentInputForm.city{{$index}}.$pristine" class="help-block">City is required.</p>
-                        </div>
-                        <label class="col-xs-2 control-label">Zip Code / Postal Code</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.zip{{$index}}.$invalid && !studentInputForm.zip{{$index}}.$pristine }">
-                            <input type="text" class="form-control" name="zip{{$index}}" ng-model="education.address.zip" required maxlength="45">
-                            <p ng-show="studentInputForm.zip{{$index}}.$invalid && !studentInputForm.zip{{$index}}.$pristine" class="help-block">Zip Code is required.</p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Phone Number</label>
-                        <div class="row">
-                            <div class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.phoneId{{$index}}.$invalid && !studentInputForm.phoneId{{$index}}.$pristine }">
-                                <input type="text" placeholder="phone number" name="phoneId{{$index}}" class="form-control" ng-model="education.phoneId" required maxlength="45">
-                                <p ng-show="studentInputForm.phoneId{{$index}}.$invalid && !studentInputForm.phoneId{{$index}}.$pristine" class="help-block">Phone is required.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </span>
-			<div class="subtitle">Other Previous Academic Study <a class="btn btn-xs btn-link pull-right" ng-click="showMore=!showMore"><span class="glyphicon glyphicon-plus"></span> Add Academic Study</a> </div>
+			<div class="subtitle">Other Previous Academic Study <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addEducation()"><span class="glyphicon glyphicon-plus"></span> Add Academic Study</a> </div>
 
 			<div class="formTitle">Required Documents Checklist</div>
 			<div class="subtitle">Documents Details</div>
@@ -546,8 +434,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="subtitle"> <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.removeRecommender($index)"><span class="glyphicon glyphicon-plus"></span> Remove</a> </div>
             </span>
-            <div class="subtitle">Other Type of Recommender <a class="btn btn-xs btn-link pull-right" ng-click="showMore=!showMore"><span class="glyphicon glyphicon-plus"></span> Add Other Recommender</a> </div>
+            <div class="subtitle">Other Type of Recommender <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addRecommender()"><span class="glyphicon glyphicon-plus"></span> Add Other Recommender</a> </div>
             <div class="formTitle">Standardized Test Account Information</div>
             <span ng-repeat="testAccount in ctrl.studentInputData.standardizedTestAccountInfoList">
                 <div class="subtitle">Test Account</div>
@@ -570,14 +459,15 @@
                         <p ng-show="studentInputForm.password{{$index}}.$invalid && !studentInputForm.password{{$index}}.$pristine" class="help-block">Password is required.</p>
                     </div>
                 </div>
+                <div class="subtitle"> <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.removeTestAccount($index)"><span class="glyphicon glyphicon-plus"></span> Remove</a> </div>
             </span>
-            <div class="subtitle">Other Test Account <a class="btn btn-xs btn-link pull-right" ng-click="showMore=!showMore"><span class="glyphicon glyphicon-plus"></span> Add Other Test Account</a> </div>
+            <div class="subtitle">Other Test Account <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addTestAccount()"><span class="glyphicon glyphicon-plus"></span> Add Other Test Account</a> </div>
 
 			<div class="formTitle">Declaration</div>
 			<div class="subtitle">Declaration Details</div>
 			<div class="form-group article-room">
 				<div class="">
-					<p> I confirm that I Student Name have been duly appointed by Student Name, have permission to act on their behalf and confirm that to the best of my knowledge all the details supplied are accurate and correct. I understand that the giving of false or incomplete information may lead to the misguidance in college counselling process or refusal of admissions to colleges or cancellation of the applicant’s enrolment. I confirm that the applicant has received a copy of the terms and conditions. </p>
+					<p> I confirm that I Student Name have been duly appointed by Student Name, have permission to act on their behalf and confirm that to the best of my knowledge all the details supplied are accurate and correct. I understand that the giving of false or incomplete information may lead to the misguidance in college counselling process or refusal of admissions to colleges or cancellation of the applicant's enrolment. I confirm that the applicant has received a copy of the terms and conditions. </p>
 				</div>
 			</div>
 			<div class="form-group button-room">
@@ -596,7 +486,7 @@
 			</div>
 			<div class="form-group button-room">
 				<div class="text-center">
-					<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='submit_sucess.html'"> <span class="glyphicon glyphicon-ok "></span> Submit </button>
+					<button type="button" class="btn btn-primary btn-lg" onclick="ctrl.saveStudentInfo()"> <span class="glyphicon glyphicon-ok "></span> Submit </button>
 				</div>
 			</div>
 		</form>

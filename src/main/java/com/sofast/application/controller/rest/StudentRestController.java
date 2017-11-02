@@ -225,4 +225,15 @@ public class StudentRestController {
         }
         return new JsonResponse<>(studentInputData);
     }
+
+    @RequestMapping(value = "/studentInfo", method = RequestMethod.POST, produces = "application/json")
+    public JsonResponse<String> saveStudentInfo(@RequestBody StudentInputData studentInputData) throws MsgException {
+        try {
+
+            return new JsonResponse<>("success");
+        } catch (Exception e) {
+            log.error("saveStudentInfo", e);
+            return new JsonResponse<>("error");
+        }
+    }
 }
