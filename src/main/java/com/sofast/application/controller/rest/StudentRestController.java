@@ -95,7 +95,7 @@ public class StudentRestController {
         }
     }
 
-    @GetMapping(value = "/student/send/mail/{studentBasicId}")
+    @PostMapping(value = "/student/send/mail/{studentBasicId}")
     public JsonResponse<String> sendEmail(@PathVariable("studentBasicId") String studentBasicId,
                                           HttpServletRequest request) throws MsgException {
         try {

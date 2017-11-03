@@ -26,6 +26,18 @@ App.factory('StudentInputService', ['$http', '$q', function($http, $q){
                         return $q.reject(errResponse);
                     }
                 );
+        },
+        sendEmail: function(studentId) {
+            return $http.post(getFullRequestPath('/student/send/mail/')+studentId, null)
+                .then(
+                    function(response){
+                        return response.data;
+                    },
+                    function(errResponse){
+                        // console.error('Error while save education');
+                        return $q.reject(errResponse);
+                    }
+                );
         }
     };
 
