@@ -15,6 +15,10 @@
               <span class="glyphicon glyphicon-plus"></span> New Student
             </a></div>
     <div ng-controller="add_courses as showCase" class="clearfix row-border hover">
+      <p class="help-block table_msg" style="">
+        <span class="success"><span class="glyphicon glyphicon-ok"></span> Email sent success. </span>
+        <span class="failed"><span class="glyphicon glyphicon-remove"></span> Email sent failed.</span>
+      </p>
       <table datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" class="table table-bordered"></table>
     </div>
   </div>

@@ -260,6 +260,22 @@ a.btn_link_red {
 	padding: 0px 15px;
 }
 
+.table_msg {
+	position: absolute;
+	z-index: 3;
+	text-align: center;
+	top: 24px;
+	width: 50%;
+	left: 50%;
+	margin-left: -30%;
+	.success {
+		color: green;
+	}
+	.failed {
+		color: @red;
+	}
+}
+
 .dataTables_wrapper {
 	background: #fff;
 	padding: @padding;
@@ -267,6 +283,7 @@ a.btn_link_red {
 	label {
 		font-weight: normal!important;
 	}
+
 	.dataTables_length {
 		margin-bottom: 10px;
 	}
