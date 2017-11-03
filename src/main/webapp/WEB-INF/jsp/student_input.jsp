@@ -249,43 +249,43 @@
                 </div>
 			</div>
             <span ng-repeat="education in ctrl.studentInputData.educationInfoList">
-                <div class="unit_title">School {{$index + 1}}</div>
-                <div class="add_more" ng-form="educationForm">
+                <div class="unit_title">School {{$index + 1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeEducation($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
+                <div class="add_more" ng-form="educationForm{{$index}}">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">School Name</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : educationForm.schoolName.$invalid && !educationForm.schoolName.$pristine }">
-                            <input type="text" class="form-control" name="schoolName" ng-model="education.schoolName" required maxlength="45">
-                            <p ng-show="educationForm.schoolName.$invalid && !educationForm.schoolName.$pristine" class="help-block">School Name is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : educationForm{{$index}}.schoolName{{$index}}.$invalid && !educationForm{{$index}}.schoolName{{$index}}.$pristine }">
+                            <input type="text" class="form-control" name="schoolName{{$index}}" ng-model="education.schoolName" required maxlength="45">
+                            <p ng-show="educationForm{{$index}}.schoolName{{$index}}.$invalid && !educationForm{{$index}}.schoolName{{$index}}.$pristine" class="help-block">School Name is required.</p>
                         </div>
                         <label class="col-sm-2 control-label">School Type</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : educationForm.schoolType.$invalid && !educationForm.schoolType.$pristine }">
-                            <select class="form-control" name="schoolType" ng-model="education.schoolType" required>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : educationForm{{$index}}.schoolType{{$index}}.$invalid && !educationForm{{$index}}.schoolType{{$index}}.$pristine }">
+                            <select class="form-control" name="schoolType{{$index}}" ng-model="education.schoolType" required>
                                 <option value="">Please Select</option>
                                 <option value="Public">Public</option>
                                 <option value="Private">Private</option>
                             </select>
-                            <p ng-show="educationForm.schoolType.$invalid && !educationForm.schoolType.$pristine" class="help-block">School Type is required.</p>
+                            <p ng-show="educationForm{{$index}}.schoolType{{$index}}.$invalid && !educationForm{{$index}}.schoolType{{$index}}.$pristine" class="help-block">School Type is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Level of study</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : educationForm.levelOfStudy.$invalid && !educationForm.levelOfStudy.$pristine }">
-                            <select class="form-control" name="levelOfStudy" ng-model="education.levelOfStudy" required>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : educationForm{{$index}}.levelOfStudy{{$index}}.$invalid && !educationForm{{$index}}.levelOfStudy{{$index}}.$pristine }">
+                            <select class="form-control" name="levelOfStudy{{$index}}" ng-model="education.levelOfStudy" required>
                                 <option value="">Please Select</option>
                                 <option value="High school">High school</option>
                                 <option value="Vocational school">Vocational school</option>
                                 <option value="Undergraduate">Undergraduate</option>
                                 <option value="Zhuanke">Zhuanke</option>
                             </select>
-                            <p ng-show="educationForm.levelOfStudy.$invalid && !educationForm.levelOfStudy.$pristine" class="help-block">Level of study is required.</p>
+                            <p ng-show="educationForm{{$index}}.levelOfStudy{{$index}}.$invalid && !educationForm{{$index}}.levelOfStudy{{$index}}.$pristine" class="help-block">Level of study is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Study Start Date</label>
                         <div class="col-sm-4">
-                            <div ng-controller="DatepickerPopupDemoCtrl" class="ng-scope" ng-class="{ 'has-error' : educationForm.startDate.$invalid && !educationForm.startDate.$pristine }">
+                            <div ng-controller="DatepickerPopupDemoCtrl" class="ng-scope" ng-class="{ 'has-error' : educationForm{{$index}}.startDate{{$index}}.$invalid && !educationForm{{$index}}.startDate{{$index}}.$pristine }">
                                 <div class="input-group">
-                                    <input type="text" name="startDate" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="education.startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
+                                    <input type="text" name="startDate{{$index}}" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="education.startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
                                     <div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-not-empty ng-valid">
                                         <!-- ngIf: isOpen -->
                                     </div>
@@ -293,14 +293,14 @@
                                         <button type="button" class="btn btn-default" ng-click="open1()"> <i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
                                 </div>
-                                <p ng-show="educationForm.startDate.$invalid && !educationForm.startDate.$pristine" class="help-block">Start Date is required.</p>
+                                <p ng-show="educationForm{{$index}}.startDate{{$index}}.$invalid && !educationForm{{$index}}.startDate{{$index}}.$pristine" class="help-block">Start Date is required.</p>
                             </div>
                         </div>
                         <label class="col-sm-2 control-label">Study End Date</label>
                         <div class="col-sm-4">
-                            <div ng-controller="DatepickerPopupDemoCtrl" class="ng-scope" ng-class="{ 'has-error' : educationForm.endDate.$invalid && !educationForm.endDate.$pristine }">
+                            <div ng-controller="DatepickerPopupDemoCtrl" class="ng-scope" ng-class="{ 'has-error' : educationForm{{$index}}.endDate{{$index}}.$invalid && !educationForm{{$index}}.endDate{{$index}}.$pristine }">
                                 <div class="input-group">
-                                    <input type="text" name="endDate" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="education.endDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
+                                    <input type="text" name="endDate{{$index}}" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="education.endDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
                                     <div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-not-empty ng-valid">
                                         <!-- ngIf: isOpen -->
                                     </div>
@@ -308,16 +308,16 @@
                                         <button type="button" class="btn btn-default" ng-click="open1()"> <i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
                                 </div>
-                                <p ng-show="educationForm.endDate.$invalid && !educationForm.endDate.$pristine" class="help-block">End Date is required.</p>
+                                <p ng-show="educationForm{{$index}}.endDate{{$index}}.$invalid && !educationForm{{$index}}.endDate{{$index}}.$pristine" class="help-block">End Date is required.</p>
                             </div>
                         </div>
                     </div>
                     <div class="unit_title">School Address and Contact</div>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Address Line 1</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm.line1.$invalid && !educationForm.line1.$pristine }">
-                            <input type="text" name="line1" placeholder="" class="form-control" ng-model="education.address.line1" required maxlength="45">
-                            <p ng-show="educationForm.line1.$invalid && !educationForm.line1.$pristine" class="help-block">Address Line 1 is required.</p>
+                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm{{$index}}.line1{{$index}}.$invalid && !educationForm{{$index}}.line1{{$index}}.$pristine }">
+                            <input type="text" name="line1{{$index}}" placeholder="" class="form-control" ng-model="education.address.line1" required maxlength="45">
+                            <p ng-show="educationForm{{$index}}.line1{{$index}}.$invalid && !educationForm{{$index}}.line1{{$index}}.$pristine" class="help-block">Address Line 1 is required.</p>
                         </div>
                         <label class="col-xs-2 control-label">Address Line 2</label>
                         <div class="col-xs-4">
@@ -326,39 +326,38 @@
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Country</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm.country.$invalid && !educationForm.country.$pristine }">
-                            <select class="form-control" ng-model="education.address.country" name="country" convert-to-string required>
+                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm{{$index}}.country{{$index}}.$invalid && !educationForm{{$index}}.country{{$index}}.$pristine }">
+                            <select class="form-control" ng-model="education.address.country" name="country{{$index}}" convert-to-string required>
                                 <option value="">Please Select</option>
                                 <option ng-repeat="country in ctrl.studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
                             </select>
-                            <p ng-show="educationForm.country.$invalid && !educationForm.country.$pristine" class="help-block">Country is required.</p>
+                            <p ng-show="educationForm{{$index}}.country{{$index}}.$invalid && !educationForm{{$index}}.country{{$index}}.$pristine" class="help-block">Country is required.</p>
                         </div>
                         <label class="col-xs-2 control-label">State / Province</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm.state.$invalid && !educationForm.state.$pristine }">
-                            <input type="text" class="form-control" name="state" ng-model="education.address.state" required maxlength="45">
-                            <p ng-show="educationForm.state.$invalid && !educationForm.state.$pristine" class="help-block">State is required.</p>
+                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm{{$index}}.state{{$index}}.$invalid && !educationForm{{$index}}.state{{$index}}.$pristine }">
+                            <input type="text" class="form-control" name="state{{$index}}" ng-model="education.address.state" required maxlength="45">
+                            <p ng-show="educationForm{{$index}}.state{{$index}}.$invalid && !educationForm{{$index}}.state{{$index}}.$pristine" class="help-block">State is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">City</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm.city.$invalid && !educationForm.city.$pristine }">
-                            <input type="text" class="form-control" name="city" ng-model="education.address.city" required maxlength="45">
-                            <p ng-show="educationForm.city.$invalid && !educationForm.city.$pristine" class="help-block">City is required.</p>
+                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm{{$index}}.city{{$index}}.$invalid && !educationForm{{$index}}.city{{$index}}.$pristine }">
+                            <input type="text" class="form-control" name="city{{$index}}" ng-model="education.address.city" required maxlength="45">
+                            <p ng-show="educationForm{{$index}}.city{{$index}}.$invalid && !educationForm{{$index}}.city{{$index}}.$pristine" class="help-block">City is required.</p>
                         </div>
                         <label class="col-xs-2 control-label">Zip Code / Postal Code</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm.zip.$invalid && !educationForm.zip.$pristine }">
-                            <input type="text" class="form-control" name="zip" ng-model="education.address.zip" required maxlength="45">
-                            <p ng-show="educationForm.zip.$invalid && !educationForm.zip.$pristine" class="help-block">Zip Code is required.</p>
+                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm{{$index}}.zip{{$index}}.$invalid && !educationForm{{$index}}.zip{{$index}}.$pristine }">
+                            <input type="text" class="form-control" name="zip{{$index}}" ng-model="education.address.zip" required maxlength="45">
+                            <p ng-show="educationForm{{$index}}.zip{{$index}}.$invalid && !educationForm{{$index}}.zip{{$index}}.$pristine" class="help-block">Zip Code is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Phone Number</label>
-                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm.eduPhoneId.$invalid && !educationForm.eduPhoneId.$pristine }">
-                            <input type="text" placeholder="phone number" name="eduPhoneId" class="form-control" ng-model="education.phoneId" required maxlength="45">
-                            <p ng-show="educationForm.eduPhoneId.$invalid && !educationForm.eduPhoneId.$pristine" class="help-block">Phone is required.</p>
+                        <div class="col-xs-4" ng-class="{ 'has-error' : educationForm{{$index}}.eduPhoneId{{$index}}.$invalid && !educationForm{{$index}}.eduPhoneId{{$index}}.$pristine }">
+                            <input type="text" placeholder="phone number" name="eduPhoneId{{$index}}" class="form-control" ng-model="education.phoneId" required maxlength="45">
+                            <p ng-show="educationForm{{$index}}.eduPhoneId{{$index}}.$invalid && !educationForm{{$index}}.eduPhoneId{{$index}}.$pristine" class="help-block">Phone is required.</p>
                         </div>
                     </div>
-                    <div class="subtitle"> <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.removeEducation($index)"><span class="glyphicon glyphicon-plus"></span> Remove</a> </div>
                 </div>
             </span>
 			<div class="subtitle">Other Previous Academic Study <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addEducation()"><span class="glyphicon glyphicon-plus"></span> Add Academic Study</a> </div>
@@ -375,73 +374,71 @@
 			</div>
 			<div class="formTitle">Recommender Information</div>
             <span ng-repeat="recommenderInfo in ctrl.studentInputData.recommenderInfoList">
-                <div class="subtitle">Recommender</div>
-                <span ng-form="recommenderInformationForm">
+                <div class="subtitle">Recommender{{$index+1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeRecommender($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
+                <span ng-form="recommenderInformationForm{{$index}}">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name of Recommender</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm.nameOfRecommender.$invalid && !recommenderInformationForm.nameOfRecommender.$pristine }">
-                            <input type="text" class="form-control" name="nameOfRecommender" ng-model="recommenderInfo.nameOfRecommender" required maxlength="45">
-                            <p ng-show="recommenderInformationForm.nameOfRecommender.$invalid && !recommenderInformationForm.nameOfRecommender.$pristine" class="help-block">Name of Recommender is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm{{$index}}.nameOfRecommender{{$index}}.$invalid && !recommenderInformationForm{{$index}}.nameOfRecommender{{$index}}.$pristine }">
+                            <input type="text" class="form-control" name="nameOfRecommender{{$index}}" ng-model="recommenderInfo.nameOfRecommender" required maxlength="45">
+                            <p ng-show="recommenderInformationForm{{$index}}.nameOfRecommender{{$index}}.$invalid && !recommenderInformationForm{{$index}}.nameOfRecommender{{$index}}.$pristine" class="help-block">Name of Recommender is required.</p>
                         </div>
                         <label class="col-sm-2 control-label">Job Title</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm.jobTitle.$invalid && !recommenderInformationForm.jobTitle.$pristine }">
-                            <input type="text" class="form-control" name="jobTitle" ng-model="recommenderInfo.jobTitle" required maxlength="45">
-                            <p ng-show="recommenderInformationForm.jobTitle.$invalid && !recommenderInformationForm.jobTitle.$pristine" class="help-block">Job Title is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm{{$index}}.jobTitle{{$index}}.$invalid && !recommenderInformationForm{{$index}}.jobTitle{{$index}}.$pristine }">
+                            <input type="text" class="form-control" name="jobTitle{{$index}}" ng-model="recommenderInfo.jobTitle" required maxlength="45">
+                            <p ng-show="recommenderInformationForm{{$index}}.jobTitle{{$index}}.$invalid && !recommenderInformationForm{{$index}}.jobTitle{{$index}}.$pristine" class="help-block">Job Title is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Relationship</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm.relationship.$invalid && !recommenderInformationForm.relationship.$pristine }">
-                            <input type="text" class="form-control" name="relationship" ng-model="recommenderInfo.relationship" required maxlength="45">
-                            <p ng-show="recommenderInformationForm.relationship.$invalid && !recommenderInformationForm.relationship.$pristine" class="help-block">Relationship is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm{{$index}}.relationship{{$index}}.$invalid && !recommenderInformationForm{{$index}}.relationship{{$index}}.$pristine }">
+                            <input type="text" class="form-control" name="relationship{{$index}}" ng-model="recommenderInfo.relationship" required maxlength="45">
+                            <p ng-show="recommenderInformationForm{{$index}}.relationship{{$index}}.$invalid && !recommenderInformationForm{{$index}}.relationship{{$index}}.$pristine" class="help-block">Relationship is required.</p>
                         </div>
                         <label class="col-sm-2 control-label">Phone Number</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm.recommenderPhoneId.$invalid && !recommenderInformationForm.recommenderPhoneId.$pristine }">
-                            <input type="text" placeholder="phone number" name="recommenderPhoneId" class="form-control" ng-model="recommenderInfo.phoneId" required maxlength="45">
-                            <p ng-show="recommenderInformationForm.recommenderPhoneId.$invalid && !recommenderInformationForm.recommenderPhoneId.$pristine" class="help-block">Phone is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm{{$index}}.recommenderPhoneId{{$index}}.$invalid && !recommenderInformationForm{{$index}}.recommenderPhoneId{{$index}}.$pristine }">
+                            <input type="text" placeholder="phone number" name="recommenderPhoneId{{$index}}" class="form-control" ng-model="recommenderInfo.phoneId" required maxlength="45">
+                            <p ng-show="recommenderInformationForm{{$index}}.recommenderPhoneId{{$index}}.$invalid && !recommenderInformationForm{{$index}}.recommenderPhoneId{{$index}}.$pristine" class="help-block">Phone is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Email Address</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm.email.$invalid && !recommenderInformationForm.email.$pristine }">
-                            <input type="text" class="form-control" name="email" ng-model="recommenderInfo.email" required maxlength="45">
-                            <p ng-show="recommenderInformationForm.email.$invalid && !recommenderInformationForm.email.$pristine" class="help-block">Email is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm{{$index}}.email{{$index}}.$invalid && !recommenderInformationForm{{$index}}.email{{$index}}.$pristine }">
+                            <input type="text" class="form-control" name="email{{$index}}" ng-model="recommenderInfo.email" required maxlength="45">
+                            <p ng-show="recommenderInformationForm{{$index}}.email{{$index}}.$invalid && !recommenderInformationForm{{$index}}.email{{$index}}.$pristine" class="help-block">Email is required.</p>
                         </div>
                         <label class="col-sm-2 control-label">Cell/Telephone Number</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm.cellPhoneId.$invalid && !recommenderInformationForm.cellPhoneId.$pristine }">
-                            <input type="text" placeholder="cell phone number" name="cellPhoneId" class="form-control" ng-model="recommenderInfo.cellPhoneId" required maxlength="45">
-                            <p ng-show="recommenderInformationForm.cellPhoneId.$invalid && !recommenderInformationForm.cellPhoneId.$pristine" class="help-block">Cell Phone is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm{{$index}}.cellPhoneId{{$index}}.$invalid && !recommenderInformationForm{{$index}}.cellPhoneId{{$index}}.$pristine }">
+                            <input type="text" placeholder="cell phone number" name="cellPhoneId{{$index}}" class="form-control" ng-model="recommenderInfo.cellPhoneId" required maxlength="45">
+                            <p ng-show="recommenderInformationForm{{$index}}.cellPhoneId{{$index}}.$invalid && !recommenderInformationForm{{$index}}.cellPhoneId{{$index}}.$pristine" class="help-block">Cell Phone is required.</p>
                         </div>
                     </div>
                 </span>
-                <div class="subtitle"> <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.removeRecommender($index)"><span class="glyphicon glyphicon-plus"></span> Remove</a> </div>
             </span>
             <div class="subtitle">Other Type of Recommender <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addRecommender()"><span class="glyphicon glyphicon-plus"></span> Add Other Recommender</a> </div>
             <div class="formTitle">Standardized Test Account Information</div>
             <span ng-repeat="testAccount in ctrl.studentInputData.standardizedTestAccountInfoList">
-                <div class="subtitle">Test Account</div>
-                <span ng-form="testAccountForm">
+                <div class="subtitle">Test Account{{$index+1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeTestAccount($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
+                <span ng-form="testAccountForm{{$index}}">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Test Account Name</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : testAccountForm.accountName.$invalid && !testAccountForm.accountName.$pristine }">
-                            <input type="text" name="accountName" class="form-control" ng-model="testAccount.accountName" required maxlength="45">
-                            <p ng-show="testAccountForm.accountName.$invalid && !testAccountForm.accountName.$pristine" class="help-block">Account Name is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : testAccountForm{{$index}}.accountName{{$index}}.$invalid && !testAccountForm{{$index}}.accountName{{$index}}.$pristine }">
+                            <input type="text" name="accountName{{$index}}" class="form-control" ng-model="testAccount.accountName" required maxlength="45">
+                            <p ng-show="testAccountForm{{$index}}.accountName{{$index}}.$invalid && !testAccountForm{{$index}}.accountName{{$index}}.$pristine" class="help-block">Account Name is required.</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Username or ID</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : testAccountForm.userName.$invalid && !testAccountForm.userName.$pristine }">
-                            <input type="text" name="userName" class="form-control" ng-model="testAccount.userName" required maxlength="45">
-                            <p ng-show="testAccountForm.userName.$invalid && !testAccountForm.userName.$pristine" class="help-block">Username is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : testAccountForm{{$index}}.userName{{$index}}.$invalid && !testAccountForm{{$index}}.userName{{$index}}.$pristine }">
+                            <input type="text" name="userName{{$index}}" class="form-control" ng-model="testAccount.userName" required maxlength="45">
+                            <p ng-show="testAccountForm{{$index}}.userName{{$index}}.$invalid && !testAccountForm{{$index}}.userName{{$index}}.$pristine" class="help-block">Username is required.</p>
                         </div>
                         <label class="col-sm-2 control-label">Password</label>
-                        <div class="col-sm-4" ng-class="{ 'has-error' : testAccountForm.password.$invalid && !testAccountForm.password.$pristine }">
-                            <input type="text" name="password" class="form-control" ng-model="testAccount.password" required maxlength="45">
-                            <p ng-show="testAccountForm.password.$invalid && !testAccountForm.password.$pristine" class="help-block">Password is required.</p>
+                        <div class="col-sm-4" ng-class="{ 'has-error' : testAccountForm{{$index}}.password{{$index}}.$invalid && !testAccountForm{{$index}}.password{{$index}}.$pristine }">
+                            <input type="text" name="password{{$index}}" class="form-control" ng-model="testAccount.password" required maxlength="45">
+                            <p ng-show="testAccountForm{{$index}}.password{{$index}}.$invalid && !testAccountForm{{$index}}.password{{$index}}.$pristine" class="help-block">Password is required.</p>
                         </div>
                     </div>
                 </span>
-                <div class="subtitle"> <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.removeTestAccount($index)"><span class="glyphicon glyphicon-plus"></span> Remove</a> </div>
             </span>
             <div class="subtitle">Other Test Account <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addTestAccount()"><span class="glyphicon glyphicon-plus"></span> Add Other Test Account</a> </div>
 
@@ -462,8 +459,13 @@
 			<div class="formTitle">Counselor Brag Sheet</div>
 			<div class="textarea_room">
 				<div class="form-group" ng-repeat="questionnaireSurvey in ctrl.studentInputData.questionnaireSurveyList">
-                    <label class="col-sm-12 control-label">{{$index+1}}. {{questionnaireSurvey.question}}</label>
-					<textarea class="form-control" ng-model="questionnaireSurvey.answer">{{questionnaireSurvey.answer}}</textarea>
+                    <span ng-form="bragForm{{$index}}">
+                        <label class="col-sm-12 control-label">{{$index+1}}. {{questionnaireSurvey.question}}</label>
+                        <div class="col-sm-12" ng-class="{ 'has-error' : bragForm{{$index}}.answer{{$index}}.$invalid && !bragForm{{$index}}.answer{{$index}}.$pristine }">
+                            <textarea class="form-control" name="answer{{$index}}" ng-model="questionnaireSurvey.answer" required>{{questionnaireSurvey.answer}}</textarea>
+                            <p ng-show="bragForm{{$index}}.answer{{$index}}.$invalid && !bragForm{{$index}}.answer{{$index}}.$pristine" class="help-block">Answer is required.</p>
+                        </div>
+                    </span>
 				</div>
 			</div>
 			<div class="form-group button-room">

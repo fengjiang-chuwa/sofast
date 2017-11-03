@@ -66,73 +66,109 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
         };
 
         self.saveStudentInfo = function () {
-            $scope.studentInputForm.firstName.$pristine = false;
-            $scope.studentInputForm.familyName.$pristine = false;
-            $scope.studentInputForm.passportNumber.$pristine = false;
-            $scope.studentInputForm.applicantEmailAddress.$pristine = false;
-            $scope.studentInputForm.dateOfBirth.$pristine = false;
-            $scope.studentInputForm.countryOfBirth.$pristine = false;
-            $scope.studentInputForm.nationality.$pristine = false;
+            var formModel = $scope.studentInputForm;
+            formModel.firstName.$pristine = false;
+            formModel.familyName.$pristine = false;
+            formModel.passportNumber.$pristine = false;
+            formModel.applicantEmailAddress.$pristine = false;
+            formModel.dateOfBirth.$pristine = false;
+            formModel.countryOfBirth.$pristine = false;
+            formModel.nationality.$pristine = false;
 
-            $scope.studentInputForm.homeLine1.$pristine = false;
-            $scope.studentInputForm.mailingLine1.$pristine = false;
-            $scope.studentInputForm.homeCountry.$pristine = false;
-            $scope.studentInputForm.mailingCountry.$pristine = false;
-            $scope.studentInputForm.homeState.$pristine = false;
-            $scope.studentInputForm.mailingState.$pristine = false;
-            $scope.studentInputForm.homeCity.$pristine = false;
-            $scope.studentInputForm.mailingCity.$pristine = false;
-            $scope.studentInputForm.homeZip.$pristine = false;
-            $scope.studentInputForm.mailingZip.$pristine = false;
-            $scope.studentInputForm.phoneId.$pristine = false;
+            formModel.homeLine1.$pristine = false;
+            formModel.mailingLine1.$pristine = false;
+            formModel.homeCountry.$pristine = false;
+            formModel.mailingCountry.$pristine = false;
+            formModel.homeState.$pristine = false;
+            formModel.mailingState.$pristine = false;
+            formModel.homeCity.$pristine = false;
+            formModel.mailingCity.$pristine = false;
+            formModel.homeZip.$pristine = false;
+            formModel.mailingZip.$pristine = false;
+            formModel.phoneId.$pristine = false;
 
-            $scope.studentInputForm.fatherName.$pristine = false;
-            $scope.studentInputForm.motherName.$pristine = false;
-            $scope.studentInputForm.motherPhoneId.$pristine = false;
-            $scope.studentInputForm.fatherPhoneId.$pristine = false;
-            $scope.studentInputForm.motherEducation.$pristine = false;
-            $scope.studentInputForm.fatherEducation.$pristine = false;
-            $scope.studentInputForm.motherProfession.$pristine = false;
-            $scope.studentInputForm.fatherProfession.$pristine = false;
-            $scope.studentInputForm.startDate.$pristine = false;
-            $scope.studentInputForm.targetSchool.$pristine = false;
-            $scope.studentInputForm.firstChoice.$pristine = false;
-            $scope.studentInputForm.secondChoice.$pristine = false;
-            $scope.studentInputForm.safetyChoice.$pristine = false;
-            $scope.studentInputForm.undecided.$pristine = false;
-            $scope.studentInputForm.nameOfHighestQualification.$pristine = false;
+            formModel.fatherName.$pristine = false;
+            formModel.motherName.$pristine = false;
+            formModel.motherPhoneId.$pristine = false;
+            formModel.fatherPhoneId.$pristine = false;
+            formModel.motherEducation.$pristine = false;
+            formModel.fatherEducation.$pristine = false;
+            formModel.motherProfession.$pristine = false;
+            formModel.fatherProfession.$pristine = false;
+            formModel.startDate.$pristine = false;
+            formModel.targetSchool.$pristine = false;
+            formModel.firstChoice.$pristine = false;
+            formModel.secondChoice.$pristine = false;
+            formModel.safetyChoice.$pristine = false;
+            formModel.undecided.$pristine = false;
+            formModel.nameOfHighestQualification.$pristine = false;
 
-            if($scope.studentInputForm.educationForm) {
-                $scope.studentInputForm.educationForm.schoolName.$pristine = false;
-                $scope.studentInputForm.educationForm.schoolType.$pristine = false;
-                $scope.studentInputForm.educationForm.levelOfStudy.$pristine = false;
-                $scope.studentInputForm.educationForm.startDate.$pristine = false;
-                $scope.studentInputForm.educationForm.endDate.$pristine = false;
-                $scope.studentInputForm.educationForm.line1.$pristine = false;
-                $scope.studentInputForm.educationForm.country.$pristine = false;
-                $scope.studentInputForm.educationForm.state.$pristine = false;
-                $scope.studentInputForm.educationForm.city.$pristine = false;
-                $scope.studentInputForm.educationForm.zip.$pristine = false;
-                $scope.studentInputForm.educationForm.eduPhoneId.$pristine = false;
+            for (var i=0; i<self.studentInputData.educationInfoList.length; i++) {
+                if (formModel["educationForm"+i]) {
+                    formModel["educationForm"+i]["schoolName"+i].$pristine = false;
+                    formModel["educationForm"+i]["schoolType"+i].$pristine = false;
+                    formModel["educationForm"+i]["levelOfStudy"+i].$pristine = false;
+                    formModel["educationForm"+i]["startDate"+i].$pristine = false;
+                    formModel["educationForm"+i]["endDate"+i].$pristine = false;
+                    formModel["educationForm"+i]["line1"+i].$pristine = false;
+                    formModel["educationForm"+i]["country"+i].$pristine = false;
+                    formModel["educationForm"+i]["state"+i].$pristine = false;
+                    formModel["educationForm"+i]["city"+i].$pristine = false;
+                    formModel["educationForm"+i]["zip"+i].$pristine = false;
+                    formModel["educationForm"+i]["eduPhoneId"+i].$pristine = false;
+                }
             }
 
-            if($scope.studentInputForm.recommenderInformationForm) {
-                $scope.studentInputForm.recommenderInformationForm.nameOfRecommender.$pristine = false;
-                $scope.studentInputForm.recommenderInformationForm.jobTitle.$pristine = false;
-                $scope.studentInputForm.recommenderInformationForm.relationship.$pristine = false;
-                $scope.studentInputForm.recommenderInformationForm.recommenderPhoneId.$pristine = false;
-                $scope.studentInputForm.recommenderInformationForm.email.$pristine = false;
-                $scope.studentInputForm.recommenderInformationForm.cellPhoneId.$pristine = false;
+            for (var i=0; i<self.studentInputData.recommenderInfoList.length; i++) {
+                if (formModel["recommenderInformationForm"+i]) {
+                    formModel["recommenderInformationForm"+i]["nameOfRecommender"+i].$pristine = false;
+                    formModel["recommenderInformationForm"+i]["jobTitle"+i].$pristine = false;
+                    formModel["recommenderInformationForm"+i]["relationship"+i].$pristine = false;
+                    formModel["recommenderInformationForm"+i]["recommenderPhoneId"+i].$pristine = false;
+                    formModel["recommenderInformationForm"+i]["email"+i].$pristine = false;
+                    formModel["recommenderInformationForm"+i]["cellPhoneId"+i].$pristine = false;
+                }
             }
 
-            if($scope.studentInputForm.testAccountForm){
-                $scope.studentInputForm.testAccountForm.accountName.$pristine = false;
-                $scope.studentInputForm.testAccountForm.userName.$pristine = false;
-                $scope.studentInputForm.testAccountForm.password.$pristine = false;
+            for (var i=0; i<self.studentInputData.standardizedTestAccountInfoList.length; i++) {
+                if (formModel["testAccountForm"+i]) {
+                    formModel["testAccountForm"+i]["accountName"+i].$pristine = false;
+                    formModel["testAccountForm"+i]["userName"+i].$pristine = false;
+                    formModel["testAccountForm"+i]["password"+i].$pristine = false;
+                }
             }
 
-            if($scope.studentInputForm.$invalid) {
+            for (var i=0; i<self.studentInputData.allQuestionnaireSurveyList.length; i++) {
+                if (formModel["bragForm"+i]) {
+                    formModel["bragForm"+i]["answer"+i].$pristine = false;
+                }
+            }
+
+            if(formModel.$invalid) {
                 return false;
+            }
+            for (var i=0; i<self.studentInputData.educationInfoList.length; i++) {
+                if (formModel["educationForm"+i] && formModel["educationForm"+i].$invalid) {
+                    return false;
+                }
+            }
+
+            for (var i=0; i<self.studentInputData.recommenderInfoList.length; i++) {
+                if (formModel["recommenderInformationForm"+i] && formModel["recommenderInformationForm"+i].$invalid) {
+                    return false;
+                }
+            }
+
+            for (var i=0; i<self.studentInputData.standardizedTestAccountInfoList.length; i++) {
+                if (formModel["testAccountForm"+i] && formModel["testAccountForm"+i].$invalid) {
+                    return false;
+                }
+            }
+
+            for (var i=0; i<self.studentInputData.allQuestionnaireSurveyList.length; i++) {
+                if (formModel["bragForm"+i] && formModel["bragForm"+i].$invalid) {
+                    return false;
+                }
             }
             StudentInputService.save(self.studentInputData)
                 .then(
