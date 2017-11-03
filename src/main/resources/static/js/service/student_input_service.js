@@ -15,18 +15,18 @@ App.factory('StudentInputService', ['$http', '$q', function($http, $q){
                     }
                 );
         },
-        // save: function(studentBasicEntity) {
-        //     return $http.post(getFullRequestPath("/studentbasic/save"), studentBasicEntity)
-        //         .then(
-        //             function(response){
-        //                 return response.data;
-        //             },
-        //             function(errResponse){
-        //                 // console.error('Error while save education');
-        //                 return $q.reject(errResponse);
-        //             }
-        //         );
-        // }
+        save: function(studentInputData) {
+            return $http.post(getFullRequestPath("/studentInfo"), studentInputData)
+                .then(
+                    function(response){
+                        return response.data;
+                    },
+                    function(errResponse){
+                        // console.error('Error while save education');
+                        return $q.reject(errResponse);
+                    }
+                );
+        }
     };
 
 }]);

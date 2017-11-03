@@ -7,6 +7,8 @@ import java.util.List;
 public interface StudentBasicService extends BaseService<StudentBasic, String> {
     StudentBasic findById(String id);
 
+    Address findAddressById(String addressId);
+
     StudentBasic findByLinkId(String linkId);
 
     StudentBasic findByEmail(String email);

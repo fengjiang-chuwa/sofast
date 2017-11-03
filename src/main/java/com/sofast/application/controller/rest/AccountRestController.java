@@ -1,6 +1,8 @@
 package com.sofast.application.controller.rest;
 
 import com.sofast.application.entity.JsonResponse;
+import com.sofast.application.entity.UserContextHolder;
+import com.sofast.application.entity.response.UserInfo;
 import com.sofast.application.exception.MsgException;
 import com.sofast.application.model.User;
 import com.sofast.application.service.UserService;
@@ -10,6 +12,7 @@ import com.sofast.application.util.UUIDHelper;
 import com.sofast.application.util.UserAccessUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,5 +53,11 @@ public class AccountRestController {
         } else {
             throw new MsgException(NOT_FOUND_CODE, NOT_FOUND_MESSAGE);
         }
+    }
+
+    @GetMapping(path = "/user/current")
+    public JsonResponse<UserInfo> getCurrentEmail() {
+        User camsStaff = UserContextHolder.getUser();
+        return new JsonResponse<>(new UserInfo(camsStaff.getUserName()));
     }
 }

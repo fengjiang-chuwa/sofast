@@ -28,8 +28,9 @@ public class StudentInfo {
     private Date dateOfBirth;
     private String nationality;
     private String passportNumber;
-    private String nameOfHighestQualification;
     private Boolean declarationAgree;
+    private String nameOfHighestQualification;
+    private String educationInfoId;
 
     @Id
     @Column(name = "id")
@@ -259,6 +260,16 @@ public class StudentInfo {
 
     public void setNameOfHighestQualification(String nameOfHighestQualification) {
         this.nameOfHighestQualification = nameOfHighestQualification;
+    }
+
+    @Basic
+    @Column(name = "education_info_id")
+    public String getEducationInfoId() {
+        return educationInfoId;
+    }
+
+    public void setEducationInfoId(String educationInfoId) {
+        this.educationInfoId = educationInfoId;
     }
 
     @Basic

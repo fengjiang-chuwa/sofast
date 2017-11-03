@@ -9,4 +9,5 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface AddressDao extends CrudRepository<Address, String> {
+    Address findById(String id);
 }
