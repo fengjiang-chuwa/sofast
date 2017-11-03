@@ -126,11 +126,10 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
             }
 
             if($scope.studentInputForm.testAccountForm){
-                // $scope.studentInputForm.testAccountForm.accountName.$pristine = false;
+                $scope.studentInputForm.testAccountForm.accountName.$pristine = false;
                 $scope.studentInputForm.testAccountForm.userName.$pristine = false;
                 $scope.studentInputForm.testAccountForm.password.$pristine = false;
             }
-            $scope.studentInputForm.testAccountForm1.$pristine = false;
 
             if($scope.studentInputForm.$invalid) {
                 return false;
