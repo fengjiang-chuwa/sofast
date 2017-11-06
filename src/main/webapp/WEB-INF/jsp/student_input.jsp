@@ -30,8 +30,8 @@
                 </div>
 				<label class="col-sm-2 control-label">Email</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.applicantEmailAddress.$invalid && !studentInputForm.applicantEmailAddress.$pristine }">
-					<input type="text" class="form-control" name="applicantEmailAddress" ng-model="ctrl.studentInputData.studentBasic.applicantEmailAddress" required maxlength="45">
-                    <p ng-show="studentInputForm.applicantEmailAddress.$invalid && !studentInputForm.applicantEmailAddress.$pristine" class="help-block">Email is required.</p>
+					<input type="email" class="form-control" name="applicantEmailAddress" ng-model="ctrl.studentInputData.studentBasic.applicantEmailAddress" required maxlength="45">
+                    <p ng-show="studentInputForm.applicantEmailAddress.$invalid && !studentInputForm.applicantEmailAddress.$pristine" class="help-block">Email is empty or Email format is wrong.</p>
                 </div>
 			</div>
 			<div class="form-group">
@@ -232,7 +232,7 @@
                 </div>
 				<label class="col-sm-2 control-label">Undecided / Undeclared</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.undecided.$invalid && !studentInputForm.undecided.$pristine }">
-					<input type="text" class="form-control" name="undecided" ng-model="ctrl.studentInputData.studentInfo.undecided" maxlength="45">
+					<input type="text" class="form-control" name="undecided" ng-model="ctrl.studentInputData.studentInfo.undecided" maxlength="45" required>
                     <p ng-show="studentInputForm.undecided.$invalid && !studentInputForm.undecided.$pristine" class="help-block">Undecided is required.</p>
                 </div>
 			</div>
@@ -403,8 +403,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Email Address</label>
                         <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm{{$index}}.email{{$index}}.$invalid && !recommenderInformationForm{{$index}}.email{{$index}}.$pristine }">
-                            <input type="text" class="form-control" name="email{{$index}}" ng-model="recommenderInfo.email" required maxlength="45">
-                            <p ng-show="recommenderInformationForm{{$index}}.email{{$index}}.$invalid && !recommenderInformationForm{{$index}}.email{{$index}}.$pristine" class="help-block">Email is required.</p>
+                            <input type="email" class="form-control" name="email{{$index}}" ng-model="recommenderInfo.email" required maxlength="45">
+                            <p ng-show="recommenderInformationForm{{$index}}.email{{$index}}.$invalid && !recommenderInformationForm{{$index}}.email{{$index}}.$pristine" class="help-block">Email is empty or Email format is wrong.</p>
                         </div>
                         <label class="col-sm-2 control-label">Cell/Telephone Number</label>
                         <div class="col-sm-4" ng-class="{ 'has-error' : recommenderInformationForm{{$index}}.cellPhoneId{{$index}}.$invalid && !recommenderInformationForm{{$index}}.cellPhoneId{{$index}}.$pristine }">
@@ -434,7 +434,7 @@
                         </div>
                         <label class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-4" ng-class="{ 'has-error' : testAccountForm{{$index}}.password{{$index}}.$invalid && !testAccountForm{{$index}}.password{{$index}}.$pristine }">
-                            <input type="text" name="password{{$index}}" class="form-control" ng-model="testAccount.password" required maxlength="45">
+                            <input type="password" name="password{{$index}}" class="form-control" ng-model="testAccount.password" required maxlength="45">
                             <p ng-show="testAccountForm{{$index}}.password{{$index}}.$invalid && !testAccountForm{{$index}}.password{{$index}}.$pristine" class="help-block">Password is required.</p>
                         </div>
                     </div>
@@ -450,10 +450,11 @@
 				</div>
 			</div>
 			<div class="form-group button-room">
-				<div class="">
+				<div ng-class="{ 'has-error' : studentInputForm.declarationAgree.$invalid && !studentInputForm.declarationAgree.$pristine }">
 					<label class="checkbox-inline">
-						<input type="checkbox" ng-model="ctrl.studentInputData.studentInfo.declarationAgree"> I agree <span class="text-muted"></span>
+						<input type="checkbox" name="declarationAgree" ng-model="ctrl.studentInputData.studentInfo.declarationAgree" required> I agree <span class="text-muted"></span>
                     </label>
+                    <p ng-show="studentInputForm.declarationAgree.$invalid && !studentInputForm.declarationAgree.$pristine" class="help-block">Declaration is required.</p>
 				</div>
 			</div>
 			<div class="formTitle">Counselor Brag Sheet</div>
