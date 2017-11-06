@@ -4,7 +4,7 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
     function (StudentInputService, $rootScope, $scope, $httpParamSerializer, DTOptionsBuilder, DTColumnBuilder) {
         var self = this;
         self.init = function(){
-            StudentInputService.init().then(function (d) {
+            StudentInputService.init(type, id).then(function (d) {
                     self.studentInputData = d.data;
                 },
                 function (errResponse) {

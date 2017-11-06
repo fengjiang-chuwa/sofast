@@ -3,8 +3,8 @@
 App.factory('StudentInputService', ['$http', '$q', function($http, $q){
 
     return {
-        init: function() {
-            return $http.get(getFullRequestPath("/studentInput/data/" + linkId))
+        init: function(type, id) {
+            return $http.get(getFullRequestPath("/studentInput/data/" + type +"/" + id))
                 .then(
                     function(response){
                         return response.data;

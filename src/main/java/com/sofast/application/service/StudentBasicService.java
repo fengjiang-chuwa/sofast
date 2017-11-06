@@ -42,4 +42,34 @@ public interface StudentBasicService extends BaseService<StudentBasic, String> {
     List<StudentHasRelationship> findStudentHasRelationshipList(String studentId);
 
     List<StudentHasStandardizedTestAccountInfo> findStudentHasStandardizedTestAccountInfoList(String studentId);
+
+    StudentInfo saveStudentInfo(StudentInfo studentInfo);
+
+    Address saveAddress(Address address);
+    EducationInfo saveEducationInfo(EducationInfo educationInfo);
+    Relationship saveRelationship(Relationship relationship);
+    StandardizedTestAccountInfo saveStandardizedTestAccountInfo(StandardizedTestAccountInfo standardizedTestAccountInfo);
+    RecommenderInfo saveRecommenderInfo(RecommenderInfo recommenderInfo);
+    QuestionnaireSurvey saveQuestionnaireSurvey(QuestionnaireSurvey questionnaireSurvey);
+
+    StudentHasAddress saveStudentHasAddress(StudentHasAddress studentHasAddress);
+    StudentHasEducationInfo saveStudentHasEducationInfo(StudentHasEducationInfo studentHasEducationInfo);
+    StudentHasRelationship saveStudentHasRelationship(StudentHasRelationship studentHasRelationship);
+    StudentHasStandardizedTestAccountInfo saveStudentHasStandardizedTestAccountInfo(StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo);
+    StudentHasRecommenderInfo saveStudentHasRecommenderInfo(StudentHasRecommenderInfo studentHasRecommenderInfo);
+    StudentHasQuestionnaireSurvey saveStudentHasQuestionnaireSurvey(StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey);
+
+    void deleteAddress(Address address);
+    void deleteEducationInfo(EducationInfo educationInfo);
+    void deleteRelationship(Relationship relationship);
+    void deleteStandardizedTestAccountInfo(StandardizedTestAccountInfo standardizedTestAccountInfo);
+    void deleteRecommenderInfo(RecommenderInfo recommenderInfo);
+    void deleteQuestionnaireSurvey(QuestionnaireSurvey questionnaireSurvey);
+
+    void deleteStudentHasAddress(StudentHasAddress studentHasAddress);
+    void deleteStudentHasEducationInfo(StudentHasEducationInfo studentHasEducationInfo);
+    void deleteStudentHasRelationship(StudentHasRelationship studentHasRelationship);
+    void deleteStudentHasStandardizedTestAccountInfo(StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo);
+    void deleteStudentHasRecommenderInfo(StudentHasRecommenderInfo studentHasRecommenderInfo);
+    void deleteStudentHasQuestionnaireSurvey(StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey);
 }

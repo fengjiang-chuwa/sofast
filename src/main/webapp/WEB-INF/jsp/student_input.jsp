@@ -259,7 +259,7 @@
                         </div>
                         <label class="col-sm-2 control-label">School Type</label>
                         <div class="col-sm-4" ng-class="{ 'has-error' : educationForm{{$index}}.schoolType{{$index}}.$invalid && !educationForm{{$index}}.schoolType{{$index}}.$pristine }">
-                            <select class="form-control" name="schoolType{{$index}}" ng-model="education.schoolType" required>
+                            <select class="form-control" name="schoolType{{$index}}" ng-model="education.type" required>
                                 <option value="">Please Select</option>
                                 <option value="Public">Public</option>
                                 <option value="Private">Private</option>
@@ -478,7 +478,8 @@
 </div>
 <%@include file="common/footer.jsp" %>
 <script>
-    var linkId = '${linkId}';
+    var id = '${id}';
+    var type = '${type}';
 </script>
 <script src="<c:url value='/js/controller/student_input_controller.js' />"></script>
 <script src="<c:url value='/js/service/student_input_service.js' />"></script>

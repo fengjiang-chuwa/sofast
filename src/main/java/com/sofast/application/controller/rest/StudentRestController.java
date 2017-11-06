@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -137,14 +138,19 @@ public class StudentRestController {
         studentInputData.setRelationshipList(relationshipList);
     }
 
-    @GetMapping(path = "/studentInput/data/{linkId}", produces = "application/json")
-    public JsonResponse<StudentInputData> getStudentInputData(@PathVariable String linkId) {
+    private StudentInputData getStudentInputDataFromDB(String linkId, String studentBasicId) {
         StudentInputData studentInputData = new StudentInputData();
         List<Country> allCountryList = studentBasicService.findAllCountryList();
         studentInputData.setAllCountryList(allCountryList);
         List<QuestionnaireSurvey> allQuestionnaireSurveyList = studentBasicService.findAllQuestionnaireSurveyList();
         studentInputData.setAllQuestionnaireSurveyList(allQuestionnaireSurveyList);
-        StudentBasic studentBasic = studentBasicService.findByLinkId(linkId);
+        StudentBasic studentBasic = null;
+        if (Strings.isNullOrEmpty(linkId)) {
+            studentBasic = studentBasicService.findById(studentBasicId);
+        } else {
+            studentBasic = studentBasicService.findByLinkId(linkId);
+        }
+
         studentInputData.setStudentBasic(studentBasic);
         StudentInfo studentInfo = studentBasicService.findStudentInfoByStudentBasicId(studentBasic.getId());
         studentInputData.setStudentInfo(studentInfo);
@@ -223,13 +229,96 @@ public class StudentRestController {
             List<StandardizedTestAccountInfo> standardizedTestAccountInfoList = studentBasicService.findStandardizedTestAccountInfoList(ids);
             studentInputData.setStandardizedTestAccountInfoList(standardizedTestAccountInfoList);
         }
+        return studentInputData;
+    }
+
+    @GetMapping(path = "/studentInput/data/{type}/{id}", produces = "application/json")
+    public JsonResponse<StudentInputData> getStudentInputData(@PathVariable String type, @PathVariable String id) {
+        StudentInputData studentInputData;
+        if ("linkId".equalsIgnoreCase(type)) {
+            studentInputData = getStudentInputDataFromDB(id, null);
+        } else {
+            studentInputData = getStudentInputDataFromDB(null, id);
+        }
         return new JsonResponse<>(studentInputData);
     }
 
     @RequestMapping(value = "/studentInfo", method = RequestMethod.POST, produces = "application/json")
     public JsonResponse<String> saveStudentInfo(@RequestBody StudentInputData studentInputData) throws MsgException {
         try {
-
+//            StudentInputData studentInputOldData = getStudentInputData(null, studentInputData.getStudentBasic().getId());
+            studentBasicService.save(studentInputData.getStudentBasic());
+            if (Strings.isNullOrEmpty(studentInputData.getStudentInfo().getId())) {
+                studentInputData.getStudentInfo().setId(UUIDHelper.getUUID());
+            }
+            studentInputData.getStudentInfo().setStudentBasicId(studentInputData.getStudentBasic().getId());
+            studentInputData.getStudentInfo().setCreatedAt(new Date());
+            studentBasicService.saveStudentInfo(studentInputData.getStudentInfo());
+            for (Address address : studentInputData.getAddressList()) {
+                if (Strings.isNullOrEmpty(address.getId())) {
+                    address.setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveAddress(address);
+                StudentHasAddress studentHasAddress = new StudentHasAddress();
+                studentHasAddress.setAddressId(address.getId());
+                studentHasAddress.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasAddress(studentHasAddress);
+            }
+            for (EducationInfoData educationInfoData : studentInputData.getEducationInfoList()) {
+                if (Strings.isNullOrEmpty(educationInfoData.getAddress().getId())) {
+                    educationInfoData.getAddress().setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveAddress(educationInfoData.getAddress());
+                if (Strings.isNullOrEmpty(educationInfoData.getId())) {
+                    educationInfoData.setId(UUIDHelper.getUUID());
+                }
+                EducationInfo educationInfo = educationInfoData.toEducationInfo(educationInfoData);
+                educationInfo.setAddressId(educationInfoData.getAddress().getId());
+                studentBasicService.saveEducationInfo(educationInfo);
+                StudentHasEducationInfo studentHasEducationInfo = new StudentHasEducationInfo();
+                studentHasEducationInfo.setEducationInfoId(educationInfo.getId());
+                studentHasEducationInfo.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasEducationInfo(studentHasEducationInfo);
+            }
+            for (Relationship relationship : studentInputData.getRelationshipList()) {
+                if (Strings.isNullOrEmpty(relationship.getId())) {
+                    relationship.setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveRelationship(relationship);
+                StudentHasRelationship studentHasRelationship = new StudentHasRelationship();
+                studentHasRelationship.setRelationshipId(relationship.getId());
+                studentHasRelationship.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasRelationship(studentHasRelationship);
+            }
+            for (StudentHasQuestionnaireSurveyData studentHasQuestionnaireSurveyData : studentInputData.getQuestionnaireSurveyList()) {
+                if (!Strings.isNullOrEmpty(studentHasQuestionnaireSurveyData.getQuestionnaireSurveyId())) {
+                    StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey = new StudentHasQuestionnaireSurvey();
+                    studentHasQuestionnaireSurvey.setStudentId(studentInputData.getStudentBasic().getId());
+                    studentHasQuestionnaireSurvey.setQuestionnaireSurveyId(studentHasQuestionnaireSurveyData.getQuestionnaireSurveyId());
+                    studentHasQuestionnaireSurvey.setAnswer(studentHasQuestionnaireSurveyData.getAnswer());
+                    studentBasicService.saveStudentHasQuestionnaireSurvey(studentHasQuestionnaireSurvey);
+                }
+            }
+            for (RecommenderInfo recommenderInfo : studentInputData.getRecommenderInfoList()) {
+                if (Strings.isNullOrEmpty(recommenderInfo.getId())) {
+                    recommenderInfo.setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveRecommenderInfo(recommenderInfo);
+                StudentHasRecommenderInfo studentHasRecommenderInfo = new StudentHasRecommenderInfo();
+                studentHasRecommenderInfo.setRecommenderInfoId(recommenderInfo.getId());
+                studentHasRecommenderInfo.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasRecommenderInfo(studentHasRecommenderInfo);
+            }
+            for (StandardizedTestAccountInfo standardizedTestAccountInfo : studentInputData.getStandardizedTestAccountInfoList()) {
+                if (Strings.isNullOrEmpty(standardizedTestAccountInfo.getId())) {
+                    standardizedTestAccountInfo.setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveStandardizedTestAccountInfo(standardizedTestAccountInfo);
+                StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo = new StudentHasStandardizedTestAccountInfo();
+                studentHasStandardizedTestAccountInfo.setStandardizedTestAccountInfoId(standardizedTestAccountInfo.getId());
+                studentHasStandardizedTestAccountInfo.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasStandardizedTestAccountInfo(studentHasStandardizedTestAccountInfo);
+            }
             return new JsonResponse<>("success");
         } catch (Exception e) {
             log.error("saveStudentInfo", e);

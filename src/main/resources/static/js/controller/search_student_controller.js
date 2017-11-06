@@ -17,7 +17,7 @@ App.controller('SearchStudentController', ['$compile','$rootScope','$scope','$ht
                     if(row.status === 'new'){
                         btnHtml += '<a ng-click ="ctrl.sendEmail(\''+data+'\')" class = "btn-default btn btn-xs" confirm="Do you want to send email to student?"> <span class = "glyphicon glyphicon-envelope"> </span> Send Email</a>';
                     }
-                    var editLink = getFullRequestPath('/payment/detail/paid/') + data;
+                    var editLink = getFullRequestPath('/student/studentBasicId/') + data;
                     btnHtml += '<a href='+editLink+' class = "btn-default btn btn-xs"> <span class = "glyphicon glyphicon-pencil"> </span> Edit Details</a>';
                     return btnHtml;
                 }),
