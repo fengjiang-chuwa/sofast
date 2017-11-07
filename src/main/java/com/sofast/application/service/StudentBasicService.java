@@ -31,6 +31,8 @@ public interface StudentBasicService extends BaseService<StudentBasic, String> {
 
     List<StandardizedTestAccountInfo> findStandardizedTestAccountInfoList(List<String> ids);
 
+    List<UploadFile> findUploadFileList(List<String> ids);
+
     List<StudentHasAddress> findStudentHasAddressList(String studentId);
 
     List<StudentHasEducationInfo> findStudentHasEducationInfoList(String studentId);
@@ -43,6 +45,8 @@ public interface StudentBasicService extends BaseService<StudentBasic, String> {
 
     List<StudentHasStandardizedTestAccountInfo> findStudentHasStandardizedTestAccountInfoList(String studentId);
 
+    List<StudentHasUploadFile> findStudentHasUploadFileList(String studentId);
+
     StudentInfo saveStudentInfo(StudentInfo studentInfo);
 
     Address saveAddress(Address address);
@@ -51,6 +55,7 @@ public interface StudentBasicService extends BaseService<StudentBasic, String> {
     StandardizedTestAccountInfo saveStandardizedTestAccountInfo(StandardizedTestAccountInfo standardizedTestAccountInfo);
     RecommenderInfo saveRecommenderInfo(RecommenderInfo recommenderInfo);
     QuestionnaireSurvey saveQuestionnaireSurvey(QuestionnaireSurvey questionnaireSurvey);
+    UploadFile saveUploadFile(UploadFile uploadFile);
 
     StudentHasAddress saveStudentHasAddress(StudentHasAddress studentHasAddress);
     StudentHasEducationInfo saveStudentHasEducationInfo(StudentHasEducationInfo studentHasEducationInfo);
@@ -58,6 +63,7 @@ public interface StudentBasicService extends BaseService<StudentBasic, String> {
     StudentHasStandardizedTestAccountInfo saveStudentHasStandardizedTestAccountInfo(StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo);
     StudentHasRecommenderInfo saveStudentHasRecommenderInfo(StudentHasRecommenderInfo studentHasRecommenderInfo);
     StudentHasQuestionnaireSurvey saveStudentHasQuestionnaireSurvey(StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey);
+    StudentHasUploadFile saveStudentHasUploadFile(StudentHasUploadFile studentHasUploadFile);
 
     void deleteAddress(Address address);
     void deleteEducationInfo(EducationInfo educationInfo);
@@ -65,6 +71,7 @@ public interface StudentBasicService extends BaseService<StudentBasic, String> {
     void deleteStandardizedTestAccountInfo(StandardizedTestAccountInfo standardizedTestAccountInfo);
     void deleteRecommenderInfo(RecommenderInfo recommenderInfo);
     void deleteQuestionnaireSurvey(QuestionnaireSurvey questionnaireSurvey);
+    void deleteUploadFile(UploadFile uploadFile);
 
     void deleteStudentHasAddress(StudentHasAddress studentHasAddress);
     void deleteStudentHasEducationInfo(StudentHasEducationInfo studentHasEducationInfo);
@@ -72,4 +79,5 @@ public interface StudentBasicService extends BaseService<StudentBasic, String> {
     void deleteStudentHasStandardizedTestAccountInfo(StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo);
     void deleteStudentHasRecommenderInfo(StudentHasRecommenderInfo studentHasRecommenderInfo);
     void deleteStudentHasQuestionnaireSurvey(StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey);
+    void deleteStudentHasUploadFile(StudentHasUploadFile studentHasUploadFile);
 }

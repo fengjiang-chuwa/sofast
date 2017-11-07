@@ -3,10 +3,11 @@ package com.sofast.application.controller.rest;
 import com.google.common.base.Strings;
 import com.sofast.application.entity.JsonResponse;
 import com.sofast.application.exception.MsgException;
-import com.sofast.application.model.UploadFile;
 import com.sofast.application.model.StudentBasic;
-import com.sofast.application.service.UploadFileService;
+import com.sofast.application.model.StudentHasUploadFile;
+import com.sofast.application.model.UploadFile;
 import com.sofast.application.service.StudentBasicService;
+import com.sofast.application.service.UploadFileService;
 import com.sofast.application.util.FileTypeCheck;
 import com.sofast.application.util.UUIDHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -39,16 +40,19 @@ public class UploadFileRestController {
     }
 
 
-    @RequestMapping(value = "/fileUpload/{linkId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/fileUpload/{id}/{type}", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResponse<UploadFile> fileUpload(HttpServletRequest request, @PathVariable String linkId) {
+    public JsonResponse<UploadFile> fileUpload(HttpServletRequest request, @PathVariable String id,
+                                               @PathVariable String type) {
         MultipartHttpServletRequest mRequest;
+        UploadFile uploadFile;
         try {
-            StudentBasic studentBasic = studentBasicService.findByLinkId(linkId);
-            if (studentBasic == null) {
-                throw new MsgException("invalid link id");
+            StudentBasic studentBasic;
+            if ("studentBasicId".equalsIgnoreCase(type)) {
+                studentBasic = studentBasicService.findById(id);
+            } else {
+                studentBasic = studentBasicService.findByLinkId(id);
             }
-            UploadFile uploadFile = null;
             mRequest = (MultipartHttpServletRequest) request;
             mRequest.getParameterMap();
             Iterator<String> itr = mRequest.getFileNames();
@@ -61,9 +65,12 @@ public class UploadFileRestController {
                 String fileName = mFile.getOriginalFilename();
                 String fileRealName = fileName.replace(".pdf", "-" + UUIDHelper.getUUID() + ".pdf");
                 mFile.transferTo(new File(uploadPath + fileRealName));
-                uploadFile = createUploadFile(mRequest.getParameter("description"), fileName, fileRealName,
-                        mRequest.getParameter("uploadStatus"), studentBasic.getId());
-                uploadFileService.save(uploadFile);
+                uploadFile = createUploadFile(null, fileName, fileRealName, mRequest.getParameter("uploadFileType"), studentBasic.getId());
+                studentBasicService.saveUploadFile(uploadFile);
+                StudentHasUploadFile studentHasUploadFile = new StudentHasUploadFile();
+                studentHasUploadFile.setUploadFileId(uploadFile.getId());
+                studentHasUploadFile.setStudentId(studentBasic.getId());
+                studentBasicService.saveStudentHasUploadFile(studentHasUploadFile);
                 return new JsonResponse<>(uploadFile);
             }
         } catch (Exception e) {
@@ -72,7 +79,7 @@ public class UploadFileRestController {
         return new JsonResponse<>(null);
     }
 
-    private UploadFile createUploadFile(String description, String fileName, String fileRealName, String status,
+    private UploadFile createUploadFile(String description, String fileName, String fileRealName, String type,
                                             String uploadBy) {
         UploadFile uploadFile = new UploadFile();
         uploadFile.setId(UUIDHelper.getUUID());
@@ -82,26 +89,32 @@ public class UploadFileRestController {
         uploadFile.setFilePath(uploadPath);
         uploadFile.setUploadBy(uploadBy);
         uploadFile.setUploadDate(new Date());
-        uploadFile.setStatus(status);
+        uploadFile.setType(type);
         return uploadFile;
     }
 
-    @RequestMapping(value = "/fileUpload/remove/{linkId}/{uploadFileId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/fileUpload/remove/{id}/{type}/{uploadFileId}", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResponse<String> removeFileUpload(@PathVariable String linkId, @PathVariable String uploadFileId) {
+    public JsonResponse<String> removeFileUpload(@PathVariable String id, @PathVariable String type,
+                                                 @PathVariable String uploadFileId) {
         try {
             if(!Strings.isNullOrEmpty(uploadFileId)) {
-                StudentBasic studentBasic = studentBasicService.findByLinkId(linkId);
-                if (studentBasic == null) {
-                    throw new MsgException("invalid link id");
-                }
                 UploadFile uploadFile = uploadFileService.findById(uploadFileId);
                 if (uploadFile == null) {
-                    throw new MsgException("invalid uploaded file id");
+                    throw new MsgException("Invalid uploaded file id");
                 }
-                if(!studentBasic.getId().equalsIgnoreCase(uploadFile.getUploadBy())){
-                    throw new MsgException("invalid link id");
+                StudentBasic studentBasic;
+                if ("studentBasicId".equalsIgnoreCase(type)) {
+                    studentBasic = studentBasicService.findById(id);
+                } else {
+                    studentBasic = studentBasicService.findByLinkId(id);
                 }
+                StudentHasUploadFile studentHasUploadFile = new StudentHasUploadFile();
+                studentHasUploadFile.setStudentId(studentBasic.getId());
+                studentHasUploadFile.setUploadFileId(uploadFileId);
+                studentBasicService.deleteStudentHasUploadFile(studentHasUploadFile);
+                String path = uploadFile.getFilePath() + uploadFile.getFileRealName();
+                deleteFile(path);
                 uploadFileService.delete(uploadFileId);
             }
             return new JsonResponse<>("success");
@@ -109,5 +122,15 @@ public class UploadFileRestController {
             log.error("removeFileUpload", e);
             return new JsonResponse<>("error");
         }
+    }
+
+    protected boolean deleteFile(String sPath) {
+        boolean flag = false;
+        File file = new File(sPath);
+        if (file.isFile() && file.exists()) {
+            file.delete();
+            flag = true;
+        }
+        return flag;
     }
 }

@@ -15,8 +15,8 @@
         <mapping class="com.sofast.application.model.Phone"/>
         <mapping class="com.sofast.application.model.RecommenderInfo"/>
         <mapping class="com.sofast.application.model.StandardizedTestAccountInfo"/>
-        <mapping class="com.sofast.application.model.StudentInfoHasRecommenderInfo"/>
-        <mapping class="com.sofast.application.model.StudentInfoHasStandardizedTestAccountInfo"/>
+        <mapping class="com.sofast.application.model.StudentHasRecommenderInfo"/>
+        <mapping class="com.sofast.application.model.StudentHasStandardizedTestAccountInfo"/>
         <mapping class="com.sofast.application.model.EducationInfo"/>
         <mapping class="com.sofast.application.model.Relationship"/>
         <mapping class="com.sofast.application.model.StudentHasAddress"/>
@@ -25,6 +25,8 @@
         <mapping class="com.sofast.application.model.StudentHasRelationship"/>
         <mapping class="com.sofast.application.model.StudentHasStandardizedTestAccountInfo"/>
         <mapping class="com.sofast.application.model.Country"/>
+        <mapping class="com.sofast.application.model.StudentHasUploadFile"/>
+        <mapping class="com.sofast.application.model.UploadFile"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

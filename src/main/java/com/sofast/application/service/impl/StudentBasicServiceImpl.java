@@ -30,6 +30,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     private final StudentHasRelationshipDao studentHasRelationshipDao;
     private final StandardizedTestAccountInfoDao standardizedTestAccountInfoDao;
     private final StudentHasStandardizedTestAccountInfoDao studentHasStandardizedTestAccountInfoDao;
+    private final UploadFileDao uploadFileDao;
+    private final StudentHasUploadFileDao studentHasUploadFileDao;
 
     @Autowired
     public StudentBasicServiceImpl(StudentBasicDao studentBasicDao, CountryDao countryDao,
@@ -41,7 +43,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
                                    StudentHasQuestionnaireSurveyDao studentHasQuestionnaireSurveyDao,
                                    StudentHasRecommenderInfoDao studentHasRecommenderInfoDao,
                                    StudentHasRelationshipDao studentHasRelationshipDao,
-                                   StudentHasStandardizedTestAccountInfoDao studentHasStandardizedTestAccountInfoDao) {
+                                   StudentHasStandardizedTestAccountInfoDao studentHasStandardizedTestAccountInfoDao,
+                                   UploadFileDao uploadFileDao, StudentHasUploadFileDao studentHasUploadFileDao) {
         this.studentBasicDao = studentBasicDao;
         this.crudRepository = studentBasicDao;
         this.countryDao = countryDao;
@@ -58,6 +61,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
         this.studentHasRecommenderInfoDao = studentHasRecommenderInfoDao;
         this.studentHasRelationshipDao = studentHasRelationshipDao;
         this.studentHasStandardizedTestAccountInfoDao = studentHasStandardizedTestAccountInfoDao;
+        this.uploadFileDao = uploadFileDao;
+        this.studentHasUploadFileDao = studentHasUploadFileDao;
     }
 
     @Override
@@ -290,5 +295,36 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     @Override
     public void deleteStudentHasQuestionnaireSurvey(StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey) {
         studentHasQuestionnaireSurveyDao.delete(studentHasQuestionnaireSurvey);
+    }
+
+    @Override
+    public List<UploadFile> findUploadFileList(List<String> ids){
+        Iterable<String> iterable = ids;
+        return Lists.newArrayList(uploadFileDao.findAll(iterable));
+    }
+
+    @Override
+    public List<StudentHasUploadFile> findStudentHasUploadFileList(String studentId){
+        return studentHasUploadFileDao.findAllByStudentId(studentId);
+    }
+
+    @Override
+    public void deleteUploadFile(UploadFile uploadFile) {
+        uploadFileDao.delete(uploadFile);
+    }
+
+    @Override
+    public void deleteStudentHasUploadFile(StudentHasUploadFile studentHasUploadFile) {
+        studentHasUploadFileDao.delete(studentHasUploadFile);
+    }
+
+    @Override
+    public UploadFile saveUploadFile(UploadFile uploadFile) {
+        return uploadFileDao.save(uploadFile);
+    }
+
+    @Override
+    public StudentHasUploadFile saveStudentHasUploadFile(StudentHasUploadFile studentHasUploadFile) {
+        return studentHasUploadFileDao.save(studentHasUploadFile);
     }
 }

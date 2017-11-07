@@ -13,24 +13,24 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">First Name</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.firstName.$invalid && !studentInputForm.firstName.$pristine }">
-					<input type="text" class="form-control" name="firstName" ng-model="ctrl.studentInputData.studentBasic.firstName" required maxlength="45">
+					<input type="text" class="form-control" name="firstName" ng-model="studentInputData.studentBasic.firstName" required maxlength="45">
                     <p ng-show="studentInputForm.firstName.$invalid && !studentInputForm.firstName.$pristine" class="help-block">First Name is required.</p>
 				</div>
 				<label class="col-sm-2 control-label">Family Name</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.familyName.$invalid && !studentInputForm.familyName.$pristine }">
-					<input type="text" class="form-control" name="familyName" ng-model="ctrl.studentInputData.studentBasic.familyName" required maxlength="45">
+					<input type="text" class="form-control" name="familyName" ng-model="studentInputData.studentBasic.familyName" required maxlength="45">
                     <p ng-show="studentInputForm.familyName.$invalid && !studentInputForm.familyName.$pristine" class="help-block">Family Name is required.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Passport Number</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.passportNumber.$invalid && !studentInputForm.passportNumber.$pristine }">
-					<input type="text" class="form-control" name="passportNumber" ng-model="ctrl.studentInputData.studentBasic.passportNumber" required maxlength="45">
+					<input type="text" class="form-control" name="passportNumber" ng-model="studentInputData.studentBasic.passportNumber" required maxlength="45">
                     <p ng-show="studentInputForm.passportNumber.$invalid && !studentInputForm.passportNumber.$pristine" class="help-block">Passport Number is required.</p>
                 </div>
 				<label class="col-sm-2 control-label">Email</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.applicantEmailAddress.$invalid && !studentInputForm.applicantEmailAddress.$pristine }">
-					<input type="email" class="form-control" name="applicantEmailAddress" ng-model="ctrl.studentInputData.studentBasic.applicantEmailAddress" required maxlength="45">
+					<input type="email" class="form-control" name="applicantEmailAddress" ng-model="studentInputData.studentBasic.applicantEmailAddress" required maxlength="45">
                     <p ng-show="studentInputForm.applicantEmailAddress.$invalid && !studentInputForm.applicantEmailAddress.$pristine" class="help-block">Email is empty or Email format is wrong.</p>
                 </div>
 			</div>
@@ -39,7 +39,7 @@
 				<div class="col-sm-4">
                     <div ng-controller="DatepickerPopupDemoCtrl" class="ng-scope" ng-class="{ 'has-error' : studentInputForm.dateOfBirth.$invalid && !studentInputForm.dateOfBirth.$pristine }">
                         <div class="input-group">
-                            <input type="text" name="dateOfBirth" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="ctrl.studentInputData.studentBasic.dateOfBirth" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
+                            <input type="text" name="dateOfBirth" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="studentInputData.studentBasic.dateOfBirth" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
                             <div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-not-empty ng-valid">
                                 <!-- ngIf: isOpen -->
                             </div>
@@ -52,10 +52,10 @@
                 </div>
 				<label class="col-sm-2 control-label">Country of Birth</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.countryOfBirth.$invalid && !studentInputForm.countryOfBirth.$pristine }">
-                    <select class="form-control" id="countryOfBirth" ng-model="ctrl.studentInputData.studentBasic.countryOfBirth" name="countryOfBirth"
+                    <select class="form-control" id="countryOfBirth" ng-model="studentInputData.studentBasic.countryOfBirth" name="countryOfBirth"
                             convert-to-string required>
                         <option value="">Please Select</option>
-                        <option ng-repeat="country in ctrl.studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
+                        <option ng-repeat="country in studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
                     </select>
                     <p ng-show="studentInputForm.countryOfBirth.$invalid && !studentInputForm.countryOfBirth.$pristine" class="help-block">Country is required.</p>
                 </div>
@@ -63,16 +63,16 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nationality / Citizenship</label>
                 <div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.nationality.$invalid && !studentInputForm.nationality.$pristine }">
-                    <select class="form-control" id="nationality" ng-model="ctrl.studentInputData.studentBasic.nationality" name="nationality"
+                    <select class="form-control" id="nationality" ng-model="studentInputData.studentBasic.nationality" name="nationality"
                             convert-to-string required>
                         <option value="">Please Select</option>
-                        <option ng-repeat="country in ctrl.studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
+                        <option ng-repeat="country in studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
                     </select>
                     <p ng-show="studentInputForm.nationality.$invalid && !studentInputForm.nationality.$pristine" class="help-block">Nationality is required.</p>
                 </div>
 			</div>
 			<div class="subtitle">Contact Details</div>
-            <span ng-repeat="address in ctrl.studentInputData.addressList">
+            <span ng-repeat="address in studentInputData.addressList">
                 <div class="unit_title" ng-if="('home' === address.type)">Permanent Home Address</div>
                 <div class="unit_title" ng-if="('mailing' === address.type)">Mailing Address</div>
                 <div class="form-group">
@@ -95,14 +95,14 @@
                     <div ng-if="('home' === address.type)" class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.homeCountry.$invalid && !studentInputForm.homeCountry.$pristine }">
                         <select class="form-control" ng-model="address.country" name="homeCountry" convert-to-string required>
                             <option value="">Please Select</option>
-                            <option ng-repeat="country in ctrl.studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
+                            <option ng-repeat="country in studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
                         </select>
                         <p ng-show="studentInputForm.homeCountry.$invalid && !studentInputForm.homeCountry.$pristine" class="help-block">Country is required.</p>
                     </div>
                     <div ng-if="('mailing' === address.type)" class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.mailingCountry.$invalid && !studentInputForm.mailingCountry.$pristine }">
                         <select class="form-control" ng-model="address.country" name="mailingCountry" convert-to-string required>
                             <option value="">Please Select</option>
-                            <option ng-repeat="country in ctrl.studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
+                            <option ng-repeat="country in studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
                         </select>
                         <p ng-show="studentInputForm.mailingCountry.$invalid && !studentInputForm.mailingCountry.$pristine" class="help-block">Country is required.</p>
                     </div>
@@ -140,12 +140,12 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label ">Phone Number</label>
                 <div class="col-xs-4" ng-class="{ 'has-error' : studentInputForm.phoneId.$invalid && !studentInputForm.phoneId.$pristine }">
-                    <input type="text" placeholder="phone number" name="phoneId" class="form-control" ng-model="ctrl.studentInputData.studentBasic.phoneId" required maxlength="45">
+                    <input type="text" placeholder="phone number" name="phoneId" class="form-control" ng-model="studentInputData.studentBasic.phoneId" required maxlength="45">
                     <p ng-show="studentInputForm.phoneId.$invalid && !studentInputForm.phoneId.$pristine" class="help-block">Phone is required.</p>
                 </div>
 			</div>
 			<div class="subtitle ">Parents' Information</div>
-            <span ng-repeat="relationship in ctrl.studentInputData.relationshipList">
+            <span ng-repeat="relationship in studentInputData.relationshipList">
                 <div class="unit_title" ng-if="('father' === relationship.relationshipTitle)">Father's Info</div>
                 <div class="unit_title" ng-if="('mother' === relationship.relationshipTitle)">Mother's Info</div>
                 <div class="form-group">
@@ -195,7 +195,7 @@
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.startDate.$invalid && !studentInputForm.startDate.$pristine }">
                     <div ng-controller="DatepickerPopupDemoCtrl" class="ng-scope">
                         <div class="input-group">
-                            <input type="text" name="startDate" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="ctrl.studentInputData.studentInfo.startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
+                            <input type="text" name="startDate" class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-date ng-valid-required ng-touched" uib-datepicker-popup="dd-MM-yyyy" ng-model="studentInputData.studentInfo.startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" required="required">
                             <div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)" template-url="uib/template/datepickerPopup/popup.html" class="ng-not-empty ng-valid">
                                 <!-- ngIf: isOpen -->
                             </div>
@@ -208,31 +208,31 @@
 				</div>
 				<label class="col-sm-2 control-label">Target School / Major</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.targetSchool.$invalid && !studentInputForm.targetSchool.$pristine }">
-					<input type="text" class="form-control" name="targetSchool" ng-model="ctrl.studentInputData.studentInfo.targetSchool" required maxlength="45">
+					<input type="text" class="form-control" name="targetSchool" ng-model="studentInputData.studentInfo.targetSchool" required maxlength="45">
                     <p ng-show="studentInputForm.targetSchool.$invalid && !studentInputForm.targetSchool.$pristine" class="help-block">Target School is required.</p>
                 </div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">First Choice</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.firstChoice.$invalid && !studentInputForm.firstChoice.$pristine }">
-					<input type="text" class="form-control" name="firstChoice" ng-model="ctrl.studentInputData.studentInfo.firstChoice" required maxlength="45">
+					<input type="text" class="form-control" name="firstChoice" ng-model="studentInputData.studentInfo.firstChoice" required maxlength="45">
                     <p ng-show="studentInputForm.firstChoice.$invalid && !studentInputForm.firstChoice.$pristine" class="help-block">First Choice is required.</p>
                 </div>
 				<label class="col-sm-2 control-label">Second Choice</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.secondChoice.$invalid && !studentInputForm.secondChoice.$pristine }">
-					<input type="text" class="form-control" name="secondChoice" ng-model="ctrl.studentInputData.studentInfo.secondChoice" required maxlength="45">
+					<input type="text" class="form-control" name="secondChoice" ng-model="studentInputData.studentInfo.secondChoice" required maxlength="45">
                     <p ng-show="studentInputForm.secondChoice.$invalid && !studentInputForm.secondChoice.$pristine" class="help-block">Second Choice is required.</p>
                 </div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Safety Choice</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.safetyChoice.$invalid && !studentInputForm.safetyChoice.$pristine }">
-					<input type="text" class="form-control" name="safetyChoice" ng-model="ctrl.studentInputData.studentInfo.safetyChoice" required maxlength="45">
+					<input type="text" class="form-control" name="safetyChoice" ng-model="studentInputData.studentInfo.safetyChoice" required maxlength="45">
                     <p ng-show="studentInputForm.safetyChoice.$invalid && !studentInputForm.safetyChoice.$pristine" class="help-block">Safety Choice is required.</p>
                 </div>
 				<label class="col-sm-2 control-label">Undecided / Undeclared</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.undecided.$invalid && !studentInputForm.undecided.$pristine }">
-					<input type="text" class="form-control" name="undecided" ng-model="ctrl.studentInputData.studentInfo.undecided" maxlength="45" required>
+					<input type="text" class="form-control" name="undecided" ng-model="studentInputData.studentInfo.undecided" maxlength="45" required>
                     <p ng-show="studentInputForm.undecided.$invalid && !studentInputForm.undecided.$pristine" class="help-block">Undecided is required.</p>
                 </div>
 			</div>
@@ -244,11 +244,11 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Name of highest qualification</label>
 				<div class="col-sm-4" ng-class="{ 'has-error' : studentInputForm.nameOfHighestQualification.$invalid && !studentInputForm.nameOfHighestQualification.$pristine }">
-					<input type="text" class="form-control" name="nameOfHighestQualification" ng-model="ctrl.studentInputData.studentInfo.nameOfHighestQualification" required maxlength="45">
+					<input type="text" class="form-control" name="nameOfHighestQualification" ng-model="studentInputData.studentInfo.nameOfHighestQualification" required maxlength="45">
                     <p ng-show="studentInputForm.nameOfHighestQualification.$invalid && !studentInputForm.fatherProfession.$pristine" class="help-block">Name of highest qualification is required.</p>
                 </div>
 			</div>
-            <span ng-repeat="education in ctrl.studentInputData.educationInfoList">
+            <span ng-repeat="education in studentInputData.educationInfoList">
                 <div class="unit_title">School {{$index + 1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeEducation($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
                 <div class="add_more" ng-form="educationForm{{$index}}">
                     <div class="form-group">
@@ -329,7 +329,7 @@
                         <div class="col-xs-4" ng-class="{ 'has-error' : educationForm{{$index}}.country{{$index}}.$invalid && !educationForm{{$index}}.country{{$index}}.$pristine }">
                             <select class="form-control" ng-model="education.address.country" name="country{{$index}}" convert-to-string required>
                                 <option value="">Please Select</option>
-                                <option ng-repeat="country in ctrl.studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
+                                <option ng-repeat="country in studentInputData.allCountryList" value="{{country.id}}">{{country.name}}</option>
                             </select>
                             <p ng-show="educationForm{{$index}}.country{{$index}}.$invalid && !educationForm{{$index}}.country{{$index}}.$pristine" class="help-block">Country is required.</p>
                         </div>
@@ -361,51 +361,8 @@
                 </div>
             </span>
 			<div class="subtitle">Other Previous Academic Study <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addEducation()"><span class="glyphicon glyphicon-plus"></span> Add Academic Study</a> </div>
-
-			<div class="formTitle">Required Documents Checklist</div>
-			<div class="subtitle">Documents Details</div>
-			<div class="listUpload">
-                <div ng-controller="UploadFileController as uCtrl">
-                    <table class="border" id="uploadFileList" ng-if="additionalProgram.commUploadFileList.length > 0">
-                        <tr>
-                            <th>#</th>
-                            <th>Type</th>
-                            <th>File Name</th>
-                            <th>Upload Date</th>
-                            <th>Upload For</th>
-                            <th>Delete</th>
-                        </tr>
-                        <tr ng-repeat="uploadFile in additionalProgram.commUploadFileList">
-                            <td>{{$index+1}}</td>
-                            <td>{{uploadFile.fileDispName}}</td>
-                            <td>&nbsp;{{uploadFile.uploadDate | date:'M/d/yyyy'}}</td>
-                            <td ng-if="uploadFile.status === 'pcgid'">&nbsp;<%= AdditionalProgramUploadStatus.PASSPORT_COPY_OR_GOVERNMENT_ISSUED_ID.getName() %></td>
-                            <td ng-if="uploadFile.status === 'fsd'">&nbsp;<%= AdditionalProgramUploadStatus.FINANCIAL_SUPPORT_DOCUMENT.getName() %></td>
-                            <td ng-if="uploadFile.status === 'vc'">&nbsp;<%= AdditionalProgramUploadStatus.VISA_COPY.getName() %></td>
-                            <td ng-if="uploadFile.status === 'ic'">&nbsp;<%= AdditionalProgramUploadStatus.I94_COPY.getName() %></td>
-                            <td ng-if="uploadFile.status === 'pc'">&nbsp;<%= AdditionalProgramUploadStatus.PASSPORT_COPY.getName() %></td>
-                            <td ng-if="uploadFile.status === 'copusui'">&nbsp;<%= AdditionalProgramUploadStatus.COPY_OF_PREVIOUS_US_UNIVERSATY_I20.getName() %></td>
-                            <td>&nbsp;{{uploadFile.description}}</td>
-                            <td ng-if="uploadFile.status === 'fsd'">&nbsp;{{additionalProgram.bankLetter}}</td>
-                            <td ng-if="uploadFile.status != 'fsd'">&nbsp;n/a</td>
-                            <td>&nbsp;{{uploadFile.uploadBy}}</td>
-                            <td>
-                                <c:if test="${isAllowEditApplication}">
-                                    <button class="btn btn-link btn-xs" confirm="Are you sure you want to delete this file?" ng-click="uCtrl.deleteFile($index, uploadFile.id, uploadFile.status, 'additionalProgram')">Delete</button>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-				<div class="form-group" ng-repeat="x in files">
-					<label class="col-sm-3 control-label">{{x}}</label>
-					<div class="col-sm-9 ">
-						<input type="file">
-                    </div>
-				</div>
-			</div>
-			<div class="formTitle">Recommender Information</div>
-            <span ng-repeat="recommenderInfo in ctrl.studentInputData.recommenderInfoList">
+            <div class="formTitle">Recommender Information</div>
+            <span ng-repeat="recommenderInfo in studentInputData.recommenderInfoList">
                 <div class="subtitle">Recommender{{$index+1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeRecommender($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
                 <span ng-form="recommenderInformationForm{{$index}}">
                     <div class="form-group">
@@ -448,7 +405,7 @@
             </span>
             <div class="subtitle">Other Type of Recommender <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addRecommender()"><span class="glyphicon glyphicon-plus"></span> Add Other Recommender</a> </div>
             <div class="formTitle">Standardized Test Account Information</div>
-            <span ng-repeat="testAccount in ctrl.studentInputData.standardizedTestAccountInfoList">
+            <span ng-repeat="testAccount in studentInputData.standardizedTestAccountInfoList">
                 <div class="subtitle">Test Account{{$index+1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeTestAccount($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
                 <span ng-form="testAccountForm{{$index}}">
                     <div class="form-group">
@@ -474,24 +431,24 @@
             </span>
             <div class="subtitle">Other Test Account <a class="btn btn-xs btn-link pull-right" ng-click="ctrl.addTestAccount()"><span class="glyphicon glyphicon-plus"></span> Add Other Test Account</a> </div>
 
-			<div class="formTitle">Declaration</div>
-			<div class="subtitle">Declaration Details</div>
-			<div class="form-group article-room">
-				<div class="">
-					<p> I confirm that I Student Name have been duly appointed by Student Name, have permission to act on their behalf and confirm that to the best of my knowledge all the details supplied are accurate and correct. I understand that the giving of false or incomplete information may lead to the misguidance in college counselling process or refusal of admissions to colleges or cancellation of the applicant's enrolment. I confirm that the applicant has received a copy of the terms and conditions. </p>
-				</div>
-			</div>
-			<div class="form-group button-room">
-				<div ng-class="{ 'has-error' : studentInputForm.declarationAgree.$invalid && !studentInputForm.declarationAgree.$pristine }">
-					<label class="checkbox-inline">
-						<input type="checkbox" name="declarationAgree" ng-model="ctrl.studentInputData.studentInfo.declarationAgree" required> I agree <span class="text-muted"></span>
+            <div class="formTitle">Declaration</div>
+            <div class="subtitle">Declaration Details</div>
+            <div class="form-group article-room">
+                <div class="">
+                    <p> I confirm that I Student Name have been duly appointed by Student Name, have permission to act on their behalf and confirm that to the best of my knowledge all the details supplied are accurate and correct. I understand that the giving of false or incomplete information may lead to the misguidance in college counselling process or refusal of admissions to colleges or cancellation of the applicant's enrolment. I confirm that the applicant has received a copy of the terms and conditions. </p>
+                </div>
+            </div>
+            <div class="form-group button-room">
+                <div ng-class="{ 'has-error' : studentInputForm.declarationAgree.$invalid && !studentInputForm.declarationAgree.$pristine }">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="declarationAgree" ng-model="studentInputData.studentInfo.declarationAgree" required> I agree <span class="text-muted"></span>
                     </label>
                     <p ng-show="studentInputForm.declarationAgree.$invalid && !studentInputForm.declarationAgree.$pristine" class="help-block">Declaration is required.</p>
-				</div>
-			</div>
-			<div class="formTitle">Counselor Brag Sheet</div>
-			<div class="textarea_room">
-				<div class="form-group" ng-repeat="questionnaireSurvey in ctrl.studentInputData.questionnaireSurveyList">
+                </div>
+            </div>
+            <div class="formTitle">Counselor Brag Sheet</div>
+            <div class="textarea_room">
+                <div class="form-group" ng-repeat="questionnaireSurvey in studentInputData.questionnaireSurveyList">
                     <span ng-form="bragForm{{$index}}">
                         <label class="col-sm-12 control-label">{{$index+1}}. {{questionnaireSurvey.question}}</label>
                         <div class="col-sm-12" ng-class="{ 'has-error' : bragForm{{$index}}.answer{{$index}}.$invalid && !bragForm{{$index}}.answer{{$index}}.$pristine }">
@@ -499,20 +456,129 @@
                             <p ng-show="bragForm{{$index}}.answer{{$index}}.$invalid && !bragForm{{$index}}.answer{{$index}}.$pristine" class="help-block">Answer is required.</p>
                         </div>
                     </span>
-				</div>
-			</div>
-			<div class="form-group button-room">
-				<div class="text-center">
-					<button type="button" class="btn btn-primary btn-lg" ng-click="ctrl.saveStudentInfo()"> <span class="glyphicon glyphicon-ok "></span> Submit </button>
-				</div>
-			</div>
-		</form>
+                </div>
+            </div>
+            <div class="form-group button-room">
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-lg" ng-click="ctrl.saveStudentInfo()"> <span class="glyphicon glyphicon-ok "></span> Submit </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="formTitle">Required Documents Checklist</div>
+        <div class="subtitle">Documents Details</div>
+        <div class="help_block_multiple">
+            <p>
+                <span>help: INSTRUCTIONS FOR UPLOADING FILES</span>
+                <br>
+                Please make sure that all upload files follow the requirements below:
+                <br>
+                1.The file is in PDF format (${maxSizeValue} file size limit);
+                <br>
+                2.The document is legible and in full focus;
+                <br>
+                3.The document must be correctly oriented (e.g., do not provide a sideways or upside down image).
+            </p>
+        </div>
+        <div class="listUpload">
+            <table class="border" id="uploadFileList" ng-if="studentInputData.uploadFileList.length > 0" ng-controller="UploadFileController as uCtrl">
+                <tr>
+                    <th>#</th>
+                    <th>Type</th>
+                    <th>File Name</th>
+                    <th>Upload Date</th>
+                    <%--<th>Upload For</th>--%>
+                    <th>Delete</th>
+                </tr>
+                <tr ng-repeat="uploadFile in studentInputData.uploadFileList">
+                    <td>{{$index+1}}</td>
+                    <td>{{uploadFile.type}}</td>
+                    <td>{{uploadFile.fileDispName}}</td>
+                    <td>&nbsp;{{uploadFile.uploadDate | date:'M/d/yyyy'}}</td>
+                    <%--<td>&nbsp;{{uploadFile.uploadBy}}</td>--%>
+                    <td>
+                        <button class="btn btn-link btn-xs" confirm="Are you sure you want to delete this file?" ng-click="uCtrl.deleteFile($index, uploadFile.id, uploadFile.type)">Delete</button>
+                    </td>
+                </tr>
+            </table>
+            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload0" method="post" id="pFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('p')">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">1. Passport <!--span class="orange">(Required)</span--></label>
+                    <div class="col-sm-6">
+                        <input type="file" name="pFile" data-rule-required="true" id="pFile" accept=".pdf">
+                        <span ng-show="$root.uploadFileError0" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                    </div>
+                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
+                </div>
+            </form>
+            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload1" method="post" id="atFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('at')">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">2. Academic Transcript <!--span class="orange">(Required)</span--></label>
+                    <div class="col-sm-6">
+                        <input type="file" name="atFile" data-rule-required="true" id="atFile" accept=".pdf">
+                        <span ng-show="$root.uploadFileError1" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                    </div>
+                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
+                </div>
+            </form>
+            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload2" method="post" id="elrFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('elr')">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">3. English Language Report/Certificate <!--span class="orange">(Required)</span--></label>
+                    <div class="col-sm-6">
+                        <input type="file" name="elrFile" data-rule-required="true" id="elrFile" accept=".pdf">
+                        <span ng-show="$root.uploadFileError2" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                    </div>
+                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
+                </div>
+            </form>
+            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload3" method="post" id="i20FileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('i20')">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">4. Existing I-20 <!--span class="orange">(Required)</span--></label>
+                    <div class="col-sm-6">
+                        <input type="file" name="i20File" data-rule-required="true" id="i20File" accept=".pdf">
+                        <span ng-show="$root.uploadFileError3" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                    </div>
+                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
+                </div>
+            </form>
+            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload4" method="post" id="psFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('ps')">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">5. Personal Statement/Admission Essay (PDF file only) <!--span class="orange">(Required)</span--></label>
+                    <div class="col-sm-6">
+                        <input type="file" name="psFile" data-rule-required="true" id="psFile" accept=".pdf">
+                        <span ng-show="$root.uploadFileError4" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                    </div>
+                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
+                </div>
+            </form>
+            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload5" method="post" id="cvFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('cv')">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">6. CV (PDF file only) <!--span class="orange">(Required)</span--></label>
+                    <div class="col-sm-6">
+                        <input type="file" name="cvFile" data-rule-required="true" id="cvFile" accept=".pdf">
+                        <span ng-show="$root.uploadFileError5" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                    </div>
+                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
+                </div>
+            </form>
+            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload6" method="post" id="cFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('c')">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">7. Certificate (PDF file only) <!--span class="orange">(Required)</span--></label>
+                    <div class="col-sm-6">
+                        <input type="file" name="cFile" data-rule-required="true" id="cFile" accept=".pdf">
+                        <span ng-show="$root.uploadFileError6" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                    </div>
+                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
+                </div>
+            </form>
+        </div>
 	</div>
 </div>
 <%@include file="common/footer.jsp" %>
 <script>
     var id = '${id}';
     var type = '${type}';
+    var maxSize = '${maxSize}';
 </script>
 <script src="<c:url value='/js/controller/student_input_controller.js' />"></script>
 <script src="<c:url value='/js/service/student_input_service.js' />"></script>

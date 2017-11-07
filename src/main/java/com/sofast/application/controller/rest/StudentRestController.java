@@ -138,19 +138,18 @@ public class StudentRestController {
         studentInputData.setRelationshipList(relationshipList);
     }
 
-    private StudentInputData getStudentInputDataFromDB(String linkId, String studentBasicId) {
+    private StudentInputData fetchStudentInputData(String id, String type) {
         StudentInputData studentInputData = new StudentInputData();
         List<Country> allCountryList = studentBasicService.findAllCountryList();
         studentInputData.setAllCountryList(allCountryList);
         List<QuestionnaireSurvey> allQuestionnaireSurveyList = studentBasicService.findAllQuestionnaireSurveyList();
         studentInputData.setAllQuestionnaireSurveyList(allQuestionnaireSurveyList);
-        StudentBasic studentBasic = null;
-        if (Strings.isNullOrEmpty(linkId)) {
-            studentBasic = studentBasicService.findById(studentBasicId);
+        StudentBasic studentBasic;
+        if ("studentBasicId".equalsIgnoreCase(type)) {
+            studentBasic = studentBasicService.findById(id);
         } else {
-            studentBasic = studentBasicService.findByLinkId(linkId);
+            studentBasic = studentBasicService.findByLinkId(id);
         }
-
         studentInputData.setStudentBasic(studentBasic);
         StudentInfo studentInfo = studentBasicService.findStudentInfoByStudentBasicId(studentBasic.getId());
         studentInputData.setStudentInfo(studentInfo);
@@ -229,6 +228,15 @@ public class StudentRestController {
             List<StandardizedTestAccountInfo> standardizedTestAccountInfoList = studentBasicService.findStandardizedTestAccountInfoList(ids);
             studentInputData.setStandardizedTestAccountInfoList(standardizedTestAccountInfoList);
         }
+        List<StudentHasUploadFile> studentHasUploadFileList = studentBasicService.findStudentHasUploadFileList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasUploadFileList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasUploadFile studentHasUploadFile : studentHasUploadFileList) {
+                ids.add(studentHasUploadFile.getUploadFileId());
+            }
+            List<UploadFile> uploadFileList = studentBasicService.findUploadFileList(ids);
+            studentInputData.setUploadFileList(uploadFileList);
+        }
         return studentInputData;
     }
 
@@ -299,12 +307,7 @@ public class StudentRestController {
 
     @GetMapping(path = "/studentInput/data/{type}/{id}", produces = "application/json")
     public JsonResponse<StudentInputData> getStudentInputData(@PathVariable String type, @PathVariable String id) {
-        StudentInputData studentInputData;
-        if ("linkId".equalsIgnoreCase(type)) {
-            studentInputData = getStudentInputDataFromDB(id, null);
-        } else {
-            studentInputData = getStudentInputDataFromDB(null, id);
-        }
+        StudentInputData studentInputData = fetchStudentInputData(id, type);
         return new JsonResponse<>(studentInputData);
     }
 

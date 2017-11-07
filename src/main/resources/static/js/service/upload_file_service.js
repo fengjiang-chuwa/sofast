@@ -1,160 +1,103 @@
 'use strict';
 
 App.factory('UploadFileService', ['$http', '$rootScope', '$q', function($http, $rootScope, $q){
-    self.checkFileFailed= function (file){
-        if(!file || !file.name){
-            return true;
-        }
-        var fileName = file.name.split(".");
-        return file.size > maxSize || fileName[1] != "pdf";
 
-    };
     return {
-        checkUploadFile: function(uploadStatus, tabData) {
+        checkUploadFile: function(uploadFileType) {
             var file;
-            var res = false;
-            if (uploadStatus === "pcgid") {
-                var pcOrGidFile = document.getElementById("pcOrGidFile");
-                file =  pcOrGidFile.files[0];
-                res = $rootScope.uploadFileError[0] = self.checkFileFailed(file);
+            if (uploadFileType === "p") {
+                file = document.getElementById("pFile").files[0];
             }
-            if (uploadStatus === "fsd") {
-                var financialFile = document.getElementById("financialFile");
-                file =  financialFile.files[0];
-                res = $rootScope.uploadFileError[1] = self.checkFileFailed(file);
+            if (uploadFileType === "at") {
+                file = document.getElementById("atFile").files[0];
             }
-            if (uploadStatus === "pc") {
-                var passportFile = document.getElementById("passportFile");
-                file =  passportFile.files[0];
-                res = $rootScope.uploadFileError[2] = self.checkFileFailed(file);
+            if (uploadFileType === "elr") {
+                file = document.getElementById("elrFile").files[0];
             }
-            if (uploadStatus === "vc") {
-                var visaFile = document.getElementById("visaFile");
-                file =  visaFile.files[0];
-                res = $rootScope.uploadFileError[3] = self.checkFileFailed(file);
+            if (uploadFileType === "i20") {
+                file = document.getElementById("i20File").files[0];
             }
-            if (uploadStatus === "ic") {
-                var i94File = document.getElementById("i94File");
-                file =  i94File.files[0];
-                res = $rootScope.uploadFileError[4] = self.checkFileFailed(file);
+            if (uploadFileType === "ps") {
+                file = document.getElementById("psFile").files[0];
             }
-            if (uploadStatus === "copusui") {
-                var copusuiFile = document.getElementById("copusuiFile");
-                file =  copusuiFile.files[0];
-                res = $rootScope.uploadFileError[5] = self.checkFileFailed(file);
+            if (uploadFileType === "cv") {
+                file = document.getElementById("cvFile").files[0];
             }
-            if (uploadStatus === "College" ||
-                uploadStatus === "IBT" ||
-                uploadStatus === "CBT" ||
-                uploadStatus === "PBT" ||
-                uploadStatus === "IELTS" ||
-                uploadStatus === "EPE") {
-                var englishFile = document.getElementById("englishFile");
-                file =  englishFile.files[0];
-                res = $rootScope.uploadFileErrorEng = self.checkFileFailed(file);
+            if (uploadFileType === "c") {
+                file = document.getElementById("cFile").files[0];
             }
-            if (uploadStatus === "GMAT" || uploadStatus === "GRE") {
-                var examFile = document.getElementById("examFile");
-                file =  examFile.files[0];
-                res = $rootScope.uploadFileErrorExam = self.checkFileFailed(file);
+            if(!file) {
+                return false;
             }
-            var tempData = tabData.split(",");
-            if (tempData && tempData[1]) {
-                if(tempData[1] === "OT") {
-                    var eduOTFile = document.getElementById("eduOTFile");
-                    file =  eduOTFile.files[0];
-                    res = $rootScope.uploadFileErrorOT = self.checkFileFailed(file);
-                }else if(tempData[1] === "Diploma") {
-                    var eduDiplomaFile = document.getElementById("eduDiplomaFile");
-                    file =  eduDiplomaFile.files[0];
-                    res = $rootScope.uploadFileErrorDip = self.checkFileFailed(file);
+            var fileName = file.name.split(".");
+            if (file.size > maxSize || fileName[1] != "pdf") {
+                if (uploadFileType === "p") {
+                    $rootScope.uploadFileError0 = true;
                 }
+                if (uploadFileType === "at") {
+                    $rootScope.uploadFileError1 = true;
+                }
+                if (uploadFileType === "elr") {
+                    $rootScope.uploadFileError2 = true;
+                }
+                if (uploadFileType === "i20") {
+                    $rootScope.uploadFileError3 = true;
+                }
+                if (uploadFileType === "ps") {
+                    $rootScope.uploadFileError4 = true;
+                }
+                if (uploadFileType === "cv") {
+                    $rootScope.uploadFileError5 = true;
+                }
+                if (uploadFileType === "c") {
+                    $rootScope.uploadFileError6 = true;
+                }
+                return false;
             }
-            return !res;
+            return true;
         },
 
-        fileUpload: function(uploadStatus, description, tabName, tabData, fileId) {
+        fileUpload: function(uploadFileType) {
             var formData = new FormData();
-            if (uploadStatus === "pcgid") {
-                var pcOrGidFile = document.getElementById("pcOrGidFile");
-                formData.append("file", pcOrGidFile.files[0]);
+            if (uploadFileType === "p") {
+                formData.append("file", document.getElementById("pFile").files[0]);
             }
-            if (uploadStatus === "fsd") {
-                var financialFile = document.getElementById("financialFile");
-                formData.append("file", financialFile.files[0]);
+            if (uploadFileType === "at") {
+                formData.append("file", document.getElementById("atFile").files[0]);
             }
-            if (uploadStatus === "pc") {
-                var passportFile = document.getElementById("passportFile");
-                formData.append("file", passportFile.files[0]);
+            if (uploadFileType === "elr") {
+                formData.append("file", document.getElementById("elrFile").files[0]);
             }
-            if (uploadStatus === "vc") {
-                var visaFile = document.getElementById("visaFile");
-                formData.append("file", visaFile.files[0]);
+            if (uploadFileType === "i20") {
+                formData.append("file", document.getElementById("i20File").files[0]);
             }
-            if (uploadStatus === "ic") {
-                var i94File = document.getElementById("i94File");
-                formData.append("file", i94File.files[0]);
+            if (uploadFileType === "ps") {
+                formData.append("file", document.getElementById("psFile").files[0]);
             }
-            if (uploadStatus === "copusui") {
-                var copusuiFile = document.getElementById("copusuiFile");
-                formData.append("file", copusuiFile.files[0]);
+            if (uploadFileType === "cv") {
+                formData.append("file", document.getElementById("cvFile").files[0]);
             }
-            if (uploadStatus === "College" ||
-                uploadStatus === "IBT" ||
-                uploadStatus === "CBT" ||
-                uploadStatus === "PBT" ||
-                uploadStatus === "IELTS" ||
-                uploadStatus === "EPE") {
-                var englishFile = document.getElementById("englishFile");
-                formData.append("file", englishFile.files[0]);
+            if (uploadFileType === "c") {
+                formData.append("file", document.getElementById("cFile").files[0]);
             }
-            if (uploadStatus === "GMAT" || uploadStatus === "GRE") {
-                var examFile = document.getElementById("examFile");
-                formData.append("file", examFile.files[0]);
-            }
-            var tempData = tabData.split(",");
-            if (tempData && tempData[1]) {
-                if(tempData[1] === "OT") {
-                    var eduOTFile = document.getElementById("eduOTFile");
-                    formData.append("file", eduOTFile.files[0]);
-                }
-                if(tempData[1] === "Diploma") {
-                    var eduDiplomaFile = document.getElementById("eduDiplomaFile");
-                    formData.append("file", eduDiplomaFile.files[0]);
-                }
-            }
-            formData.append("uploadStatus", uploadStatus);
-            formData.append("description", description);
-            if(!fileId){
-                fileId = "";
-            }
+            formData.append("uploadFileType", uploadFileType);
             return $http({
-                        method: 'POST',
-                        url: getFullRequestPath("/fileUpload/"+tabName+"/"+tabData+"?fileId="+fileId),
-                        headers: {'Content-Type': undefined},
-                        data: formData,
-                        transformRequest: function(data, headersGetterFunction) {
-                            return data;
-                        }
-                    }).success(function(data, status) {
-                        //alert("success");
-                    }).error(function(data, status){
-                        //alert("error");
-                    });
-        },
-        clearFileStatus: function(appId,fileId) {
-            return $http.post(getFullRequestPath("/process/"+appId+"/file/"+fileId+"/clearStatus"))
-                .then(
-                function(response){
-                    return response.data;
-                },
-                function(errResponse){
-                    return $q.reject(errResponse);
+                method: 'POST',
+                url: getFullRequestPath("/fileUpload/" + id + "/" + type),
+                headers: {'Content-Type': undefined},
+                data: formData,
+                transformRequest: function(data, headersGetterFunction) {
+                    return data;
                 }
-            );
+            }).success(function(data, status) {
+                //alert("success");
+            }).error(function(data, status){
+                //alert("error");
+            });
         },
-        deleteFile: function(id, tabName) {
-            return $http.post(getFullRequestPath("/fileUpload/remove/" + tabName + "/" + id)).then(
+
+        deleteFile: function(uploadFileId, id, type) {
+            return $http.post(getFullRequestPath("/fileUpload/remove/" + id + "/" + type + "/" + uploadFileId)).then(
                 function(response){
                     if (response.data.data === "success") {
                         return response.data;
