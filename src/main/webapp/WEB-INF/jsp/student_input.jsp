@@ -365,7 +365,39 @@
 			<div class="formTitle">Required Documents Checklist</div>
 			<div class="subtitle">Documents Details</div>
 			<div class="listUpload">
-				<div class="form-group " ng-repeat="x in files">
+                <div ng-controller="UploadFileController as uCtrl">
+                    <table class="border" id="uploadFileList" ng-if="additionalProgram.commUploadFileList.length > 0">
+                        <tr>
+                            <th>#</th>
+                            <th>Type</th>
+                            <th>File Name</th>
+                            <th>Upload Date</th>
+                            <th>Upload For</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr ng-repeat="uploadFile in additionalProgram.commUploadFileList">
+                            <td>{{$index+1}}</td>
+                            <td>{{uploadFile.fileDispName}}</td>
+                            <td>&nbsp;{{uploadFile.uploadDate | date:'M/d/yyyy'}}</td>
+                            <td ng-if="uploadFile.status === 'pcgid'">&nbsp;<%= AdditionalProgramUploadStatus.PASSPORT_COPY_OR_GOVERNMENT_ISSUED_ID.getName() %></td>
+                            <td ng-if="uploadFile.status === 'fsd'">&nbsp;<%= AdditionalProgramUploadStatus.FINANCIAL_SUPPORT_DOCUMENT.getName() %></td>
+                            <td ng-if="uploadFile.status === 'vc'">&nbsp;<%= AdditionalProgramUploadStatus.VISA_COPY.getName() %></td>
+                            <td ng-if="uploadFile.status === 'ic'">&nbsp;<%= AdditionalProgramUploadStatus.I94_COPY.getName() %></td>
+                            <td ng-if="uploadFile.status === 'pc'">&nbsp;<%= AdditionalProgramUploadStatus.PASSPORT_COPY.getName() %></td>
+                            <td ng-if="uploadFile.status === 'copusui'">&nbsp;<%= AdditionalProgramUploadStatus.COPY_OF_PREVIOUS_US_UNIVERSATY_I20.getName() %></td>
+                            <td>&nbsp;{{uploadFile.description}}</td>
+                            <td ng-if="uploadFile.status === 'fsd'">&nbsp;{{additionalProgram.bankLetter}}</td>
+                            <td ng-if="uploadFile.status != 'fsd'">&nbsp;n/a</td>
+                            <td>&nbsp;{{uploadFile.uploadBy}}</td>
+                            <td>
+                                <c:if test="${isAllowEditApplication}">
+                                    <button class="btn btn-link btn-xs" confirm="Are you sure you want to delete this file?" ng-click="uCtrl.deleteFile($index, uploadFile.id, uploadFile.status, 'additionalProgram')">Delete</button>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+				<div class="form-group" ng-repeat="x in files">
 					<label class="col-sm-3 control-label">{{x}}</label>
 					<div class="col-sm-9 ">
 						<input type="file">
@@ -484,5 +516,7 @@
 </script>
 <script src="<c:url value='/js/controller/student_input_controller.js' />"></script>
 <script src="<c:url value='/js/service/student_input_service.js' />"></script>
+<script src="<c:url value='/js/controller/upload_file_controller.js' />"></script>
+<script src="<c:url value='/js/service/upload_file_service.js' />"></script>
 </body>
 </html>

@@ -232,6 +232,71 @@ public class StudentRestController {
         return studentInputData;
     }
 
+    private void deleteStudentData(StudentBasic studentBasic) {
+        List<StudentHasAddress> studentHasAddressList = studentBasicService.findStudentHasAddressList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasAddressList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasAddress studentHasAddress : studentHasAddressList) {
+                ids.add(studentHasAddress.getAddressId());
+                studentBasicService.deleteStudentHasAddress(studentHasAddress);
+            }
+            List<Address> addressList = studentBasicService.findAddressList(ids);
+            for (Address address : addressList) {
+                studentBasicService.deleteAddress(address);
+            }
+        }
+        List<StudentHasRecommenderInfo> studentHasRecommenderInfoList = studentBasicService.findStudentHasRecommenderInfoList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasRecommenderInfoList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasRecommenderInfo studentHasRecommenderInfo : studentHasRecommenderInfoList) {
+                ids.add(studentHasRecommenderInfo.getRecommenderInfoId());
+                studentBasicService.deleteStudentHasRecommenderInfo(studentHasRecommenderInfo);
+            }
+            List<RecommenderInfo> recommenderInfoList = studentBasicService.findRecommenderInfoList(ids);
+            for (RecommenderInfo recommenderInfo : recommenderInfoList) {
+                studentBasicService.deleteRecommenderInfo(recommenderInfo);
+            }
+        }
+        List<StudentHasRelationship> studentHasRelationshipList = studentBasicService.findStudentHasRelationshipList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasRelationshipList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasRelationship studentHasRelationship : studentHasRelationshipList) {
+                ids.add(studentHasRelationship.getRelationshipId());
+                studentBasicService.deleteStudentHasRelationship(studentHasRelationship);
+            }
+            List<Relationship> relationshipList = studentBasicService.findRelationshipList(ids);
+            for (Relationship relationship : relationshipList) {
+                studentBasicService.deleteRelationship(relationship);
+            }
+        }
+        List<StudentHasEducationInfo> studentHasEducationInfoList = studentBasicService.findStudentHasEducationInfoList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasEducationInfoList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasEducationInfo studentHasEducationInfo : studentHasEducationInfoList) {
+                ids.add(studentHasEducationInfo.getEducationInfoId());
+                studentBasicService.deleteStudentHasEducationInfo(studentHasEducationInfo);
+            }
+            List<EducationInfo> educationInfoList = studentBasicService.findEducationInfoList(ids);
+            for (EducationInfo educationInfo : educationInfoList) {
+                Address address = studentBasicService.findAddressById(educationInfo.getAddressId());
+                studentBasicService.deleteAddress(address);
+                studentBasicService.deleteEducationInfo(educationInfo);
+            }
+        }
+        List<StudentHasStandardizedTestAccountInfo> studentHasStandardizedTestAccountInfoList = studentBasicService.findStudentHasStandardizedTestAccountInfoList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasStandardizedTestAccountInfoList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo : studentHasStandardizedTestAccountInfoList) {
+                ids.add(studentHasStandardizedTestAccountInfo.getStandardizedTestAccountInfoId());
+                studentBasicService.deleteStudentHasStandardizedTestAccountInfo(studentHasStandardizedTestAccountInfo);
+            }
+            List<StandardizedTestAccountInfo> standardizedTestAccountInfoList = studentBasicService.findStandardizedTestAccountInfoList(ids);
+            for (StandardizedTestAccountInfo standardizedTestAccountInfo : standardizedTestAccountInfoList) {
+                studentBasicService.deleteStandardizedTestAccountInfo(standardizedTestAccountInfo);
+            }
+        }
+    }
+
     @GetMapping(path = "/studentInput/data/{type}/{id}", produces = "application/json")
     public JsonResponse<StudentInputData> getStudentInputData(@PathVariable String type, @PathVariable String id) {
         StudentInputData studentInputData;
@@ -246,7 +311,7 @@ public class StudentRestController {
     @RequestMapping(value = "/studentInfo", method = RequestMethod.POST, produces = "application/json")
     public JsonResponse<String> saveStudentInfo(@RequestBody StudentInputData studentInputData) throws MsgException {
         try {
-//            StudentInputData studentInputOldData = getStudentInputData(null, studentInputData.getStudentBasic().getId());
+            deleteStudentData(studentInputData.getStudentBasic());
             studentBasicService.save(studentInputData.getStudentBasic());
             if (Strings.isNullOrEmpty(studentInputData.getStudentInfo().getId())) {
                 studentInputData.getStudentInfo().setId(UUIDHelper.getUUID());

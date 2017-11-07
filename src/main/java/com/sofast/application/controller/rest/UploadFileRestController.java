@@ -3,9 +3,9 @@ package com.sofast.application.controller.rest;
 import com.google.common.base.Strings;
 import com.sofast.application.entity.JsonResponse;
 import com.sofast.application.exception.MsgException;
-import com.sofast.application.model.CommUploadFile;
+import com.sofast.application.model.UploadFile;
 import com.sofast.application.model.StudentBasic;
-import com.sofast.application.service.CommUploadFileService;
+import com.sofast.application.service.UploadFileService;
 import com.sofast.application.service.StudentBasicService;
 import com.sofast.application.util.FileTypeCheck;
 import com.sofast.application.util.UUIDHelper;
@@ -28,27 +28,27 @@ public class UploadFileRestController {
     @Value("${upload.path}")
     private String uploadPath;
 
-    private final CommUploadFileService commUploadFileService;
+    private final UploadFileService uploadFileService;
 
     private final StudentBasicService studentBasicService;
 
     @Autowired
-    public UploadFileRestController(CommUploadFileService commUploadFileService, StudentBasicService studentBasicService) {
-        this.commUploadFileService = commUploadFileService;
+    public UploadFileRestController(UploadFileService uploadFileService, StudentBasicService studentBasicService) {
+        this.uploadFileService = uploadFileService;
         this.studentBasicService = studentBasicService;
     }
 
 
     @RequestMapping(value = "/fileUpload/{linkId}", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResponse<CommUploadFile> fileUpload(HttpServletRequest request, @PathVariable String linkId) {
+    public JsonResponse<UploadFile> fileUpload(HttpServletRequest request, @PathVariable String linkId) {
         MultipartHttpServletRequest mRequest;
         try {
             StudentBasic studentBasic = studentBasicService.findByLinkId(linkId);
             if (studentBasic == null) {
                 throw new MsgException("invalid link id");
             }
-            CommUploadFile commUploadFile = null;
+            UploadFile uploadFile = null;
             mRequest = (MultipartHttpServletRequest) request;
             mRequest.getParameterMap();
             Iterator<String> itr = mRequest.getFileNames();
@@ -61,10 +61,10 @@ public class UploadFileRestController {
                 String fileName = mFile.getOriginalFilename();
                 String fileRealName = fileName.replace(".pdf", "-" + UUIDHelper.getUUID() + ".pdf");
                 mFile.transferTo(new File(uploadPath + fileRealName));
-                commUploadFile = createUploadFile(mRequest.getParameter("description"), fileName, fileRealName,
+                uploadFile = createUploadFile(mRequest.getParameter("description"), fileName, fileRealName,
                         mRequest.getParameter("uploadStatus"), studentBasic.getId());
-                commUploadFileService.save(commUploadFile);
-                return new JsonResponse<>(commUploadFile);
+                uploadFileService.save(uploadFile);
+                return new JsonResponse<>(uploadFile);
             }
         } catch (Exception e) {
             log.error("fileUpload", e);
@@ -72,18 +72,18 @@ public class UploadFileRestController {
         return new JsonResponse<>(null);
     }
 
-    private CommUploadFile createUploadFile(String description, String fileName, String fileRealName, String status,
+    private UploadFile createUploadFile(String description, String fileName, String fileRealName, String status,
                                             String uploadBy) {
-        CommUploadFile commUploadFile = new CommUploadFile();
-        commUploadFile.setId(UUIDHelper.getUUID());
-        commUploadFile.setDescription(description);
-        commUploadFile.setFileDispName(fileName);
-        commUploadFile.setFileRealName(fileRealName);
-        commUploadFile.setFilePath(uploadPath);
-        commUploadFile.setUploadBy(uploadBy);
-        commUploadFile.setUploadDate(new Date());
-        commUploadFile.setStatus(status);
-        return commUploadFile;
+        UploadFile uploadFile = new UploadFile();
+        uploadFile.setId(UUIDHelper.getUUID());
+        uploadFile.setDescription(description);
+        uploadFile.setFileDispName(fileName);
+        uploadFile.setFileRealName(fileRealName);
+        uploadFile.setFilePath(uploadPath);
+        uploadFile.setUploadBy(uploadBy);
+        uploadFile.setUploadDate(new Date());
+        uploadFile.setStatus(status);
+        return uploadFile;
     }
 
     @RequestMapping(value = "/fileUpload/remove/{linkId}/{uploadFileId}", method = RequestMethod.POST)
@@ -95,14 +95,14 @@ public class UploadFileRestController {
                 if (studentBasic == null) {
                     throw new MsgException("invalid link id");
                 }
-                CommUploadFile commUploadFile = commUploadFileService.findById(uploadFileId);
-                if (commUploadFile == null) {
+                UploadFile uploadFile = uploadFileService.findById(uploadFileId);
+                if (uploadFile == null) {
                     throw new MsgException("invalid uploaded file id");
                 }
-                if(!studentBasic.getId().equalsIgnoreCase(commUploadFile.getUploadBy())){
+                if(!studentBasic.getId().equalsIgnoreCase(uploadFile.getUploadBy())){
                     throw new MsgException("invalid link id");
                 }
-                commUploadFileService.delete(uploadFileId);
+                uploadFileService.delete(uploadFileId);
             }
             return new JsonResponse<>("success");
         } catch (Exception e) {
