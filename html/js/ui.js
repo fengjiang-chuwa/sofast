@@ -103,7 +103,7 @@ validationApp.controller('phoneNumber', ['$scope', function($scope) {
 // Show Information
 validationApp.controller('showInfo', function($scope, $window) {
     $scope.level = ['Undergraduate', 'Postgraduate', 'Postgraduated Researcher'];
-    $scope.files = ['Passport', 'Academic Transcript', 'English Language Report/Certificate', 'Existing I-20', 'Personal Statement/Admission Essay', 'CV', 'Certificate (Optional)']
+    $scope.files = ['Passport', 'Academic Transcript', 'English Language Report / Certificate', 'Existing I-20', 'Personal Statement / Admission Essay', 'CV', 'Certificate (Optional)']
     $scope.bragSheet = [
         '1. List 1-3 occupations you are considering in order of preference and explain what it is about the occupation that interests you and why you might be successful in such a field.',
         '2. Describe how a particular event or activity (positive or negative) has had the most significant impact on you in your life and shaped you as a person and why?',
