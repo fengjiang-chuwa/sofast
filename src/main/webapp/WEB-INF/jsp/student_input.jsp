@@ -249,7 +249,7 @@
                 </div>
 			</div>
             <span ng-repeat="education in studentInputData.educationInfoList">
-                <div class="unit_title">School {{$index + 1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeEducation($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
+                <div class="subtitle">School {{$index + 1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeEducation($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
                 <div class="add_more" ng-form="educationForm{{$index}}">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">School Name</label>
