@@ -30,6 +30,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     private final StudentHasRelationshipDao studentHasRelationshipDao;
     private final StandardizedTestAccountInfoDao standardizedTestAccountInfoDao;
     private final StudentHasStandardizedTestAccountInfoDao studentHasStandardizedTestAccountInfoDao;
+    private final UploadFileDao uploadFileDao;
+    private final StudentHasUploadFileDao studentHasUploadFileDao;
 
     @Autowired
     public StudentBasicServiceImpl(StudentBasicDao studentBasicDao, CountryDao countryDao,
@@ -41,7 +43,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
                                    StudentHasQuestionnaireSurveyDao studentHasQuestionnaireSurveyDao,
                                    StudentHasRecommenderInfoDao studentHasRecommenderInfoDao,
                                    StudentHasRelationshipDao studentHasRelationshipDao,
-                                   StudentHasStandardizedTestAccountInfoDao studentHasStandardizedTestAccountInfoDao) {
+                                   StudentHasStandardizedTestAccountInfoDao studentHasStandardizedTestAccountInfoDao,
+                                   UploadFileDao uploadFileDao, StudentHasUploadFileDao studentHasUploadFileDao) {
         this.studentBasicDao = studentBasicDao;
         this.crudRepository = studentBasicDao;
         this.countryDao = countryDao;
@@ -58,6 +61,8 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
         this.studentHasRecommenderInfoDao = studentHasRecommenderInfoDao;
         this.studentHasRelationshipDao = studentHasRelationshipDao;
         this.studentHasStandardizedTestAccountInfoDao = studentHasStandardizedTestAccountInfoDao;
+        this.uploadFileDao = uploadFileDao;
+        this.studentHasUploadFileDao = studentHasUploadFileDao;
     }
 
     @Override
@@ -165,5 +170,161 @@ public class StudentBasicServiceImpl extends BaseServiceImpl<StudentBasic, Strin
     @Override
     public List<StudentHasStandardizedTestAccountInfo> findStudentHasStandardizedTestAccountInfoList(String studentId){
         return studentHasStandardizedTestAccountInfoDao.findAllByStudentId(studentId);
+    }
+
+    @Override
+    public Address saveAddress(Address address) {
+        return addressDao.save(address);
+    }
+
+    @Override
+    public EducationInfo saveEducationInfo(EducationInfo educationInfo) {
+        return educationInfoDao.save(educationInfo);
+    }
+
+    @Override
+    public Relationship saveRelationship(Relationship relationship) {
+        return relationshipDao.save(relationship);
+    }
+
+    @Override
+    public StandardizedTestAccountInfo saveStandardizedTestAccountInfo(StandardizedTestAccountInfo standardizedTestAccountInfo) {
+        return standardizedTestAccountInfoDao.save(standardizedTestAccountInfo);
+    }
+
+    @Override
+    public RecommenderInfo saveRecommenderInfo(RecommenderInfo recommenderInfo) {
+        return recommenderInfoDao.save(recommenderInfo);
+    }
+
+    @Override
+    public QuestionnaireSurvey saveQuestionnaireSurvey(QuestionnaireSurvey questionnaireSurvey) {
+        return questionnaireSurveyDao.save(questionnaireSurvey);
+    }
+
+    @Override
+    public StudentHasAddress saveStudentHasAddress(StudentHasAddress studentHasAddress) {
+        return studentHasAddressDao.save(studentHasAddress);
+    }
+
+    @Override
+    public StudentHasEducationInfo saveStudentHasEducationInfo(StudentHasEducationInfo studentHasEducationInfo) {
+        return studentHasEducationInfoDao.save(studentHasEducationInfo);
+    }
+
+    @Override
+    public StudentHasRelationship saveStudentHasRelationship(StudentHasRelationship studentHasRelationship) {
+        return studentHasRelationshipDao.save(studentHasRelationship);
+    }
+
+    @Override
+    public StudentHasStandardizedTestAccountInfo saveStudentHasStandardizedTestAccountInfo(StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo) {
+        return studentHasStandardizedTestAccountInfoDao.save(studentHasStandardizedTestAccountInfo);
+    }
+
+    @Override
+    public StudentHasRecommenderInfo saveStudentHasRecommenderInfo(StudentHasRecommenderInfo studentHasRecommenderInfo) {
+        return studentHasRecommenderInfoDao.save(studentHasRecommenderInfo);
+    }
+
+    @Override
+    public StudentHasQuestionnaireSurvey saveStudentHasQuestionnaireSurvey(StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey) {
+        return studentHasQuestionnaireSurveyDao.save(studentHasQuestionnaireSurvey);
+    }
+
+    @Override
+    public StudentInfo saveStudentInfo(StudentInfo studentInfo) {
+        return studentInfoDao.save(studentInfo);
+    }
+
+    @Override
+    public void deleteAddress(Address address) {
+        addressDao.delete(address);
+    }
+
+    @Override
+    public void deleteEducationInfo(EducationInfo educationInfo) {
+        educationInfoDao.delete(educationInfo);
+    }
+
+    @Override
+    public void deleteRelationship(Relationship relationship) {
+        relationshipDao.delete(relationship);
+    }
+
+    @Override
+    public void deleteStandardizedTestAccountInfo(StandardizedTestAccountInfo standardizedTestAccountInfo) {
+        standardizedTestAccountInfoDao.delete(standardizedTestAccountInfo);
+    }
+
+    @Override
+    public void deleteRecommenderInfo(RecommenderInfo recommenderInfo) {
+        recommenderInfoDao.delete(recommenderInfo);
+    }
+
+    @Override
+    public void deleteQuestionnaireSurvey(QuestionnaireSurvey questionnaireSurvey) {
+        questionnaireSurveyDao.delete(questionnaireSurvey);
+    }
+
+    @Override
+    public void deleteStudentHasAddress(StudentHasAddress studentHasAddress) {
+        studentHasAddressDao.delete(studentHasAddress);
+    }
+
+    @Override
+    public void deleteStudentHasEducationInfo(StudentHasEducationInfo studentHasEducationInfo) {
+        studentHasEducationInfoDao.delete(studentHasEducationInfo);
+    }
+
+    @Override
+    public void deleteStudentHasRelationship(StudentHasRelationship studentHasRelationship) {
+        studentHasRelationshipDao.delete(studentHasRelationship);
+    }
+
+    @Override
+    public void deleteStudentHasStandardizedTestAccountInfo(StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo) {
+        studentHasStandardizedTestAccountInfoDao.delete(studentHasStandardizedTestAccountInfo);
+    }
+
+    @Override
+    public void deleteStudentHasRecommenderInfo(StudentHasRecommenderInfo studentHasRecommenderInfo) {
+        studentHasRecommenderInfoDao.delete(studentHasRecommenderInfo);
+    }
+
+    @Override
+    public void deleteStudentHasQuestionnaireSurvey(StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey) {
+        studentHasQuestionnaireSurveyDao.delete(studentHasQuestionnaireSurvey);
+    }
+
+    @Override
+    public List<UploadFile> findUploadFileList(List<String> ids){
+        Iterable<String> iterable = ids;
+        return Lists.newArrayList(uploadFileDao.findAll(iterable));
+    }
+
+    @Override
+    public List<StudentHasUploadFile> findStudentHasUploadFileList(String studentId){
+        return studentHasUploadFileDao.findAllByStudentId(studentId);
+    }
+
+    @Override
+    public void deleteUploadFile(UploadFile uploadFile) {
+        uploadFileDao.delete(uploadFile);
+    }
+
+    @Override
+    public void deleteStudentHasUploadFile(StudentHasUploadFile studentHasUploadFile) {
+        studentHasUploadFileDao.delete(studentHasUploadFile);
+    }
+
+    @Override
+    public UploadFile saveUploadFile(UploadFile uploadFile) {
+        return uploadFileDao.save(uploadFile);
+    }
+
+    @Override
+    public StudentHasUploadFile saveStudentHasUploadFile(StudentHasUploadFile studentHasUploadFile) {
+        return studentHasUploadFileDao.save(studentHasUploadFile);
     }
 }

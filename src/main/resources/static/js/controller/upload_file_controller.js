@@ -2,93 +2,116 @@
 
 App.controller('UploadFileController', ['$scope', '$rootScope', '$confirm', 'UploadFileService', function ($scope, $rootScope, $confirm, UploadFileService) {
     var self = this;
-    $rootScope.uploadFileError = [];
-    $rootScope.uploadFileError[0] = false;
-    $rootScope.uploadFileError[1] = false;
-    $rootScope.uploadFileError[2] = false;
-    $rootScope.uploadFileError[3] = false;
-    $rootScope.uploadFileError[4] = false;
-    $rootScope.uploadFileError[5] = false;
 
-    self.fileUpload = function (uploadStatus, description, tabName){
-        var tabData = "na";
-        if(UploadFileService.checkUploadFile(uploadStatus, tabData)) {
-            UploadFileService.fileUpload(uploadStatus, description, tabName, tabData, $scope.ctl.fileId).then(
+    $rootScope.uploadFileError0 = false;
+    $rootScope.uploadFileError1 = false;
+    $rootScope.uploadFileError2 = false;
+    $rootScope.uploadFileError3 = false;
+    $rootScope.uploadFileError4 = false;
+    $rootScope.uploadFileError5 = false;
+
+    self.fileUpload = function (uploadFileType){
+        if(UploadFileService.checkUploadFile(uploadFileType)) {
+            UploadFileService.fileUpload(uploadFileType).then(
                 function (d) {
                     if (200 === d.status) {
                         if (d.data.data !== undefined) {
-                            if (tabName == 'additionalProgram') {
-                                var refreshFile = {};
-                                refreshFile.fileId = $scope.ctl.fileId;
-                                refreshFile.fileIndex = $scope.ctl.fileIndex;
-                                $scope.$emit('refreshFile',refreshFile);
-
-                                UploadFileService.clearFileStatus(appId,$scope.ctl.fileId)
-                                    .then(
-                                    function (d) {
-                                        if(d.data){
-                                            $scope.btnPersonPendingClass[$scope.ctl.fileIndex] = "btn-default";
-                                            $scope.btnPersonReceivedClass[$scope.ctl.fileIndex] = "btn-default";
-                                            $scope.btnPersonDeniedClass[$scope.ctl.fileIndex] = "btn-default";
-
-                                            var denyReasons = [];
-                                            for(var i=0;i<$rootScope.denyReason.length;i++){
-                                                if($rootScope.denyReason[i].fileId!=$scope.ctl.fileId){
-                                                    denyReasons.push($rootScope.denyReason[i]);
-                                                }
-                                            }
-                                            $rootScope.denyReason = denyReasons;
-                                            $rootScope.fileReview--;
-                                            if($rootScope.fileReview<0){
-                                                $rootScope.fileReview = 0;
-                                            }
-                                        }
-                                    },
-                                    function (errResponse) {
-                                        console.error('Error while clear file status');
-                                    }
-                                );
+                            if (uploadFileType === "p") {
+                                $rootScope.showUpload0 = false;
+                            }
+                            if (uploadFileType === "at") {
+                                $rootScope.showUpload1 = false;
+                            }
+                            if (uploadFileType === "elr") {
+                                $rootScope.showUpload2 = false;
+                            }
+                            if (uploadFileType === "i20") {
+                                $rootScope.showUpload3 = false;
+                            }
+                            if (uploadFileType === "ps") {
+                                $rootScope.showUpload4 = false;
+                            }
+                            if (uploadFileType === "cv") {
+                                $rootScope.showUpload5 = false;
+                            }
+                            if (uploadFileType === "c") {
+                                $rootScope.showUpload6 = false;
+                            }
+                            if ($scope.studentInputData.uploadFileList == null) {
+                                $scope.studentInputData.uploadFileList = [];
+                                $scope.studentInputData.uploadFileList.push(d.data.data);
+                            } else {
+                                $scope.studentInputData.uploadFileList.push(d.data.data);
                             }
                         } else {
-                            if (tabName == 'additionalProgram') {
-                                $rootScope.uploadFileError[$scope.ctl.fileIndex] = true;
+                            if (uploadFileType === "p") {
+                                $rootScope.uploadFileError0 = true;
+                            }
+                            if (uploadFileType === "at") {
+                                $rootScope.uploadFileError1 = true;
+                            }
+                            if (uploadFileType === "elr") {
+                                $rootScope.uploadFileError2 = true;
+                            }
+                            if (uploadFileType === "i20") {
+                                $rootScope.uploadFileError3 = true;
+                            }
+                            if (uploadFileType === "ps") {
+                                $rootScope.uploadFileError4 = true;
+                            }
+                            if (uploadFileType === "cv") {
+                                $rootScope.uploadFileError5 = true;
+                            }
+                            if (uploadFileType === "c") {
+                                $rootScope.uploadFileError6 = true;
                             }
                         }
                     } else {
                         // error handler
+                        console.error('Error while uploading file');
                     }
                 },
                 function (errResponse) {
-                    console.error('Error while fetching Currencies');
+                    console.error('Error while uploading file');
                 }
             );
         }
     };
 
-    $scope.uploadFormPersonal = function(fileId,status,index){
-        $scope.ctl.fileId = fileId;
-        $scope.ctl.fileIndex = index;
-        self.fileUpload(status, $scope.uCtrl.description[index], 'additionalProgram');
-    };
-    $scope.fullScreen = function(filePath){
-        window.open(filePath);
-    };
-    $scope.$on('showDescription' , function (e, param) {
-        if(param){
-            if(param.type=='clearPersonal'){
-                $scope.uCtrl.description = [];
-                $scope.uCtrl.description[0] = "";
-                $scope.uCtrl.description[1] = "";
-                $scope.uCtrl.description[2] = "";
-                $scope.uCtrl.description[3] = "";
-                $scope.uCtrl.description[4] = "";
-                $scope.uCtrl.description[5] = "";
-            }
-            if(param.type=='personal'){
-                if(param.personalDescription){
-                    $scope.uCtrl.description = param.personalDescription;
+    self.deleteFile = function (index, uploadFileId, uploadFileType){
+        $scope.studentInputData.uploadFileList.splice(index, 1);
+        UploadFileService.deleteFile(uploadFileId, id, type).then(
+            function (d) {
+                if(200 === d.status){
+                    if (uploadFileType === "p") {
+                        $rootScope.showUpload0 = true;
+                    }
+                    if (uploadFileType === "at") {
+                        $rootScope.showUpload1 = true;
+                    }
+                    if (uploadFileType === "elr") {
+                        $rootScope.showUpload2 = true;
+                    }
+                    if (uploadFileType === "i20") {
+                        $rootScope.showUpload3 = true;
+                    }
+                    if (uploadFileType === "ps") {
+                        $rootScope.showUpload4 = true;
+                    }
+                    if (uploadFileType === "cv") {
+                        $rootScope.showUpload5 = true;
+                    }
+                    if (uploadFileType === "c") {
+                        $rootScope.showUpload6 = true;
+                    }
+                } else {
+                    // error handler
+                    console.error('Error while deleting file');
                 }
+            },
+            function (errResponse) {
+                console.error('Error while deleting file');
             }
-        }
-    });
+        );
+    };
 }]);

@@ -10,27 +10,21 @@ import java.util.Date;
  * @date 8/9/16
  */
 @Entity
-@Table(name = "Comm_Upload_File", schema = "so_fast", catalog = "")
-public class CommUploadFile {
+@Table(name = "upload_file", schema = "so_fast", catalog = "")
+public class UploadFile {
     
     private String id;
-    
     private String filePath;
-    
     private String fileRealName;
-    
     private String fileDispName;
-    
     private String uploadBy;
-    
     private Date uploadDate;
     private String description;
-    
     private String status;
-    private String uploadByStaff;
+    private String type;
 
     @Id
-    @Column(name = "ID", nullable = false, length = 36)
+    @Column(name = "id", nullable = false, length = 36)
     public String getId() {
         return id;
     }
@@ -40,7 +34,7 @@ public class CommUploadFile {
     }
 
     @Basic
-    @Column(name = "FILE_PATH", nullable = false, length = 200)
+    @Column(name = "file_path", nullable = false, length = 200)
     public String getFilePath() {
         return filePath;
     }
@@ -50,7 +44,7 @@ public class CommUploadFile {
     }
 
     @Basic
-    @Column(name = "FILE_REAL_NAME", nullable = false, length = 150)
+    @Column(name = "file_real_name", nullable = false, length = 150)
     public String getFileRealName() {
         return fileRealName;
     }
@@ -60,7 +54,7 @@ public class CommUploadFile {
     }
 
     @Basic
-    @Column(name = "FILE_DISP_NAME", nullable = false, length = 100)
+    @Column(name = "file_disp_name", nullable = false, length = 100)
     public String getFileDispName() {
         return fileDispName;
     }
@@ -70,7 +64,7 @@ public class CommUploadFile {
     }
 
     @Basic
-    @Column(name = "UPLOAD_BY", nullable = false, length = 36)
+    @Column(name = "upload_by", nullable = false, length = 36)
     public String getUploadBy() {
         return uploadBy;
     }
@@ -80,7 +74,7 @@ public class CommUploadFile {
     }
 
     @Basic
-    @Column(name = "UPLOAD_DATE", nullable = false)
+    @Column(name = "upload_date", nullable = false)
     public Date getUploadDate() {
         return uploadDate;
     }
@@ -90,7 +84,7 @@ public class CommUploadFile {
     }
 
     @Basic
-    @Column(name = "DESCRIPTION", nullable = true, length = 200)
+    @Column(name = "description", nullable = true, length = 200)
     public String getDescription() {
         return description;
     }
@@ -100,7 +94,7 @@ public class CommUploadFile {
     }
 
     @Basic
-    @Column(name = "STATUS", nullable = false, length = 45)
+    @Column(name = "status", nullable = false, length = 45)
     public String getStatus() {
         return status;
     }
@@ -110,13 +104,13 @@ public class CommUploadFile {
     }
 
     @Basic
-    @Column(name = "UPLOAD_BY_STAFF")
-    public String getUploadByStaff() {
-        return uploadByStaff;
+    @Column(name = "type")
+    public String getType() {
+        return type;
     }
 
-    public void setUploadByStaff(String uploadByStaff) {
-        this.uploadByStaff = uploadByStaff;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
@@ -124,7 +118,7 @@ public class CommUploadFile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CommUploadFile that = (CommUploadFile) o;
+        UploadFile that = (UploadFile) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (filePath != null ? !filePath.equals(that.filePath) : that.filePath != null) return false;
@@ -133,8 +127,7 @@ public class CommUploadFile {
         if (uploadBy != null ? !uploadBy.equals(that.uploadBy) : that.uploadBy != null) return false;
         if (uploadDate != null ? !uploadDate.equals(that.uploadDate) : that.uploadDate != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        return uploadByStaff != null ? uploadByStaff.equals(that.uploadByStaff) : that.uploadByStaff == null;
+        return status != null ? !status.equals(that.status) : that.status != null;
     }
 
     @Override
@@ -147,7 +140,6 @@ public class CommUploadFile {
         result = 31 * result + (uploadDate != null ? uploadDate.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (uploadByStaff != null ? uploadByStaff.hashCode() : 0);
         return result;
     }
 }

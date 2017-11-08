@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -95,7 +96,7 @@ public class StudentRestController {
         }
     }
 
-    @GetMapping(value = "/student/send/mail/{studentBasicId}")
+    @PostMapping(value = "/student/send/mail/{studentBasicId}")
     public JsonResponse<String> sendEmail(@PathVariable("studentBasicId") String studentBasicId,
                                           HttpServletRequest request) throws MsgException {
         try {
@@ -137,14 +138,18 @@ public class StudentRestController {
         studentInputData.setRelationshipList(relationshipList);
     }
 
-    @GetMapping(path = "/studentInput/data/{linkId}", produces = "application/json")
-    public JsonResponse<StudentInputData> getStudentInputData(@PathVariable String linkId) {
+    private StudentInputData fetchStudentInputData(String id, String type) {
         StudentInputData studentInputData = new StudentInputData();
         List<Country> allCountryList = studentBasicService.findAllCountryList();
         studentInputData.setAllCountryList(allCountryList);
         List<QuestionnaireSurvey> allQuestionnaireSurveyList = studentBasicService.findAllQuestionnaireSurveyList();
         studentInputData.setAllQuestionnaireSurveyList(allQuestionnaireSurveyList);
-        StudentBasic studentBasic = studentBasicService.findByLinkId(linkId);
+        StudentBasic studentBasic;
+        if ("studentBasicId".equalsIgnoreCase(type)) {
+            studentBasic = studentBasicService.findById(id);
+        } else {
+            studentBasic = studentBasicService.findByLinkId(id);
+        }
         studentInputData.setStudentBasic(studentBasic);
         StudentInfo studentInfo = studentBasicService.findStudentInfoByStudentBasicId(studentBasic.getId());
         studentInputData.setStudentInfo(studentInfo);
@@ -223,13 +228,165 @@ public class StudentRestController {
             List<StandardizedTestAccountInfo> standardizedTestAccountInfoList = studentBasicService.findStandardizedTestAccountInfoList(ids);
             studentInputData.setStandardizedTestAccountInfoList(standardizedTestAccountInfoList);
         }
+        List<StudentHasUploadFile> studentHasUploadFileList = studentBasicService.findStudentHasUploadFileList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasUploadFileList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasUploadFile studentHasUploadFile : studentHasUploadFileList) {
+                ids.add(studentHasUploadFile.getUploadFileId());
+            }
+            List<UploadFile> uploadFileList = studentBasicService.findUploadFileList(ids);
+            studentInputData.setUploadFileList(uploadFileList);
+        }
+        return studentInputData;
+    }
+
+    private void deleteStudentData(StudentBasic studentBasic) {
+        List<StudentHasAddress> studentHasAddressList = studentBasicService.findStudentHasAddressList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasAddressList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasAddress studentHasAddress : studentHasAddressList) {
+                ids.add(studentHasAddress.getAddressId());
+                studentBasicService.deleteStudentHasAddress(studentHasAddress);
+            }
+            List<Address> addressList = studentBasicService.findAddressList(ids);
+            for (Address address : addressList) {
+                studentBasicService.deleteAddress(address);
+            }
+        }
+        List<StudentHasRecommenderInfo> studentHasRecommenderInfoList = studentBasicService.findStudentHasRecommenderInfoList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasRecommenderInfoList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasRecommenderInfo studentHasRecommenderInfo : studentHasRecommenderInfoList) {
+                ids.add(studentHasRecommenderInfo.getRecommenderInfoId());
+                studentBasicService.deleteStudentHasRecommenderInfo(studentHasRecommenderInfo);
+            }
+            List<RecommenderInfo> recommenderInfoList = studentBasicService.findRecommenderInfoList(ids);
+            for (RecommenderInfo recommenderInfo : recommenderInfoList) {
+                studentBasicService.deleteRecommenderInfo(recommenderInfo);
+            }
+        }
+        List<StudentHasRelationship> studentHasRelationshipList = studentBasicService.findStudentHasRelationshipList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasRelationshipList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasRelationship studentHasRelationship : studentHasRelationshipList) {
+                ids.add(studentHasRelationship.getRelationshipId());
+                studentBasicService.deleteStudentHasRelationship(studentHasRelationship);
+            }
+            List<Relationship> relationshipList = studentBasicService.findRelationshipList(ids);
+            for (Relationship relationship : relationshipList) {
+                studentBasicService.deleteRelationship(relationship);
+            }
+        }
+        List<StudentHasEducationInfo> studentHasEducationInfoList = studentBasicService.findStudentHasEducationInfoList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasEducationInfoList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasEducationInfo studentHasEducationInfo : studentHasEducationInfoList) {
+                ids.add(studentHasEducationInfo.getEducationInfoId());
+                studentBasicService.deleteStudentHasEducationInfo(studentHasEducationInfo);
+            }
+            List<EducationInfo> educationInfoList = studentBasicService.findEducationInfoList(ids);
+            for (EducationInfo educationInfo : educationInfoList) {
+                Address address = studentBasicService.findAddressById(educationInfo.getAddressId());
+                studentBasicService.deleteAddress(address);
+                studentBasicService.deleteEducationInfo(educationInfo);
+            }
+        }
+        List<StudentHasStandardizedTestAccountInfo> studentHasStandardizedTestAccountInfoList = studentBasicService.findStudentHasStandardizedTestAccountInfoList(studentBasic.getId());
+        if (!CollectionHelper.isEmptyOrNull(studentHasStandardizedTestAccountInfoList)) {
+            List<String> ids = Lists.newArrayList();
+            for (StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo : studentHasStandardizedTestAccountInfoList) {
+                ids.add(studentHasStandardizedTestAccountInfo.getStandardizedTestAccountInfoId());
+                studentBasicService.deleteStudentHasStandardizedTestAccountInfo(studentHasStandardizedTestAccountInfo);
+            }
+            List<StandardizedTestAccountInfo> standardizedTestAccountInfoList = studentBasicService.findStandardizedTestAccountInfoList(ids);
+            for (StandardizedTestAccountInfo standardizedTestAccountInfo : standardizedTestAccountInfoList) {
+                studentBasicService.deleteStandardizedTestAccountInfo(standardizedTestAccountInfo);
+            }
+        }
+    }
+
+    @GetMapping(path = "/studentInput/data/{type}/{id}", produces = "application/json")
+    public JsonResponse<StudentInputData> getStudentInputData(@PathVariable String type, @PathVariable String id) {
+        StudentInputData studentInputData = fetchStudentInputData(id, type);
         return new JsonResponse<>(studentInputData);
     }
 
     @RequestMapping(value = "/studentInfo", method = RequestMethod.POST, produces = "application/json")
     public JsonResponse<String> saveStudentInfo(@RequestBody StudentInputData studentInputData) throws MsgException {
         try {
-
+            deleteStudentData(studentInputData.getStudentBasic());
+            studentBasicService.save(studentInputData.getStudentBasic());
+            if (Strings.isNullOrEmpty(studentInputData.getStudentInfo().getId())) {
+                studentInputData.getStudentInfo().setId(UUIDHelper.getUUID());
+            }
+            studentInputData.getStudentInfo().setStudentBasicId(studentInputData.getStudentBasic().getId());
+            studentInputData.getStudentInfo().setCreatedAt(new Date());
+            studentBasicService.saveStudentInfo(studentInputData.getStudentInfo());
+            for (Address address : studentInputData.getAddressList()) {
+                if (Strings.isNullOrEmpty(address.getId())) {
+                    address.setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveAddress(address);
+                StudentHasAddress studentHasAddress = new StudentHasAddress();
+                studentHasAddress.setAddressId(address.getId());
+                studentHasAddress.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasAddress(studentHasAddress);
+            }
+            for (EducationInfoData educationInfoData : studentInputData.getEducationInfoList()) {
+                if (Strings.isNullOrEmpty(educationInfoData.getAddress().getId())) {
+                    educationInfoData.getAddress().setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveAddress(educationInfoData.getAddress());
+                if (Strings.isNullOrEmpty(educationInfoData.getId())) {
+                    educationInfoData.setId(UUIDHelper.getUUID());
+                }
+                EducationInfo educationInfo = educationInfoData.toEducationInfo(educationInfoData);
+                educationInfo.setAddressId(educationInfoData.getAddress().getId());
+                studentBasicService.saveEducationInfo(educationInfo);
+                StudentHasEducationInfo studentHasEducationInfo = new StudentHasEducationInfo();
+                studentHasEducationInfo.setEducationInfoId(educationInfo.getId());
+                studentHasEducationInfo.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasEducationInfo(studentHasEducationInfo);
+            }
+            for (Relationship relationship : studentInputData.getRelationshipList()) {
+                if (Strings.isNullOrEmpty(relationship.getId())) {
+                    relationship.setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveRelationship(relationship);
+                StudentHasRelationship studentHasRelationship = new StudentHasRelationship();
+                studentHasRelationship.setRelationshipId(relationship.getId());
+                studentHasRelationship.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasRelationship(studentHasRelationship);
+            }
+            for (StudentHasQuestionnaireSurveyData studentHasQuestionnaireSurveyData : studentInputData.getQuestionnaireSurveyList()) {
+                if (!Strings.isNullOrEmpty(studentHasQuestionnaireSurveyData.getQuestionnaireSurveyId())) {
+                    StudentHasQuestionnaireSurvey studentHasQuestionnaireSurvey = new StudentHasQuestionnaireSurvey();
+                    studentHasQuestionnaireSurvey.setStudentId(studentInputData.getStudentBasic().getId());
+                    studentHasQuestionnaireSurvey.setQuestionnaireSurveyId(studentHasQuestionnaireSurveyData.getQuestionnaireSurveyId());
+                    studentHasQuestionnaireSurvey.setAnswer(studentHasQuestionnaireSurveyData.getAnswer());
+                    studentBasicService.saveStudentHasQuestionnaireSurvey(studentHasQuestionnaireSurvey);
+                }
+            }
+            for (RecommenderInfo recommenderInfo : studentInputData.getRecommenderInfoList()) {
+                if (Strings.isNullOrEmpty(recommenderInfo.getId())) {
+                    recommenderInfo.setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveRecommenderInfo(recommenderInfo);
+                StudentHasRecommenderInfo studentHasRecommenderInfo = new StudentHasRecommenderInfo();
+                studentHasRecommenderInfo.setRecommenderInfoId(recommenderInfo.getId());
+                studentHasRecommenderInfo.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasRecommenderInfo(studentHasRecommenderInfo);
+            }
+            for (StandardizedTestAccountInfo standardizedTestAccountInfo : studentInputData.getStandardizedTestAccountInfoList()) {
+                if (Strings.isNullOrEmpty(standardizedTestAccountInfo.getId())) {
+                    standardizedTestAccountInfo.setId(UUIDHelper.getUUID());
+                }
+                studentBasicService.saveStandardizedTestAccountInfo(standardizedTestAccountInfo);
+                StudentHasStandardizedTestAccountInfo studentHasStandardizedTestAccountInfo = new StudentHasStandardizedTestAccountInfo();
+                studentHasStandardizedTestAccountInfo.setStandardizedTestAccountInfoId(standardizedTestAccountInfo.getId());
+                studentHasStandardizedTestAccountInfo.setStudentId(studentInputData.getStudentBasic().getId());
+                studentBasicService.saveStudentHasStandardizedTestAccountInfo(studentHasStandardizedTestAccountInfo);
+            }
             return new JsonResponse<>("success");
         } catch (Exception e) {
             log.error("saveStudentInfo", e);

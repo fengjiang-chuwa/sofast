@@ -17,4 +17,5 @@ public class StudentInputData {
     private List<EducationInfoData> educationInfoList;
     private List<StudentHasQuestionnaireSurveyData> questionnaireSurveyList;
     private List<StandardizedTestAccountInfo> standardizedTestAccountInfoList;
+    private List<UploadFile> uploadFileList;
 }
