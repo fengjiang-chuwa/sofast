@@ -137,62 +137,6 @@
         </div>
         <div ng-include="'/sofast/html/tmpl/school_information.html'" class="add_more" ng-show="showMore"></div>
         <div class="formTitle">Required Documents Checklist</div>
-        <div class="subtitle">Documents Details</div>
-        <div class="notice_room">
-          <div>Help: INSTRUCTIONS FOR UPLOADING FILES</div>
-          <p>Please make sure that all upload files follow the requirements below:
-            <br> 1.The file is in PDF format (5MB file size limit);
-            <br> 2.The document is legible and in full focus;
-            <br> 3.The document must be correctly oriented (e.g., do not provide a sideways or upside down image).</p>
-        </div>
-        <div class="listUpload">
-          <div class="dataTables_wrapper">
-            <!--             <div class="dataTables_length">Uploaded Document List</div> -->
-            <table class="table table-bordered dataTable">
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>File Name</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Passport</td>
-                  <td>XXXXXXXX.pdf</td>
-                  <td>
-                    <a class="btn btn-xs btn-link btn_link_red">
-                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Passport</td>
-                  <td>XXXXXXXX.pdf</td>
-                  <td>
-                    <a class="btn btn-xs btn-link btn_link_red">
-                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Passport</td>
-                  <td>XXXXXXXX.pdf</td>
-                  <td>
-                    <a class="btn btn-xs btn-link btn_link_red">
-                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="form-group " ng-repeat="x in files">
-            <label for="inputPassword3 " class="col-sm-3 control-label">{{x}}</label>
-            <div class="col-sm-9 ">
-              <input type="file" class="control-label ">
-              <button type="submit" class=" btn btn-xs btn-default">Upload</button>
-            </div>
-          </div>
-        </div>
-        <div class="formTitle">Required Documents Checklist</div>
         <div class="subtitle">Recommender 1</div>
         <div ng-include="'/sofast/html/tmpl/recommender.html'"></div>
         <div class="subtitle">Recommender 2</div>
@@ -250,6 +194,62 @@
             <label for="inputPassword3 " class="col-sm-12 control-label">{{x}}</label>
             <div class="col-sm-12 ">
               <textarea class="form-control "></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="formTitle">Required Documents Checklist</div>
+        <div class="subtitle">Documents Details</div>
+        <div class="notice_room">
+          <div>Help: INSTRUCTIONS FOR UPLOADING FILES</div>
+          <p>Please make sure that all upload files follow the requirements below:
+            <br> 1.The file is in PDF format (5MB file size limit);
+            <br> 2.The document is legible and in full focus;
+            <br> 3.The document must be correctly oriented (e.g., do not provide a sideways or upside down image).</p>
+        </div>
+        <div class="listUpload">
+          <div class="dataTables_wrapper">
+            <!--             <div class="dataTables_length">Uploaded Document List</div> -->
+            <table class="table table-bordered dataTable">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>File Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Passport</td>
+                  <td>XXXXXXXX.pdf</td>
+                  <td>
+                    <a class="btn btn-xs btn-link btn_link_red">
+                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Passport</td>
+                  <td>XXXXXXXX.pdf</td>
+                  <td>
+                    <a class="btn btn-xs btn-link btn_link_red">
+                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Passport</td>
+                  <td>XXXXXXXX.pdf</td>
+                  <td>
+                    <a class="btn btn-xs btn-link btn_link_red">
+                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group " ng-repeat="x in files">
+            <label for="inputPassword3 " class="col-sm-3 control-label">{{x}}</label>
+            <div class="col-sm-9 ">
+              <input type="file" class="control-label ">
+              <button type="submit" class=" btn btn-xs btn-default">Upload</button>
             </div>
           </div>
         </div>
