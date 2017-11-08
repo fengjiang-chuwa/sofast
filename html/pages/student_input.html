@@ -122,18 +122,67 @@
             <input type="text " class="form-control "> </div>
         </div>
         <div ng-include="'/sofast/html/tmpl/school_information.html'" class="add_more"></div>
-        <div class="subtitle">Other Previous Academic Study <a class="btn btn-xs btn-link pull-right" ng-click="showMore=!showMore"><span class="glyphicon glyphicon-plus"></span> Add Academic Study</a> </div>
-        <div class="unit_title">School2 <a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="showMore=!showMore"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
+        <div class="subtitle">Other Previous Academic Study
+          <a class="btn btn-xs btn-link pull-right" ng-click="showMore=!showMore">
+            <span class="glyphicon glyphicon-plus"></span> Add Academic Study</a>
+        </div>
+        <div class="unit_title">School2
+          <a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="showMore=!showMore">
+            <span class="glyphicon glyphicon-trash"></span> Remove</a>
+        </div>
         <div ng-include="'/sofast/html/tmpl/school_information.html'" class="add_more"></div>
-        <div class="unit_title" ng-show="showMore">School3 <a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="showMore=!showMore"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
+        <div class="unit_title" ng-show="showMore">School3
+          <a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="showMore=!showMore">
+            <span class="glyphicon glyphicon-trash"></span> Remove</a>
+        </div>
         <div ng-include="'/sofast/html/tmpl/school_information.html'" class="add_more" ng-show="showMore"></div>
         <div class="formTitle">Required Documents Checklist</div>
         <div class="subtitle">Documents Details</div>
         <div class="listUpload">
+          <div class="dataTables_wrapper">
+            <!--             <div class="dataTables_length">Uploaded Document List</div> -->
+            <table class="table table-bordered dataTable">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>File Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Passport</td>
+                  <td>XXXXXXXX.pdf</td>
+                  <td>
+                    <a class="btn btn-xs btn-link btn_link_red">
+                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Passport</td>
+                  <td>XXXXXXXX.pdf</td>
+                  <td>
+                    <a class="btn btn-xs btn-link btn_link_red">
+                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Passport</td>
+                  <td>XXXXXXXX.pdf</td>
+                  <td>
+                    <a class="btn btn-xs btn-link btn_link_red">
+                      <span class="glyphicon glyphicon-trash"></span> Remove</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div class="form-group " ng-repeat="x in files">
             <label for="inputPassword3 " class="col-sm-3 control-label">{{x}}</label>
             <div class="col-sm-9 ">
-              <input type="file"> </div>
+              <input type="file" class="control-label ">
+              <button type="submit" class=" btn btn-xs btn-default">Upload</button>
+            </div>
           </div>
         </div>
         <div class="formTitle">Required Documents Checklist</div>
@@ -183,7 +232,9 @@
         <div class="form-group button-room">
           <div class="">
             <label class="checkbox-inline">
-              <input type="checkbox"> I agree <span class="text-muted"></span> </label>
+              <input type="checkbox"> I agree
+              <span class="text-muted"></span>
+            </label>
           </div>
         </div>
         <div class="formTitle">Counselor Brag Sheet</div>
@@ -197,7 +248,8 @@
         </div>
         <div class="form-group button-room ">
           <div class="text-center">
-            <button type="button " class="btn btn-primary btn-lg" onclick="window.location.href='submit_sucess.html'"> <span class="glyphicon glyphicon-ok "></span> Submit </button>
+            <button type="button " class="btn btn-primary btn-lg" onclick="window.location.href='submit_sucess.html'">
+              <span class="glyphicon glyphicon-ok "></span> Submit </button>
           </div>
         </div>
       </form>
