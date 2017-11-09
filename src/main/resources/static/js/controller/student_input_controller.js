@@ -1,7 +1,7 @@
 'use strict';
 
-App.controller('StudentInputController', ['StudentInputService', '$rootScope','$scope','$httpParamSerializer','DTOptionsBuilder', 'DTColumnBuilder',
-    function (StudentInputService, $rootScope, $scope, $httpParamSerializer, DTOptionsBuilder, DTColumnBuilder) {
+App.controller('StudentInputController', ['StudentInputService', '$sce','$rootScope','$scope','$httpParamSerializer','DTOptionsBuilder', 'DTColumnBuilder',
+    function (StudentInputService, $sce, $rootScope, $scope, $httpParamSerializer, DTOptionsBuilder, DTColumnBuilder) {
         var self = this;
 
         $rootScope.showUpload0 = true;
@@ -234,7 +234,7 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
                 .then(
                     function (d) {
                         if(d.data==="success"){
-                            window.location.href = getFullRequestPath("/welcome");
+                            window.location.href = getFullRequestPath("/student/success");
                         }else {
                             $scope.showErrorMsg = true;
                             $scope.errorMsg = $sce.trustAsHtml(d.data);
