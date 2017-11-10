@@ -106,7 +106,7 @@ public class StudentRestController {
             }
             String link = request.getRequestURL().toString();
             link = link.substring(0, link.indexOf("/student/send/mail/"));
-            link += "/student/" + studentBasic.getLinkId();
+            link += "/student/linkId/" + studentBasic.getLinkId();
             String content = MessageFormat.format(mailTemplate, studentBasic.getFirstName(), link, link);
             mailUtil.send(studentBasic.getApplicantEmailAddress(), mailSubject, content);
             return new JsonResponse<>("success");
@@ -315,6 +315,18 @@ public class StudentRestController {
     public JsonResponse<String> saveStudentInfo(@RequestBody StudentInputData studentInputData) throws MsgException {
         try {
             deleteStudentData(studentInputData.getStudentBasic());
+            if(CollectionHelper.isEmptyOrNull(studentInputData.getEducationInfoList())){
+                studentInputData.setEducationInfoList(Lists.newArrayList());
+            }
+            if(CollectionHelper.isEmptyOrNull(studentInputData.getRecommenderInfoList())){
+                studentInputData.setRecommenderInfoList(Lists.newArrayList());
+            }
+            if(CollectionHelper.isEmptyOrNull(studentInputData.getRelationshipList())){
+                studentInputData.setRelationshipList(Lists.newArrayList());
+            }
+            if(CollectionHelper.isEmptyOrNull(studentInputData.getStandardizedTestAccountInfoList())){
+                studentInputData.setStandardizedTestAccountInfoList(Lists.newArrayList());
+            }
             studentBasicService.save(studentInputData.getStudentBasic());
             if (Strings.isNullOrEmpty(studentInputData.getStudentInfo().getId())) {
                 studentInputData.getStudentInfo().setId(UUIDHelper.getUUID());

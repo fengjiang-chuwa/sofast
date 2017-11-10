@@ -27,4 +27,9 @@ public class StudentController {
 	    model.put("maxSizeValue", maxSizeValue);
 		return "student_input";
 	}
+
+	@GetMapping("/student/success")
+	public String welcomeSuccess(Map<String, Object> model) {
+		return "submit_sucess";
+	}
 }

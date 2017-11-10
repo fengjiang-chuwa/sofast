@@ -249,7 +249,7 @@
                 </div>
 			</div>
             <span ng-repeat="education in studentInputData.educationInfoList">
-                <div class="unit_title">School {{$index + 1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeEducation($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
+                <div class="subtitle">School {{$index + 1}}<a class="btn btn-xs btn-link btn_link_red pull-right" ng-click="ctrl.removeEducation($index)"><span class="glyphicon glyphicon-trash"></span> Remove</a></div>
                 <div class="add_more" ng-form="educationForm{{$index}}">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">School Name</label>
@@ -458,119 +458,122 @@
                     </span>
                 </div>
             </div>
+            <div class="formTitle">Required Documents Checklist</div>
+        </form>
+        <div class="form_container form-horizontal">
+            <div class="subtitle">Documents Details</div>
+            <div class="notice_room">
+                <div>Help: INSTRUCTIONS FOR UPLOADING FILES</div>
+                <p>Please make sure that all upload files follow the requirements below:
+                    <br> 1.The file is in PDF format (${maxSizeValue} file size limit);
+                    <br> 2.The document is legible and in full focus;
+                    <br> 3.The document must be correctly oriented (e.g., do not provide a sideways or upside down image);</p >
+            </div>
+            <div class="listUpload">
+                <div class="dataTables_wrapper" ng-controller="UploadFileController as uCtrl">
+                    <table class="table-bordered table" id="uploadFileList" ng-if="studentInputData.uploadFileList.length > 0">
+                        <tr>
+                            <th>#</th>
+                            <th>Type</th>
+                            <th>File Name</th>
+                            <th>Upload Date</th>
+                            <%--<th>Upload For</th>--%>
+                            <th>Action</th>
+                        </tr>
+                        <tr ng-repeat="uploadFile in studentInputData.uploadFileList">
+                            <td>{{$index+1}}</td>
+                            <td ng-if="uploadFile.type === 'p'">&nbsp;Passport</td>
+                            <td ng-if="uploadFile.type === 'at'">&nbsp;Academic Transcript</td>
+                            <td ng-if="uploadFile.type === 'elr'">&nbsp;English Language Report/Certificate</td>
+                            <td ng-if="uploadFile.type === 'i20'">&nbsp;Existing I-20</td>
+                            <td ng-if="uploadFile.type === 'ps'">&nbsp;Personal Statement/Admission Essay</td>
+                            <td ng-if="uploadFile.type === 'cv'">&nbsp;CV</td>
+                            <td ng-if="uploadFile.type === 'c'">&nbsp;Certificate</td>
+                            <td>{{uploadFile.fileDispName}}</td>
+                            <td>&nbsp;{{uploadFile.uploadDate | date:'M/dd/yyyy'}}</td>
+                            <%--<td>&nbsp;{{uploadFile.uploadBy}}</td>--%>
+                            <td>
+                                <button class="btn btn-default btn-xs" confirm="Are you sure you want to delete this file?" ng-click="uCtrl.deleteFile($index, uploadFile.id, uploadFile.type)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload0" method="post" id="pFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('p')">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Passport <!--span class="orange">(Required)</span--></label>
+                        <div class="col-sm-9">
+                            <input type="file" name="pFile" data-rule-required="true" id="pFile" accept=".pdf" class="control-label">
+                            <span ng-show="$root.uploadFileError0" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                            <button type="submit" class="btn btn-default btn-xs">Upload</button>
+                        </div>
+                    </div>
+                </form>
+                <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload1" method="post" id="atFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('at')">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Academic Transcript <!--span class="orange">(Required)</span--></label>
+                        <div class="col-sm-9">
+                            <input type="file" name="atFile" data-rule-required="true" id="atFile" accept=".pdf" class="control-label">
+                            <span ng-show="$root.uploadFileError1" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                            <button type="submit" class="btn btn-default btn-xs">Upload</button>
+                        </div>
+                    </div>
+                </form>
+                <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload2" method="post" id="elrFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('elr')">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">English Language Report/Certificate <!--span class="orange">(Required)</span--></label>
+                        <div class="col-sm-9">
+                            <input type="file" name="elrFile" data-rule-required="true" id="elrFile" accept=".pdf" class="control-label">
+                            <span ng-show="$root.uploadFileError2" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                            <button type="submit" class="btn btn-default btn-xs">Upload</button>
+                        </div>
+                    </div>
+                </form>
+                <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload3" method="post" id="i20FileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('i20')">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Existing I-20 <!--span class="orange">(Required)</span--></label>
+                        <div class="col-sm-9">
+                            <input type="file" name="i20File" data-rule-required="true" id="i20File" accept=".pdf" class="control-label">
+                            <span ng-show="$root.uploadFileError3" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                            <button type="submit" class="btn btn-default btn-xs">Upload</button>
+                        </div>
+                    </div>
+                </form>
+                <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload4" method="post" id="psFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('ps')">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Personal Statement/Admission Essay (PDF file only) <!--span class="orange">(Required)</span--></label>
+                        <div class="col-sm-9">
+                            <input type="file" name="psFile" data-rule-required="true" id="psFile" accept=".pdf" class="control-label">
+                            <span ng-show="$root.uploadFileError4" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                            <button type="submit" class="btn btn-default btn-xs">Upload</button>
+                        </div>
+                    </div>
+                </form>
+                <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload5" method="post" id="cvFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('cv')">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">CV (PDF file only) <!--span class="orange">(Required)</span--></label>
+                        <div class="col-sm-9">
+                            <input type="file" name="cvFile" data-rule-required="true" id="cvFile" accept=".pdf" class="control-label">
+                            <span ng-show="$root.uploadFileError5" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                            <button type="submit" class="btn btn-default btn-xs">Upload</button>
+                        </div>
+                    </div>
+                </form>
+                <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload6" method="post" id="cFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('c')">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Certificate (PDF file only) <!--span class="orange">(Required)</span--></label>
+                        <div class="col-sm-9">
+                            <input type="file" name="cFile" data-rule-required="true" id="cFile" accept=".pdf" class="control-label">
+                            <span ng-show="$root.uploadFileError6" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
+                            <button type="submit" class="btn btn-default btn-xs">Upload</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="form-group button-room">
                 <div class="text-center">
                     <button type="button" class="btn btn-primary btn-lg" ng-click="ctrl.saveStudentInfo()"> <span class="glyphicon glyphicon-ok "></span> Submit </button>
                 </div>
             </div>
-        </form>
-
-        <div class="formTitle">Required Documents Checklist</div>
-        <div class="subtitle">Documents Details</div>
-        <div class="help_block_multiple">
-            <p>
-                <span>help: INSTRUCTIONS FOR UPLOADING FILES</span>
-                <br>
-                Please make sure that all upload files follow the requirements below:
-                <br>
-                1.The file is in PDF format (${maxSizeValue} file size limit);
-                <br>
-                2.The document is legible and in full focus;
-                <br>
-                3.The document must be correctly oriented (e.g., do not provide a sideways or upside down image).
-            </p>
-        </div>
-        <div class="listUpload">
-            <table class="border" id="uploadFileList" ng-if="studentInputData.uploadFileList.length > 0" ng-controller="UploadFileController as uCtrl">
-                <tr>
-                    <th>#</th>
-                    <th>Type</th>
-                    <th>File Name</th>
-                    <th>Upload Date</th>
-                    <%--<th>Upload For</th>--%>
-                    <th>Delete</th>
-                </tr>
-                <tr ng-repeat="uploadFile in studentInputData.uploadFileList">
-                    <td>{{$index+1}}</td>
-                    <td>{{uploadFile.type}}</td>
-                    <td>{{uploadFile.fileDispName}}</td>
-                    <td>&nbsp;{{uploadFile.uploadDate | date:'M/d/yyyy'}}</td>
-                    <%--<td>&nbsp;{{uploadFile.uploadBy}}</td>--%>
-                    <td>
-                        <button class="btn btn-link btn-xs" confirm="Are you sure you want to delete this file?" ng-click="uCtrl.deleteFile($index, uploadFile.id, uploadFile.type)">Delete</button>
-                    </td>
-                </tr>
-            </table>
-            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload0" method="post" id="pFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('p')">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">1. Passport <!--span class="orange">(Required)</span--></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="pFile" data-rule-required="true" id="pFile" accept=".pdf">
-                        <span ng-show="$root.uploadFileError0" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
-                    </div>
-                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
-                </div>
-            </form>
-            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload1" method="post" id="atFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('at')">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">2. Academic Transcript <!--span class="orange">(Required)</span--></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="atFile" data-rule-required="true" id="atFile" accept=".pdf">
-                        <span ng-show="$root.uploadFileError1" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
-                    </div>
-                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
-                </div>
-            </form>
-            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload2" method="post" id="elrFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('elr')">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">3. English Language Report/Certificate <!--span class="orange">(Required)</span--></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="elrFile" data-rule-required="true" id="elrFile" accept=".pdf">
-                        <span ng-show="$root.uploadFileError2" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
-                    </div>
-                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
-                </div>
-            </form>
-            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload3" method="post" id="i20FileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('i20')">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">4. Existing I-20 <!--span class="orange">(Required)</span--></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="i20File" data-rule-required="true" id="i20File" accept=".pdf">
-                        <span ng-show="$root.uploadFileError3" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
-                    </div>
-                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
-                </div>
-            </form>
-            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload4" method="post" id="psFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('ps')">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">5. Personal Statement/Admission Essay (PDF file only) <!--span class="orange">(Required)</span--></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="psFile" data-rule-required="true" id="psFile" accept=".pdf">
-                        <span ng-show="$root.uploadFileError4" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
-                    </div>
-                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
-                </div>
-            </form>
-            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload5" method="post" id="cvFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('cv')">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">6. CV (PDF file only) <!--span class="orange">(Required)</span--></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="cvFile" data-rule-required="true" id="cvFile" accept=".pdf">
-                        <span ng-show="$root.uploadFileError5" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
-                    </div>
-                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
-                </div>
-            </form>
-            <form ng-controller="UploadFileController as uCtrl" ng-show="$root.showUpload6" method="post" id="cFileUpload" enctype="multipart/form-data" ng-submit="uCtrl.fileUpload('c')">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">7. Certificate (PDF file only) <!--span class="orange">(Required)</span--></label>
-                    <div class="col-sm-6">
-                        <input type="file" name="cFile" data-rule-required="true" id="cFile" accept=".pdf">
-                        <span ng-show="$root.uploadFileError6" class="orange">Uploaded file size exceeded max size or not pdf file.</span>
-                    </div>
-                    <div class="col-sm-3"><button type="submit" class="btn btn-default btn-xs">Upload</button></div>
-                </div>
-            </form>
         </div>
 	</div>
 </div>

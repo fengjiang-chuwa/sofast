@@ -1,7 +1,7 @@
 'use strict';
 
-App.controller('StudentInputController', ['StudentInputService', '$rootScope','$scope','$httpParamSerializer','DTOptionsBuilder', 'DTColumnBuilder',
-    function (StudentInputService, $rootScope, $scope, $httpParamSerializer, DTOptionsBuilder, DTColumnBuilder) {
+App.controller('StudentInputController', ['StudentInputService', '$sce','$rootScope','$scope','$httpParamSerializer','DTOptionsBuilder', 'DTColumnBuilder',
+    function (StudentInputService, $sce, $rootScope, $scope, $httpParamSerializer, DTOptionsBuilder, DTColumnBuilder) {
         var self = this;
 
         $rootScope.showUpload0 = true;
@@ -56,6 +56,9 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
         self.init();
 
         self.addEducation = function() {
+            if (!$scope.studentInputData.educationInfoList) {
+                $scope.studentInputData.educationInfoList = [];
+            }
             $scope.studentInputData.educationInfoList.push({
                                                             "id": null,
                                                             "schoolName": null,
@@ -75,6 +78,9 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
         };
 
         self.addRecommender = function() {
+            if (!$scope.studentInputData.recommenderInfoList) {
+                $scope.studentInputData.recommenderInfoList = [];
+            }
             $scope.studentInputData.recommenderInfoList.push({
                                                                 "id": null,
                                                                 "type": null,
@@ -92,6 +98,9 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
         };
 
         self.addTestAccount = function() {
+            if (!$scope.studentInputData.standardizedTestAccountInfoList) {
+                $scope.studentInputData.standardizedTestAccountInfoList = [];
+            }
             $scope.studentInputData.standardizedTestAccountInfoList.push({
                                                                             "id": null,
                                                                             "accountName": null,
@@ -127,6 +136,7 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
             formModel.homeZip.$pristine = false;
             formModel.mailingZip.$pristine = false;
             formModel.phoneId.$pristine = false;
+            formModel.declarationAgree.$pristine = false;
 
             formModel.fatherName.$pristine = false;
             formModel.motherName.$pristine = false;
@@ -144,78 +154,87 @@ App.controller('StudentInputController', ['StudentInputService', '$rootScope','$
             formModel.undecided.$pristine = false;
             formModel.nameOfHighestQualification.$pristine = false;
 
-            for (var i=0; i<$scope.studentInputData.educationInfoList.length; i++) {
-                if (formModel["educationForm"+i]) {
-                    formModel["educationForm"+i]["schoolName"+i].$pristine = false;
-                    formModel["educationForm"+i]["schoolType"+i].$pristine = false;
-                    formModel["educationForm"+i]["levelOfStudy"+i].$pristine = false;
-                    formModel["educationForm"+i]["startDate"+i].$pristine = false;
-                    formModel["educationForm"+i]["endDate"+i].$pristine = false;
-                    formModel["educationForm"+i]["line1"+i].$pristine = false;
-                    formModel["educationForm"+i]["country"+i].$pristine = false;
-                    formModel["educationForm"+i]["state"+i].$pristine = false;
-                    formModel["educationForm"+i]["city"+i].$pristine = false;
-                    formModel["educationForm"+i]["zip"+i].$pristine = false;
-                    formModel["educationForm"+i]["eduPhoneId"+i].$pristine = false;
+            if ($scope.studentInputData.educationInfoList) {
+                for (var i = 0; i < $scope.studentInputData.educationInfoList.length; i++) {
+                    if (formModel["educationForm" + i]) {
+                        formModel["educationForm" + i]["schoolName" + i].$pristine = false;
+                        formModel["educationForm" + i]["schoolType" + i].$pristine = false;
+                        formModel["educationForm" + i]["levelOfStudy" + i].$pristine = false;
+                        formModel["educationForm" + i]["startDate" + i].$pristine = false;
+                        formModel["educationForm" + i]["endDate" + i].$pristine = false;
+                        formModel["educationForm" + i]["line1" + i].$pristine = false;
+                        formModel["educationForm" + i]["country" + i].$pristine = false;
+                        formModel["educationForm" + i]["state" + i].$pristine = false;
+                        formModel["educationForm" + i]["city" + i].$pristine = false;
+                        formModel["educationForm" + i]["zip" + i].$pristine = false;
+                        formModel["educationForm" + i]["eduPhoneId" + i].$pristine = false;
+                    }
                 }
             }
-
-            for (var i=0; i<$scope.studentInputData.recommenderInfoList.length; i++) {
-                if (formModel["recommenderInformationForm"+i]) {
-                    formModel["recommenderInformationForm"+i]["nameOfRecommender"+i].$pristine = false;
-                    formModel["recommenderInformationForm"+i]["jobTitle"+i].$pristine = false;
-                    formModel["recommenderInformationForm"+i]["relationship"+i].$pristine = false;
-                    formModel["recommenderInformationForm"+i]["recommenderPhoneId"+i].$pristine = false;
-                    formModel["recommenderInformationForm"+i]["email"+i].$pristine = false;
-                    formModel["recommenderInformationForm"+i]["cellPhoneId"+i].$pristine = false;
+            if ($scope.studentInputData.recommenderInfoList) {
+                for (var i = 0; i < $scope.studentInputData.recommenderInfoList.length; i++) {
+                    if (formModel["recommenderInformationForm" + i]) {
+                        formModel["recommenderInformationForm" + i]["nameOfRecommender" + i].$pristine = false;
+                        formModel["recommenderInformationForm" + i]["jobTitle" + i].$pristine = false;
+                        formModel["recommenderInformationForm" + i]["relationship" + i].$pristine = false;
+                        formModel["recommenderInformationForm" + i]["recommenderPhoneId" + i].$pristine = false;
+                        formModel["recommenderInformationForm" + i]["email" + i].$pristine = false;
+                        formModel["recommenderInformationForm" + i]["cellPhoneId" + i].$pristine = false;
+                    }
                 }
             }
-
-            for (var i=0; i<$scope.studentInputData.standardizedTestAccountInfoList.length; i++) {
-                if (formModel["testAccountForm"+i]) {
-                    formModel["testAccountForm"+i]["accountName"+i].$pristine = false;
-                    formModel["testAccountForm"+i]["userName"+i].$pristine = false;
-                    formModel["testAccountForm"+i]["password"+i].$pristine = false;
+            if ($scope.studentInputData.standardizedTestAccountInfoList) {
+                for (var i = 0; i < $scope.studentInputData.standardizedTestAccountInfoList.length; i++) {
+                    if (formModel["testAccountForm" + i]) {
+                        formModel["testAccountForm" + i]["accountName" + i].$pristine = false;
+                        formModel["testAccountForm" + i]["userName" + i].$pristine = false;
+                        formModel["testAccountForm" + i]["password" + i].$pristine = false;
+                    }
                 }
             }
-
-            for (var i=0; i<$scope.studentInputData.allQuestionnaireSurveyList.length; i++) {
-                if (formModel["bragForm"+i]) {
-                    formModel["bragForm"+i]["answer"+i].$pristine = false;
+            if ($scope.studentInputData.allQuestionnaireSurveyList) {
+                for (var i = 0; i < $scope.studentInputData.allQuestionnaireSurveyList.length; i++) {
+                    if (formModel["bragForm" + i]) {
+                        formModel["bragForm" + i]["answer" + i].$pristine = false;
+                    }
                 }
             }
-
             if(formModel.$invalid) {
                 return false;
             }
-            for (var i=0; i<$scope.studentInputData.educationInfoList.length; i++) {
-                if (formModel["educationForm"+i] && formModel["educationForm"+i].$invalid) {
-                    return false;
+            if ($scope.studentInputData.educationInfoList) {
+                for (var i = 0; i < $scope.studentInputData.educationInfoList.length; i++) {
+                    if (formModel["educationForm" + i] && formModel["educationForm" + i].$invalid) {
+                        return false;
+                    }
                 }
             }
-
-            for (var i=0; i<$scope.studentInputData.recommenderInfoList.length; i++) {
-                if (formModel["recommenderInformationForm"+i] && formModel["recommenderInformationForm"+i].$invalid) {
-                    return false;
+            if ($scope.studentInputData.recommenderInfoList) {
+                for (var i = 0; i < $scope.studentInputData.recommenderInfoList.length; i++) {
+                    if (formModel["recommenderInformationForm" + i] && formModel["recommenderInformationForm" + i].$invalid) {
+                        return false;
+                    }
                 }
             }
-
-            for (var i=0; i<$scope.studentInputData.standardizedTestAccountInfoList.length; i++) {
-                if (formModel["testAccountForm"+i] && formModel["testAccountForm"+i].$invalid) {
-                    return false;
+            if ($scope.studentInputData.standardizedTestAccountInfoList) {
+                for (var i = 0; i < $scope.studentInputData.standardizedTestAccountInfoList.length; i++) {
+                    if (formModel["testAccountForm" + i] && formModel["testAccountForm" + i].$invalid) {
+                        return false;
+                    }
                 }
             }
-
-            for (var i=0; i<$scope.studentInputData.allQuestionnaireSurveyList.length; i++) {
-                if (formModel["bragForm"+i] && formModel["bragForm"+i].$invalid) {
-                    return false;
+            if ($scope.studentInputData.allQuestionnaireSurveyList) {
+                for (var i = 0; i < $scope.studentInputData.allQuestionnaireSurveyList.length; i++) {
+                    if (formModel["bragForm" + i] && formModel["bragForm" + i].$invalid) {
+                        return false;
+                    }
                 }
             }
             StudentInputService.save($scope.studentInputData)
                 .then(
                     function (d) {
                         if(d.data==="success"){
-                            window.location.href = getFullRequestPath("/welcome");
+                            window.location.href = getFullRequestPath("/student/success");
                         }else {
                             $scope.showErrorMsg = true;
                             $scope.errorMsg = $sce.trustAsHtml(d.data);
