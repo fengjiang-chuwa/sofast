@@ -153,6 +153,13 @@ body {
   padding-left: 60px;
 }
 
+.page_footer {
+  position: relative;
+  z-index: 999999;
+  text-align: center;
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
   .show_page {
     margin-left: 0;
