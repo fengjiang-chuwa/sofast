@@ -19,6 +19,10 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+.sub-header a {
+  font-size: 22px;
+}
+
 
 /*
  * Top navigation
