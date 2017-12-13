@@ -164,6 +164,43 @@ body {
   font-size: 14px;
 }
 
+.pagination-sm>li>a,
+.pagination-sm>li>span {
+  border: none;
+}
+
+.mask_loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: 0 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, .8)
+}
+
+.mask_loading>div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  margin-top: -150px;
+  text-align: center
+}
+
+.mask_loading>div div {
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ccc
+}
+
+.mask_loading img {
+  width: 50%;
+}
+
 @media (max-width: 768px) {
   .show_page {
     margin-left: 0;
