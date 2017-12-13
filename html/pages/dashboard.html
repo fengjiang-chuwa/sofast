@@ -228,10 +228,59 @@
             </tbody>
           </table>
         </div>
+        <div class="clearfix">
+          <div class="col-xs-6">
+            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 10 of 300 entries</div>
+          </div>
+          <div class="col-xs-6">
+            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+              <ul class="pagination pagination-sm">
+                <li class="disabled">
+                  <a href="#" class="previous" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous">Previous</a>
+                </li>
+                <li></li>
+                <li class="active">
+                  <a href="#" class="" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0">1</a>
+                </li>
+                <li>
+                  <a href="#" class="" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0">2</a>
+                </li>
+                <li>
+                  <a href="#" class="" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0">3</a>
+                </li>
+                <li>
+                  <a href="#" class="" aria-controls="DataTables_Table_0" data-dt-idx="4" tabindex="0">4</a>
+                </li>
+                <li>
+                  <a href="#" class="" aria-controls="DataTables_Table_0" data-dt-idx="5" tabindex="0">5</a>
+                </li>
+                <li class="disabled">
+                  <a href="#" onclick="event.preventDefault()">…</a>
+                </li>
+                <li>
+                  <a href="#" class="" aria-controls="DataTables_Table_0" data-dt-idx="6" tabindex="0">30</a>
+                </li>
+                <li>
+                  <a href="#" class="next" aria-controls="DataTables_Table_0" data-dt-idx="7" tabindex="0" id="DataTables_Table_0_next">Next</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="page_footer">© Copyright 2016, California Science And Technology University. All rights reserved</div>
+  <!-- for Loading -->
+  <div ng-controller="ShowLoadingCtrl as ctrl " style="display: block; position: absolute; top: 5px; right: 5px; z-index: 9999;">
+    <input type="button" ng-click="ctrl.showLoading() " value="loading "> {{ctrl.loadingImg}}
+    <div id="mask-loading " class="mask_loading " ng-if="ctrl.loadingImg " style=" ">
+      <div> <img src="/sofast/html/img/loading_transparent.gif ">
+        <div>Page is loading.</div>
+      </div>
+    </div>
+  </div>
+  <!-- end for Loading -->
 </body>
 
 </html>
