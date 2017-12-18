@@ -213,7 +213,7 @@ body {
 }
 
 .select_multiple select option {
-  padding: 10px 5px;
+  padding: 5px;
 }
 
 .select_multiple select option:hover {
@@ -223,18 +223,17 @@ body {
 .select_multiple .arrow_room {
   text-align: center;
   border: 1px solid #ccc;
-  border-radius: 5px;
   margin: 0 auto;
   margin-bottom: 20px;
   color: #aaa;
   cursor: pointer;
   padding: 10px 0;
-  max-width: 80px;
+  max-width: 50px;
 }
 
 .select_multiple .arrow_room:first-child,
 .select_multiple .sort_room:first-child {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .select_multiple .arrow_room:hover,
