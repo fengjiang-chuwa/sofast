@@ -254,9 +254,13 @@ body {
 }
 
 .button_room {
+  margin-top: 30px;
+}
+
+.button_room .text-center {
   border-top: 1px dashed #ccc;
   padding-top: 30px;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
 @media (max-width: 768px) {
