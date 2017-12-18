@@ -201,6 +201,57 @@ body {
   width: 50%;
 }
 
+
+/* select_multiple */
+
+.select_multiple select {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #dcc;
+}
+
+.select_multiple select option {
+  padding: 10px 5px;
+}
+
+.select_multiple select option:hover {
+  background-color: #efefef;
+}
+
+.select_multiple .arrow_room {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  color: #aaa;
+  cursor: pointer;
+  padding: 10px 0;
+  max-width: 80px;
+}
+
+.select_multiple .arrow_room:first-child,
+.select_multiple .sort_room:first-child {
+  margin-top: 50px;
+}
+
+.select_multiple .arrow_room:hover,
+.select_multiple .sort_room:hover {
+  color: #333;
+  border-color: #999;
+}
+
+.select_multiple .sort_room {
+  text-align: center;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  color: #aaa;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
 @media (max-width: 768px) {
   .show_page {
     margin-left: 0;
