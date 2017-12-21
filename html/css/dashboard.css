@@ -210,7 +210,12 @@ body {
   padding: 10px;
   width: 100%;
   border: 1px solid #dcc;
-  height: 412px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .select_multiple select {
+    min-height: 412px;
+  }
 }
 
 .select_multiple select option {
@@ -219,6 +224,7 @@ body {
 
 .select_multiple select option:hover {
   background-color: #efefef;
+  color: #000;
 }
 
 .select_multiple .arrow_room {
