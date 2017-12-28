@@ -9,6 +9,9 @@
   <meta name="author" content="">
   <link rel="icon" href="../../favicon.ico">
   <title>Dashboard Template for Bootstrap</title>
+  <script type="text/javascript">
+  var angular_query_builder_version = "1.0";
+  </script>
   <script type="text/javascript" src="/sofast/html/js/dashboard.js"></script>
 </head>
 
@@ -319,6 +322,29 @@
               <button type="button " class="btn btn-default">
                 <span class="glyphicon glyphicon-remove "></span> Cancel </button>
             </div>
+          </div>
+        </div>
+        <div ng-controller="MainController">
+          <div class="" style="margin-top: 30px">
+            <div class="hero-unit">
+              <h2>
+                    Angular Query Builder
+                    <small>v{{appVersion}} / based on AngularJS and Bootstrap</small>
+                </h2> </div>
+            <div class="aqb-search-form">
+              <form name="searchForm" ng-submit="search(searchForm, $event)">
+                <div class="aqb-search-form-body">
+                  <div class="aqb-animate-combined" ng-repeat="group in searchContainer.groups | orderBy:'index'">
+                    <div search-group search-container="searchContainer" groups="searchContainer.groups" group-index="$index" source-types="sourceTypes" logical-operators="logicalOperators"></div>
+                  </div>
+                </div>
+                <div class="aqb-search-form-footer">
+                  <button type="submit" class="btn" ng-disabled="searchForm.$invalid">Search</button>
+                </div>
+              </form>
+              <div ng-show="!!output"> <pre ng-bind-html="output"></pre> </div>
+            </div>
+            <div> <pre>{{jsonOutput}}</pre> </div>
           </div>
         </div>
       </div>
