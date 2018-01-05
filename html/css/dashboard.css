@@ -103,6 +103,10 @@ body {
   margin-top: 0;
 }
 
+.page-header>.glyphicon {
+  font-size: 75%;
+}
+
 
 /*
  * Placeholder dashboard ideas
