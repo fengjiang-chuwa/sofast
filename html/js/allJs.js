@@ -15,6 +15,10 @@ document.write("<script  type='text/javascript' src='/sofast/html/plugin/angular
 document.write("<script  type='text/javascript' src='/sofast/html/plugin/bootstrap/js/ui-bootstrap-tpls-1.3.3.js'></script>");
 document.write("<script  type='text/javascript' src='/sofast/html/js/ui.js'></script>");
 document.write("<script  type='text/javascript' src='/sofast/html/js/datatables.js'></script>");
+// only for error msg
+document.write("<script  type='text/javascript' src='/sofast/html/plugin/angular_query/angular-query-builder-templates.js'></script>");
+document.write("<script  type='text/javascript' src='/sofast/html/plugin/angular_query/angular-animate.js'></script>");
+document.write("<script  type='text/javascript' src='/sofast/html/plugin/angular_query/angular-query-builder.min.js'></script>");
 // Combiner: {
 //     "combine": "/sofast/html/css/global.css",
 //     "combine": "/sofast/html/css/layouts.css",
