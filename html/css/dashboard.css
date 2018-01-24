@@ -369,3 +369,15 @@
 .table>tbody>tr>td {
   line-height: 0.8;
 }
+
+
+/* alert */
+
+.msg_alert .alert {
+  position: absolute;
+  top: 0;
+  width: 40%;
+  left: 50%;
+  margin-left: -20%;
+  padding: 5px 10px;
+}
