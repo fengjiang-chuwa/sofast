@@ -561,3 +561,31 @@ validationApp.component('modalComponent', {
         };
     }
 });
+// show alert
+validationApp.directive('myAlert', function($timeout) {
+    return {
+        scope: {
+            // message: '@',
+            isVisible: '='
+        },
+        link: link,
+        restrict: 'E',
+        replace: true,
+        template: '<div ng-if="isVisible" class="alert alert-success">message</div>'
+    }
+
+    function link(scope, element, attrs) {
+        scope.isVisible = true;
+        $timeout(function() {
+            scope.isVisible = false;
+        }, 5000);
+    }
+});
+validationApp.controller('myCtrl', function($scope) {
+    $scope.isVisible = true;
+    $scope.show = show;
+
+    function show() {
+        $scope.isVisible = true;
+    }
+});
