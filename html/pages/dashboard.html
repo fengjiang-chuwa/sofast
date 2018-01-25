@@ -106,9 +106,10 @@
         
         </h1>
         <div ng-controller="myCtrl" class="msg_alert">
-          <a href="" ng-click="show()">Show the alert</a>
-          <my-alert message="This is an alert" is-visible="isVisible"></my-alert>
+          <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="5000" close="closeAlert($index)">{{alert.msg}}</div>
+          <a href="" ng-click="addAlert()">Show the alert</a>
         </div>
+        <!-- dismiss-on-timeout="5000" -->
         <h2 class="sub-header">Section title<a href="#" class="pull-right">configuration</a></h2>
         <div class="table-responsive">
           <table class="table table-striped">

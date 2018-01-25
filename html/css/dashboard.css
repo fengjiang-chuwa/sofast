@@ -373,11 +373,19 @@
 
 /* alert */
 
-.msg_alert .alert {
+.msg_alert {
   position: absolute;
   top: 0;
   width: 40%;
   left: 50%;
   margin-left: -20%;
+}
+
+.msg_alert .alert {
   padding: 5px 10px;
+  margin-bottom: 5px;
+}
+
+.msg_alert .alert-dismissible .close {
+  right: 0;
 }
