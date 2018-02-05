@@ -1,0 +1,16 @@
+<div ng-controller="DatepickerPopupDemoCtrl" class="datapicker_room">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="startDate"
+                                           ng-model="ctrl.yearTerm.startDate"
+                                           uib-datepicker-popup="{{format}}"
+                                           is-open="popup1.opened" datepicker-options="dateOptions"
+                                           ng-required="true" close-text="Close"
+                                           class="form-control"
+                                           alt-input-formats="altInputFormats" ng-change="ctrl.calculateEndDate()" required/>
+                                    <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open1()"> <i
+                                                            class="glyphicon glyphicon-calendar"></i>
+                                                    </button>
+                                                </span>
+                                </div>
+                            </div>
