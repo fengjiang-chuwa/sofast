@@ -1,0 +1,43 @@
+public class unittest {
+
+    private static final String MODEL_TEST_CLASS_END = "}";
+    private static final String MODEL_TEST_CLASS_START = "public class ModelTest {\n" +
+            "    @Before\n" +
+            "    public void setUp() throws Exception {\n" +
+            "\n" +
+            "    }\n" +
+            "\n" +
+            "    @After\n" +
+            "    public void tearDown() throws Exception {\n" +
+            "\n" +
+            "    }\n" +
+            "\n";
+    private static final String MODEL_TEST_METHOD_TEMPLATE =
+            "    @Test\n" +
+            "    public void test%s() throws Exception {\n" +
+            "        %s source%s = new %s();\n" +
+            "        %s target%s = new %s();\n" +
+            "        BeanUtils.copyProperties(source%s, target%s);\n" +
+            "    }\n";
+
+
+
+    public static void main(String[] args){
+        String inputPath = "/unzipapp/entity/";
+
+        File dir = new File(inputPath);
+        String[] extensions = new String[] { "java" };
+        List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, true);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(MODEL_TEST_CLASS_START);
+        for (File file : files) {
+            String fileNameWithOutExt = FilenameUtils.removeExtension(file.getName());
+            stringBuilder.append(String.format(MODEL_TEST_METHOD_TEMPLATE,fileNameWithOutExt,fileNameWithOutExt,
+                    fileNameWithOutExt,
+                    fileNameWithOutExt,fileNameWithOutExt,fileNameWithOutExt,
+                    fileNameWithOutExt,fileNameWithOutExt,fileNameWithOutExt));
+        }
+        stringBuilder.append(MODEL_TEST_CLASS_END);
+        System.out.println(stringBuilder.toString());
+    }
+}
