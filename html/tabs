@@ -4,15 +4,15 @@
   display: none;
 }
 
-.navbar .selected {
+.navbar .navbar-nav {
   position: relative;
 }
 
-.navbar .selected>li>a {
+.navbar .navbar-nav>li>a {
   padding-top: 5px;
 }
 
-.navbar .selected>li ul {
+.navbar .navbar-nav>li ul {
   display: block;
   position: absolute;
   width: 500px;
@@ -21,20 +21,20 @@
   padding-left: 10px;
 }
 
-.navbar .selected>li ul a {
+.navbar .navbar-nav>li ul a {
   border: none;
   background: none;
   color: #fff;
   padding: 0 5px;
 }
 
-.navbar .selected>li ul a:hover {
+.navbar .navbar-nav>li ul a:hover {
   background: none;
   border: none;
   text-decoration: underline;
 }
 
-.navbar .selected>li ul .active a {
+.navbar .navbar-nav>li ul .active a {
   background: #fff;
   color: #000;
 }
@@ -45,7 +45,7 @@
 
 
       <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right selected">  
+        <ul class="nav navbar-nav navbar-right">  
           <li>
             <a href="#">Dashboard</a>
             <ul class="nav nav-tabs">
